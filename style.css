@@ -1,0 +1,12 @@
+@keyframes newitemfade {
+  from {
+    background: #4fd1c5;
+  }
+  to {
+    background: transparent;
+  }
+}
+.new-item {
+  animation-name: newitemfade;
+  animation-duration: 1.5s;
+}
