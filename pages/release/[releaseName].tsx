@@ -11,13 +11,16 @@ import TimeAgo from "timeago-react";
 import Layout from "../../components/Layout";
 import NFO from "../../components/NFO";
 import Proof from "../../components/Proof";
+import http from "../../utils/http";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { rid } = context.params;
-  const res = await fetch(`http://la55u.me/api/releases/${rid}`);
-  const data = await res.json();
-
-  return { props: { data } };
+  const { releaseName } = context.params;
+  // const res = await fetch(`http://la55u.me/api/releases/${rid}`);
+  // const data = await res.json();
+  const url = `/data/details/name/${releaseName}`;
+  console.log("getting details:", url);
+  const res = await http.get(url);
+  return { props: { res } };
 };
 
 const Release = ({ data }) => {

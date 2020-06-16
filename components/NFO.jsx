@@ -3,7 +3,7 @@ import { Text } from "@chakra-ui/core";
 const NFO = ({ nfo }) => {
   if (!nfo)
     return (
-      <Text mt={5} textAlign="center">
+      <Text mt={5} textAlign="center" color="grey">
         No NFO file available for this release
       </Text>
     );

@@ -24,13 +24,7 @@ const ModalSubscribe = () => {
 
   return (
     <>
-      <Button
-        ml={4}
-        variantColor="teal"
-        size="sm"
-        rightIcon="bell"
-        onClick={onOpen}
-      >
+      <Button variantColor="teal" size="sm" rightIcon="bell" onClick={onOpen}>
         Subscribe
       </Button>
 

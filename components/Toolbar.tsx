@@ -2,17 +2,18 @@ import { Flex, FormLabel, Heading, Switch } from "@chakra-ui/core";
 import React from "react";
 import ModalSubscribe from "./ModalSubscribe";
 
-const Toolbar = () => {
+const Toolbar = ({ took, resultsCnt }) => {
+  // const { error, data } = useContext(StateContext);
+  // console.log("ctx", data);
+
   return (
     <>
       <Flex justify="space-between" align="center" mt={5}>
-        <Heading size="xs" color="teal.400">
-          6 results found in 45 ms
-        </Heading>
-
         <Flex>
           <Flex align="center">
-            <FormLabel pb={0} htmlFor="live">
+            <ModalSubscribe />
+
+            <FormLabel pb={0} ml={4} htmlFor="live">
               Live updates
             </FormLabel>
             <Switch
@@ -23,9 +24,13 @@ const Toolbar = () => {
               color="teal"
             />
           </Flex>
-
-          <ModalSubscribe />
         </Flex>
+
+        {took && (
+          <Heading size="xs" color="teal.400">
+            {resultsCnt} results found in {took} ms
+          </Heading>
+        )}
       </Flex>
     </>
   );

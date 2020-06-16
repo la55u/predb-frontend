@@ -8,19 +8,29 @@ import {
   InputRightElement,
 } from "@chakra-ui/core";
 import React, { useEffect, useState } from "react";
+import useDebounce from "../hooks/useDebounce";
 import http from "../utils/http";
 import { API_ENDPOINT } from "../utils/routes";
 
-const SearchSimple = () => {
+const SearchSimple = ({ dispatch }) => {
   const [query, setQuery] = useState("");
 
+  console.log("SearchSimple rerender");
+  const debouncedQuery = useDebounce(query, 200);
+
   useEffect(() => {
-    getResults();
-  }, [query]);
+    if (query) getResults();
+  }, [debouncedQuery]);
 
   const getResults = async () => {
+    if (query.length < 3) return; // todo warning
+
+    dispatch({ type: "SEARCH_START" });
     try {
-      const res = await http.post(API_ENDPOINT.SEARCH_SIMPLE, { input: query });
+      const res = await http.post(API_ENDPOINT.SEARCH_SIMPLE, {
+        input: query,
+      });
+      dispatch({ type: "SEARCH_SUCCESS", payload: res });
     } catch (error) {
       console.error("error fetching data:", error);
     }

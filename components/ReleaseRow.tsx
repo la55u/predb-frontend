@@ -86,7 +86,7 @@ const ReleaseRow = ({ release }) => {
         <Box gridArea="namewrap">
           <PseudoBox wordBreak="break-word" my={[1, 1, 0]}>
             <NextLink
-              href="/release/[rid]"
+              href="/release/[releaseName]"
               as={`/release/${release.name}`}
               passHref
             >

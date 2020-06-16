@@ -10,3 +10,7 @@
   animation-name: newitemfade;
   animation-duration: 1.5s;
 }
+
+body {
+  overflow-y: scroll;
+}
