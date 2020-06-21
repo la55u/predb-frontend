@@ -110,7 +110,9 @@ const ReleaseRow = ({ release }) => {
             <Flex>
               {release.nukes && (
                 <Box
-                  title="Nuked: todo"
+                  title={release.nukes
+                    .map((n) => `[${n.type}] ${n.reason}`)
+                    .join("\r\n")}
                   as={IoIosNuclear}
                   color="orange.400"
                   cursor="help"

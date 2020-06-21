@@ -1,8 +1,8 @@
-import { Box, Flex, Spinner, Text } from "@chakra-ui/core";
+import { Box, Flex, Spinner } from "@chakra-ui/core";
 import { useEffect, useState } from "react";
-import { MdZoomOut } from "react-icons/md";
 import { useSocket } from "../hooks/useSocket";
 import { API_BASE } from "../utils/routes";
+import { NoResults } from "./NoResults";
 import ReleaseRow from "./ReleaseRow";
 
 const ReleaseList = ({ releases, loading, searchResults }) => {
@@ -43,19 +43,7 @@ const ReleaseList = ({ releases, loading, searchResults }) => {
       </Flex>
     );
 
-  if (searchResults?.length === 0)
-    return (
-      <Flex
-        justify="center"
-        align="center"
-        mt={20}
-        color="gray.500"
-        direction="column"
-      >
-        <Box as={MdZoomOut} size="100px" mb={5} />
-        <Text>No results found</Text>
-      </Flex>
-    );
+  if (searchResults?.length === 0) return <NoResults />;
 
   return (
     <>

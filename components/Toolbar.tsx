@@ -26,7 +26,7 @@ const Toolbar = ({ took, resultsCnt }) => {
           </Flex>
         </Flex>
 
-        {took && (
+        {resultsCnt > 0 && (
           <Heading size="xs" color="teal.400">
             {resultsCnt} results found in {took} ms
           </Heading>
