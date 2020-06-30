@@ -119,22 +119,19 @@ const ReleaseRow = ({ release }) => {
                 />
               )}
 
-              <Flex as="small" ml={4} color={gray[colorMode]} align="center">
-                Proof{" "}
-                {release.proof ? (
+              {release.proof && (
+                <Flex as="small" ml={4} color={gray[colorMode]} align="center">
+                  <span>Proof</span>
                   <Icon ml={1} fontSize="9px" name="check" color="green.500" />
-                ) : (
-                  <Icon ml={1} fontSize="9px" name="close" color="red.500" />
-                )}
-              </Flex>
-              <Flex as="small" ml={4} color={gray[colorMode]} align="center">
-                NFO{" "}
-                {release.has_nfo ? (
-                  <Icon ml={1} name="check" color="green.500" />
-                ) : (
-                  <Icon ml={1} name="close" fontSize="9px" color="red.500" />
-                )}
-              </Flex>
+                </Flex>
+              )}
+
+              {release.nfo?.length > 0 && (
+                <Flex as="small" ml={4} color={gray[colorMode]} align="center">
+                  <span>NFO</span>
+                  <Icon ml={1} name="check" color="green.500" fontSize="9px" />
+                </Flex>
+              )}
             </Flex>
           </Flex>
         </Box>

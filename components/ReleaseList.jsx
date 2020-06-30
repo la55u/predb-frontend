@@ -5,12 +5,13 @@ import { API_BASE } from "../utils/routes";
 import { NoResults } from "./NoResults";
 import ReleaseRow from "./ReleaseRow";
 
-const ReleaseList = ({ releases, loading, searchResults }) => {
-  const [allRelease, setAllRelease] = useState([...releases]);
+const ReleaseList = ({ initialReleases, loading, searchResults }) => {
+  const [allRelease, setAllRelease] = useState([...initialReleases]);
   const socket = useSocket(API_BASE);
   // const { data, loading, error } = useContext(SearchContext);
 
-  const list = searchResults ? searchResults : releases;
+  // if the search is active show results otherwise show all release
+  const list = searchResults ? searchResults : allRelease;
   // console.log("list", list);
 
   useEffect(() => {
@@ -21,7 +22,11 @@ const ReleaseList = ({ releases, loading, searchResults }) => {
   }, [socket]);
 
   const handleNew = (payload) => {
-    setAllRelease((all) => [{ ...payload, new: true }, ...all]);
+    console.log("new:", payload);
+    setAllRelease((all) => [
+      { ...payload, new: true },
+      ...all.slice(0, all.length - 1),
+    ]);
   };
 
   const handleUpdate = (payload) => {

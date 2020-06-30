@@ -16,7 +16,9 @@ import {
 } from "@chakra-ui/core";
 import NextLink from "next/link";
 import { useState } from "react";
+import { FiLogIn } from "react-icons/fi";
 import Layout from "../components/Layout";
+import { API_BASE, API_ENDPOINT } from "../utils/routes";
 
 const Login = () => {
   const { colorMode } = useColorMode();
@@ -32,6 +34,26 @@ const Login = () => {
     setCredentials((c) => ({ ...c, [name]: value }));
   };
 
+  const initialLoginState = { token: "", error: false, loading: false };
+
+  const loginReducer = (state, action) => {
+    switch (action.type) {
+      case "LOGIN_BEGIN":
+        return { ...state, loading: true };
+      case "LOGIN_SUCCESS":
+        return { ...state, loading: false, token: action.payload };
+      case "LOGIN_FAIL":
+        return { ...state, loading: false, error: action.payload };
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const res = await fetch(API_BASE + API_ENDPOINT.LOGIN);
+    const data = await res.json();
+    console.log("login data:", data);
+  };
+
   return (
     <Layout>
       <Box
@@ -43,6 +65,7 @@ const Login = () => {
         borderRadius="md"
         w={["100%", "100%", "500px"]}
         mx="auto"
+        onSubmit={handleSubmit}
       >
         <Stack spacing={5}>
           <Heading>Log in</Heading>
@@ -90,7 +113,7 @@ const Login = () => {
             ml="auto"
             mt={5}
             variantColor="teal"
-            rightIcon="arrow-forward"
+            rightIcon={FiLogIn}
             type="submit"
           >
             Log in

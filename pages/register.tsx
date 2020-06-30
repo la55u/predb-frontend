@@ -5,10 +5,10 @@ import {
   FormHelperText,
   FormLabel,
   Heading,
-  Icon,
+  IconButton,
   Input,
   InputGroup,
-  InputLeftElement,
+  InputRightElement,
   Link,
   Stack,
   useColorMode,
@@ -16,18 +16,35 @@ import {
 import NextLink from "next/link";
 import { useState } from "react";
 import Layout from "../components/Layout";
+import { API_BASE, API_ENDPOINT } from "../utils/routes";
 
-const Login = () => {
+const Register = () => {
   const { colorMode } = useColorMode();
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
+    passwordConfirm: "",
   });
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
+
   const borderColor = { dark: "gray.700", light: "gray.300" };
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type } = e.target;
     setCredentials((c) => ({ ...c, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const res = await fetch(API_BASE + API_ENDPOINT.REGISTER, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(credentials),
+    });
+    const data = await res.json();
+    console.log("login data:", data);
   };
 
   return (
@@ -41,6 +58,7 @@ const Login = () => {
         borderRadius="md"
         w={["100%", "100%", "500px"]}
         mx="auto"
+        onSubmit={handleSubmit}
       >
         <Stack spacing={5}>
           <Heading>Register</Heading>
@@ -48,9 +66,9 @@ const Login = () => {
           <FormControl>
             <FormLabel>Email</FormLabel>
             <InputGroup>
-              <InputLeftElement>
+              {/* <InputLeftElement>
                 <Icon name="at-sign" color="gray.400" />
-              </InputLeftElement>
+              </InputLeftElement> */}
               <Input
                 isRequired
                 placeholder="Email address..."
@@ -67,44 +85,61 @@ const Login = () => {
           <FormControl>
             <FormLabel>Password</FormLabel>
             <InputGroup>
-              <InputLeftElement>
+              {/* <InputLeftElement>
                 <Icon name="lock" color="gray.400" />
-              </InputLeftElement>
+              </InputLeftElement> */}
               <Input
                 isRequired
-                type="password"
+                type={showPassword ? "text" : "password"}
                 placeholder="Password..."
                 value={credentials.password}
                 onChange={handleInput}
                 name="password"
               />
+              <InputRightElement>
+                <IconButton
+                  size="sm"
+                  variant="ghost"
+                  icon={showPassword ? "view-off" : "view"}
+                  aria-label="Clear input"
+                  onClick={() => setShowPassword((s) => !s)}
+                />
+              </InputRightElement>
             </InputGroup>
           </FormControl>
 
           <FormControl>
             <FormLabel>Confirm password</FormLabel>
             <InputGroup>
-              <InputLeftElement>
+              {/* <InputLeftElement>
                 <Icon name="lock" color="gray.400" />
-              </InputLeftElement>
+              </InputLeftElement> */}
               <Input
                 isRequired
-                type="password"
+                type={showPasswordConfirm ? "text" : "password"}
                 placeholder="Password..."
-                value={credentials.password}
+                value={credentials.passwordConfirm}
                 onChange={handleInput}
-                name="password"
+                name={"passwordConfirm"}
+                isInvalid={
+                  credentials.passwordConfirm &&
+                  credentials.password !== credentials.passwordConfirm
+                }
               />
+
+              <InputRightElement>
+                <IconButton
+                  size="sm"
+                  variant="ghost"
+                  icon={showPasswordConfirm ? "view-off" : "view"}
+                  aria-label={showPasswordConfirm ? "Hide" : "Show"}
+                  onClick={() => setShowPasswordConfirm((s) => !s)}
+                />
+              </InputRightElement>
             </InputGroup>
           </FormControl>
 
-          <Button
-            ml="auto"
-            mt={5}
-            variantColor="teal"
-            rightIcon="arrow-forward"
-            type="submit"
-          >
+          <Button ml="auto" mt={5} variantColor="teal" type="submit">
             Register
           </Button>
         </Stack>
@@ -122,4 +157,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

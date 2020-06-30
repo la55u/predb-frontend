@@ -7,7 +7,7 @@ import Toolbar from "../components/Toolbar";
 import {
   initialState,
   SearchContext,
-  searchReducer,
+  searchReducer
 } from "../context/SearchContext";
 import { API_BASE, API_ENDPOINT } from "../utils/routes";
 
@@ -33,7 +33,7 @@ const Home = ({ data }) => {
       />
 
       <ReleaseList
-        releases={data.data.values}
+        initialReleases={data.data.values}
         searchResults={state.data?.values}
         loading={state.loading}
       />
