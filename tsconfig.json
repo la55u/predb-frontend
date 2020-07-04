@@ -20,6 +20,6 @@
     "**/*.ts",
     "**/*.tsx",
     "components/ModalSubscribe.jsx",
-    "components/ReleaseList.jsx"
+    "components/ReleaseList.jsx", "pages/swagger.jsx"
   ]
 }

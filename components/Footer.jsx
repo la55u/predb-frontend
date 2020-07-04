@@ -4,12 +4,12 @@ import { Container } from "./Container";
 
 export const Footer = () => {
   return (
-    <Box as="footer" borderTopWidth="1px" width="full" height="2rem">
+    <Box as="footer" borderTopWidth="1px" width="full">
       <Container
         as={Flex}
         justify="space-between"
         align="center"
-        h={"100%"}
+        // h={"100%"}
         color="grey"
         flexWrap="wrap"
       >
@@ -32,6 +32,9 @@ export const Footer = () => {
           </NextLink>
           <NextLink href="/contact" passHref>
             <Link mx={2}>Contact</Link>
+          </NextLink>
+          <NextLink href="/rss" passHref>
+            <Link mx={2}>RSS</Link>
           </NextLink>
           <NextLink href="/swagger" passHref>
             <Link mx={2} mr={[2, 0]}>

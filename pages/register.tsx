@@ -12,27 +12,30 @@ import {
   Link,
   Stack,
   useColorMode,
+  useToast,
 } from "@chakra-ui/core";
 import NextLink from "next/link";
 import { useState } from "react";
 import Layout from "../components/Layout";
 import { API_BASE, API_ENDPOINT } from "../utils/routes";
 
+const initialState = {
+  email: "",
+  password: "",
+  passwordConfirm: "",
+};
+
 const Register = () => {
   const { colorMode } = useColorMode();
-  const [credentials, setCredentials] = useState({
-    email: "",
-    password: "",
-    passwordConfirm: "",
-  });
-
+  const [credentials, setCredentials] = useState(initialState);
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
 
+  const toast = useToast();
   const borderColor = { dark: "gray.700", light: "gray.300" };
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value, type } = e.target;
+    const { name, value } = e.target;
     setCredentials((c) => ({ ...c, [name]: value }));
   };
 
@@ -44,7 +47,17 @@ const Register = () => {
       body: JSON.stringify(credentials),
     });
     const data = await res.json();
-    console.log("login data:", data);
+    console.log("register data:", data);
+
+    setCredentials({ ...initialState });
+    document.querySelector("form").reset();
+
+    toast({
+      title: "Email sent",
+      description: "Follow the instructions to complete the registration",
+      status: "success",
+      duration: 7000,
+    });
   };
 
   return (

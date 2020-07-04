@@ -1,4 +1,6 @@
 import {
+  Alert,
+  AlertIcon,
   Box,
   Button,
   Checkbox,
@@ -6,14 +8,15 @@ import {
   FormControl,
   FormLabel,
   Heading,
-  Icon,
+  IconButton,
   Input,
   InputGroup,
-  InputLeftElement,
+  InputRightElement,
   Link,
   Stack,
   useColorMode,
 } from "@chakra-ui/core";
+import { useRouter } from "next/dist/client/router";
 import NextLink from "next/link";
 import { useState } from "react";
 import { FiLogIn } from "react-icons/fi";
@@ -22,11 +25,14 @@ import { API_BASE, API_ENDPOINT } from "../utils/routes";
 
 const Login = () => {
   const { colorMode } = useColorMode();
+  const [showPassword, setShowPassword] = useState(false);
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
     remember: false,
   });
+  const router = useRouter();
+
   const borderColor = { dark: "gray.700", light: "gray.300" };
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -49,13 +55,30 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch(API_BASE + API_ENDPOINT.LOGIN);
+    const res = await fetch(API_BASE + API_ENDPOINT.LOGIN, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(credentials),
+    });
     const data = await res.json();
     console.log("login data:", data);
   };
 
   return (
     <Layout>
+      {router.query.confirmed === "1" && (
+        <Alert
+          status="success"
+          variant="subtle"
+          w={["100%", "100%", "500px"]}
+          borderRadius="md"
+          mx="auto"
+        >
+          <AlertIcon />
+          Registration complete! You may now log in.
+        </Alert>
+      )}
+
       <Box
         as="form"
         mt={20}
@@ -72,9 +95,6 @@ const Login = () => {
           <FormControl>
             <FormLabel>Email</FormLabel>
             <InputGroup>
-              <InputLeftElement>
-                <Icon name="at-sign" color="gray.400" />
-              </InputLeftElement>
               <Input
                 isRequired
                 placeholder="Email address..."
@@ -88,17 +108,23 @@ const Login = () => {
           <FormControl>
             <FormLabel>Password</FormLabel>
             <InputGroup>
-              <InputLeftElement>
-                <Icon name="lock" color="gray.400" />
-              </InputLeftElement>
               <Input
                 isRequired
-                type="password"
+                type={showPassword ? "text" : "password"}
                 placeholder="Password..."
                 value={credentials.password}
                 onChange={handleInput}
                 name="password"
               />
+              <InputRightElement>
+                <IconButton
+                  size="sm"
+                  variant="ghost"
+                  icon={showPassword ? "view-off" : "view"}
+                  aria-label={showPassword ? "Hide" : "Show"}
+                  onClick={() => setShowPassword((s) => !s)}
+                />
+              </InputRightElement>
             </InputGroup>
           </FormControl>
 
