@@ -79,7 +79,7 @@ const ReleaseRow = ({ release }) => {
           />
         </Box>
 
-        <Box gridArea="cat" justifySelf={["end", "end", "start"]}>
+        <Box gridArea="cat" justifySelf="end" px={3}>
           <CategoryBadge />
         </Box>
 

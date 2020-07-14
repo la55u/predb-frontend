@@ -20,9 +20,19 @@ const Logo = () => {
     <Flex align="baseline">
       <Link href="/">
         <a>
-          <Flex align="baseline" fontStyle="italic">
+          <Flex
+            align="baseline"
+            fontStyle="italic"
+            style={{
+              background: "linear-gradient(to right,#4FD1C5,#00B5D8)",
+              "-webkit-background-clip": "text",
+              "-webkit-text-fill-color": "transparent",
+            }}
+          >
             <Heading>PREdb</Heading>
-            <Heading size="md">.live</Heading>
+            <Heading color="teal.500" size="md" pr={2}>
+              .live
+            </Heading>
           </Flex>
         </a>
       </Link>
