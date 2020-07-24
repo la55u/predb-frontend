@@ -20,9 +20,9 @@ export const Footer = () => {
           alignItems="center"
         >
           <Text>Made in Budapest, Hungary</Text>
-          <Box mx={3} display={["none", "block"]}>
+          <Text mx={3} display={["none", "inline"]}>
             •
-          </Box>
+          </Text>
           <Text>Build: {process.env.NEXT_PUBLIC_GIT_SHA}</Text>
         </Flex>
 

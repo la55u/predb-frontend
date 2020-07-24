@@ -12,6 +12,7 @@ import NextLink from "next/link";
 import React, { useState } from "react";
 import { IoIosNuclear } from "react-icons/io";
 import TimeAgo from "timeago-react";
+import { getSection } from "../utils/classify";
 import CategoryBadge from "./CategoryBadge";
 import CopyButton from "./CopyButon";
 
@@ -28,6 +29,8 @@ const ReleaseRow = ({ release }) => {
     light:
       "0 8px 10px 0 rgba(10, 31, 68, 0.1), 0 0 1px 0 rgba(10, 31, 68, 0.08)",
   };
+
+  const section = getSection(release.name, release.section);
 
   return (
     <PseudoBox
@@ -80,7 +83,7 @@ const ReleaseRow = ({ release }) => {
         </Box>
 
         <Box gridArea="cat" justifySelf="end" px={3}>
-          <CategoryBadge />
+          <CategoryBadge section={section} />
         </Box>
 
         <Box gridArea="namewrap">
