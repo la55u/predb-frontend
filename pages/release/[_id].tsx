@@ -11,16 +11,15 @@ import TimeAgo from "timeago-react";
 import Layout from "../../components/Layout";
 import NFO from "../../components/NFO";
 import Proof from "../../components/Proof";
-import http from "../../utils/http";
+import { API_BASE } from "../../utils/routes";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { releaseName } = context.params;
-  // const res = await fetch(`http://la55u.me/api/releases/${rid}`);
-  // const data = await res.json();
-  const url = `/data/details/name/${releaseName}`;
-  console.log("getting details:", url);
-  const res = await http.get(url);
-  return { props: { res } };
+  const { _id } = context.params;
+  const url = `${API_BASE}/api/data/details/_id/${_id}`;
+  console.log("getting:", url);
+  const res = await fetch(url);
+  const data = await res.json();
+  return { props: { data } };
 };
 
 const Release = ({ data }) => {
@@ -36,42 +35,62 @@ const Release = ({ data }) => {
         borderRadius="md"
         borderColor={borderColor[colorMode]}
       >
-        <Grid p={4} gap="0 10px" templateColumns="150px auto">
-          <Heading size="sm">Release name</Heading>
+        <Grid p={4} gap="0 20px" templateColumns="150px auto">
+          <Heading size="sm" justifySelf="end">
+            Release
+          </Heading>
           <Text wordBreak="break-all">{data.name}</Text>
 
-          <Heading size="sm">Release group</Heading>
-          <Text>{data.grp}</Text>
+          <Heading size="sm" justifySelf="end">
+            Group
+          </Heading>
+          <Text>{data.group}</Text>
 
-          <Heading size="sm">Added on</Heading>
+          <Heading size="sm" justifySelf="end">
+            Added
+          </Heading>
           <Text>
-            {new Date(data.added * 1000).toLocaleString()} (
-            <TimeAgo datetime={new Date(data.added * 1000)} />)
+            {new Date(data.added).toLocaleString()} (
+            <TimeAgo datetime={new Date(data.added)} />)
           </Text>
 
-          <Heading size="sm">Section</Heading>
+          <Heading size="sm" justifySelf="end">
+            Section
+          </Heading>
           <Text>{data.section}</Text>
 
-          <Heading size="sm">No. of files</Heading>
+          <Heading size="sm" justifySelf="end">
+            No. of files
+          </Heading>
           <Text>{data.files}</Text>
 
-          <Heading size="sm">Size</Heading>
+          <Heading size="sm" justifySelf="end">
+            Size
+          </Heading>
           <Text>{data.size} MB</Text>
 
-          <Heading size="sm">Genre</Heading>
+          <Heading size="sm" justifySelf="end">
+            Genre
+          </Heading>
           <Text>{data.genre || "-"}</Text>
 
-          <Heading size="sm">Retail link</Heading>
+          <Heading size="sm" justifySelf="end">
+            Retail link
+          </Heading>
           <Text>{data.url || "-"}</Text>
 
-          <Heading size="sm">Tracer sites</Heading>
+          <Heading size="sm" justifySelf="end">
+            Trace
+          </Heading>
           <Text fontStyle="italic">
             {data.traces.map((tr) => `#${tr.rank} ${tr.site}`).join(", ")}
           </Text>
 
-          <Heading size="sm">Nukes</Heading>
+          <Heading size="sm" justifySelf="end">
+            Nukes
+          </Heading>
           <Text>
-            {data.nukes.length === 0 ? (
+            {!data.nukes || data.nukes.length === 0 ? (
               "-"
             ) : (
               <>

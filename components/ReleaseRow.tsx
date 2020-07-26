@@ -34,7 +34,7 @@ const ReleaseRow = ({ release }) => {
 
   return (
     <PseudoBox
-      // role="group"
+      role="group"
       px={[1, 1, 1, 4]}
       py={2}
       position="relative"
@@ -60,6 +60,8 @@ const ReleaseRow = ({ release }) => {
       }}
     >
       <Grid
+        gap="0 6px"
+        alignItems="center"
         templateColumns={{
           base: "1.5fr 1fr 1fr 1.5fr",
           md: "0.5fr 0.5fr 2.5fr 0.2fr 0.2fr 0.3fr",
@@ -68,8 +70,6 @@ const ReleaseRow = ({ release }) => {
           base: `"added files size cat" "namewrap namewrap namewrap namewrap" `,
           md: `"added cat namewrap action files size"`,
         }}
-        gap="0 6px"
-        alignItems="center"
       >
         <Box
           gridArea="added"
@@ -89,8 +89,8 @@ const ReleaseRow = ({ release }) => {
         <Box gridArea="namewrap">
           <PseudoBox wordBreak="break-word" my={[1, 1, 0]}>
             <NextLink
-              href="/release/[releaseName]"
-              as={`/release/${release.name}`}
+              href="/release/[_id]"
+              as={`/release/${release._id}`}
               passHref
             >
               <Link _groupHover={{ color: hoverTitleColor[colorMode] }}>

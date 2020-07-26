@@ -1,25 +1,28 @@
 // returns the normalized section (category) of a release
 export const getSection = (name, section) => {
   // XXX
-  if (/[.\-_]XXX|xxx[.\-_]/.test(name) || /XXX|xxx/.test(section)) {
-    if (name.includes("imageset")) return SECTIONS.XXX_PICS;
+  // avoid xXx movie
+  if (/[.\-_]XXX|xxx[.\-_]/.test(name) || /XXX/i.test(section)) {
+    if (/IMAGESET/i.test(name)) return SECTIONS.XXX_PICS;
     else return SECTIONS.XXX_VIDEO;
   }
 
   // TV
-  if (/[Ss]\d+[EeDd]\d+/.test(name) || /^[Tt][Vv]/.test(section)) {
-    if (/720|1080|2160|[pPiI]/.test(name)) return SECTIONS.TV_HD;
-    else if (/[Ss]\d+[Dd]\d+/.test(name)) return SECTIONS.TV_DISC;
+  // S01E01 or S01D01 format
+  if (/S\d+[ED]\d+/i.test(name) || /^TV/i.test(section)) {
+    if (/720|1080|2160|[PI]/i.test(name)) return SECTIONS.TV_HD;
+    else if (/S\d+D\d+/i.test(name)) return SECTIONS.TV_DISC;
     return SECTIONS.TV_SD;
   }
 
   // MUSIC
-  if (/MP3|FLAC|VINYL/.test(section)) return SECTIONS.MUSIC_AUDIO;
+  if (/MP3|FLAC|VINYL|MUSIC/i.test(section)) return SECTIONS.MUSIC_AUDIO;
 
   // GAMES
+  // check for common consoles in name
   if (
-    /NSW|PLAYSTATION|XBOX|PS4|PS3|PS2|NINTENDO/.test(name) ||
-    /GAME/.test(section)
+    /NSW|PLAYSTATION|XBOX|PS4|PS3|PS2|NINTENDO|NDS|WIIU/i.test(name) ||
+    /GAME|CONSOLE/i.test(section)
   ) {
     if (/NSW|NINTENDO/.test(name)) return SECTIONS.GAME_NINTENDO;
     else if (
@@ -27,30 +30,45 @@ export const getSection = (name, section) => {
       /PS$|PS2|PS3|PS4|PS5|PLAYSTATION/.test(section)
     )
       return SECTIONS.GAME_PS;
-    else if (
-      /[.\-_][xX][bB][oO][xX]/.test(name) ||
-      /[.\-_][xX][bB][oO][xX]/.test(section)
-    )
+    else if (/[.\-_]XBOX/i.test(name) || /[.\-_]XBOX/i.test(section))
       return SECTIONS.GAME_XBOX;
 
     return SECTIONS.GAME_PC;
   }
 
   // BOOK
-  if (
-    /[.\-_][eE][bB][oO][oO][kK]/.test(name) ||
-    /[.\-_][eE][bB][oO][oO][kK]/.test(section)
-  ) {
+  if (/[.\-_]E?BOOK/i.test(name) || /BOOK/i.test(section)) {
     return SECTIONS.EBOOK;
   }
 
   // TUTORIAL
   if (
-    /TUTORIAL|BOOKWARE|Udemy|Lynda|PluralSight|EggHead|LinkedIn|SkillShare|Sonic|^PACKT|OREILLY/i.test(
+    /TUTORIAL|BOOKWARE|Udemy|Lynda|PluralSight|EggHead|LinkedIn|SkillShare|^Sonic|Sitepoint|^PACKT|OREILLY/i.test(
       name
     )
   ) {
     return SECTIONS.TUTORIAL;
+  }
+
+  // APPS
+  if (/APP|PRE|0/.test(section)) {
+    if (/LINUX/i.test(name) || /LINUX/i.test(section))
+      return SECTIONS.APP_LINUX;
+    else if (/MAC/i.test(name) || /MAC/i.test(section)) return SECTIONS.APP_MAC;
+    else if (
+      /Android|Mobile|IOS/i.test(name) ||
+      /Android|Mobile|IOS/i.test(section)
+    )
+      return SECTIONS.APP_MOBILE;
+    return SECTIONS.APP_WIN;
+  }
+
+  // MOVIE
+  // name must contain a year
+  if (/[.\-_][12]\d{3}[.\-_]/.test(name)) {
+    if (/720|1080|2160[PI]/i.test(name)) return SECTIONS.MOVIE_HD;
+    else if (/COMPLETE|PAL|NTSC/i.test(name)) return SECTIONS.MOVIE_DICS;
+    return SECTIONS.MOVIE_SD;
   }
 
   // EVERYTHING ELSE
