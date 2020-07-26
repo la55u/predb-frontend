@@ -1,0 +1,18 @@
+export const SITES = {
+  AR: "AlphaRatio",
+  RTT: "RevolutionTT",
+  TD: "TorrentDay",
+  IPT: "IPTorrents",
+  FF: "FunFile",
+  TL: "TorrentLeech",
+  PTM: "PreToMe",
+  TS: "TorrentSeeds",
+  SPC: "Speed.cd",
+  AL: "Acid-Lounge",
+  XS: "XSpeeds",
+  ME: "",
+  SBS: "SuperBits",
+  nC: "nCore",
+  Tby: "TorrentBytes",
+  TN: "",
+};
