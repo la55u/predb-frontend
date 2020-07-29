@@ -13,7 +13,7 @@
     "@emotion/styled": "^10.0.27",
     "@types/socket.io-client": "^1.4.33",
     "emotion-theming": "^10.0.27",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "lodash.debounce": "^4.0.8",
     "next": "9.4.4",
     "react": "16.13.1",
