@@ -21,7 +21,7 @@ const Restore = () => {
 
   const borderColor = { dark: "gray.700", light: "gray.300" };
 
-  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInput = (e) => {
     setEmail(e.target.value);
   };
 

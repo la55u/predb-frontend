@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import io from "socket.io-client";
 
 export function useSocket(url) {
-  const [socket, setSocket] = useState<SocketIOClient.Socket>();
+  const [socket, setSocket] = useState();
 
   useEffect(() => {
     const socketIo = io(url);

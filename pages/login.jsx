@@ -35,7 +35,7 @@ const Login = () => {
 
   const borderColor = { dark: "gray.700", light: "gray.300" };
 
-  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInput = (e) => {
     const { name, value, type } = e.target;
     setCredentials((c) => ({ ...c, [name]: value }));
   };

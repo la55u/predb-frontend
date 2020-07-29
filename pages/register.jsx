@@ -34,7 +34,7 @@ const Register = () => {
   const toast = useToast();
   const borderColor = { dark: "gray.700", light: "gray.300" };
 
-  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInput = (e) => {
     const { name, value } = e.target;
     setCredentials((c) => ({ ...c, [name]: value }));
   };

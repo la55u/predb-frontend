@@ -15,7 +15,7 @@ import { GithubLink } from "./GithubLink";
 import { HeaderContainer } from "./HeaderContainer";
 import Logo from "./Logo";
 
-const Header = (props: any) => {
+const Header = (props) => {
   const { colorMode, toggleColorMode } = useColorMode();
   const bg = { light: "gray.100", dark: "gray.800" };
 
