@@ -6,6 +6,7 @@ export const SITES = {
   ME: "Milkie",
   nC: "nCore",
   PTM: "PreToMe",
+  PTF: "PTFiles",
   RTT: "RevolutionTT",
   SBS: "SuperBits",
   SPC: "Speed.cd",

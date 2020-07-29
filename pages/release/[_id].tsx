@@ -1,5 +1,6 @@
 import { useColorMode } from "@chakra-ui/core";
 import { GetServerSideProps } from "next";
+import Head from "next/head";
 import DetailsTable from "../../components/DetailsTable";
 import Layout from "../../components/Layout";
 import NFO from "../../components/NFO";
@@ -23,6 +24,9 @@ const Release = ({ data }) => {
 
   return (
     <Layout>
+      <Head>
+        <title>Release | {data.name}</title>
+      </Head>
       <DetailsTable data={data} borderColor={borderColor[colorMode]} />
 
       <RetailTable data={data} borderColor={borderColor[colorMode]} />

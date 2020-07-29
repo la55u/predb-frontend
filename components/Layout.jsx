@@ -12,6 +12,7 @@ const Layout = ({ children }) => {
   return (
     <>
       <Head>
+        <title>PREdb | The Scene PRE & NFO database</title>
         <link
           href="https://fonts.googleapis.com/css2?family=Lato&display=swap"
           rel="stylesheet"
