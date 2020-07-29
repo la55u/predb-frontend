@@ -38,7 +38,6 @@ const ReleaseRow = ({ release }) => {
       px={[1, 1, 1, 4]}
       py={2}
       position="relative"
-      role="group"
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
       _before={{
