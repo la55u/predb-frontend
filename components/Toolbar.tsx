@@ -1,5 +1,4 @@
 import { Flex, FormLabel, Heading, Switch } from "@chakra-ui/core";
-import React from "react";
 import ModalSubscribe from "./ModalSubscribe";
 
 const Toolbar = ({ took, resultsCnt }) => {

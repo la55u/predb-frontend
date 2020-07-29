@@ -1,6 +1,5 @@
 import { Box } from "@chakra-ui/core";
 import dynamic from "next/dynamic";
-import React from "react";
 import Layout from "../components/Layout";
 
 const DynamicSwaggerUI = dynamic(() => import("swagger-ui-react"), {

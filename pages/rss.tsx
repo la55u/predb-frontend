@@ -1,4 +1,3 @@
-import React from "react";
 import { API_BASE, API_ENDPOINT } from "../utils/routes";
 
 const getRssXml = (releases: any[]) => {

@@ -1,5 +1,4 @@
 import { FormControl, FormLabel, Input, SimpleGrid } from "@chakra-ui/core";
-import React from "react";
 
 const SearchAdvanced = () => {
   return (
