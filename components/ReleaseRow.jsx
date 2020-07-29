@@ -38,7 +38,6 @@ const ReleaseRow = ({ release }) => {
       px={[1, 1, 1, 4]}
       py={2}
       position="relative"
-      role="group"
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
       _before={{
@@ -63,7 +62,7 @@ const ReleaseRow = ({ release }) => {
         gap="0 6px"
         alignItems="center"
         templateColumns={{
-          base: "1.5fr 1fr 1fr 1.5fr",
+          base: "3fr 1fr 1fr 1fr",
           md: "0.5fr 0.5fr 2.5fr 0.2fr 0.2fr 0.3fr",
         }}
         templateAreas={{

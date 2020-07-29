@@ -1,5 +1,4 @@
 import { useColorMode } from "@chakra-ui/core";
-import { GetServerSideProps } from "next";
 import Head from "next/head";
 import DetailsTable from "../../components/DetailsTable";
 import Layout from "../../components/Layout";
@@ -8,7 +7,7 @@ import Proof from "../../components/Proof";
 import RetailTable from "../../components/RetailTable";
 import { API_BASE } from "../../utils/routes";
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps = async (context) => {
   const { _id } = context.params;
   const url = `${API_BASE}/api/data/details/_id/${_id}`;
   console.log("getting:", url);

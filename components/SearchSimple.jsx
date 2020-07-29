@@ -36,7 +36,7 @@ const SearchSimple = ({ dispatch }) => {
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e) => {
     setQuery(e.target.value);
   };
 

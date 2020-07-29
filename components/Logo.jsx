@@ -25,8 +25,8 @@ const Logo = () => {
             fontStyle="italic"
             style={{
               background: "linear-gradient(to right,#4FD1C5,#00B5D8)",
-              "-webkit-background-clip": "text",
-              "-webkit-text-fill-color": "transparent",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
             }}
           >
             <Heading>PREdb</Heading>

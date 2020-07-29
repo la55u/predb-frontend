@@ -1,13 +1,8 @@
 import { Button } from "@chakra-ui/core";
-import React from "react";
 import { FaBook } from "react-icons/fa";
 import { FiFilm, FiMonitor, FiPackage } from "react-icons/fi";
-import {
-  IoIosMusicalNotes,
-  IoMdHelpCircleOutline,
-  IoMdSchool,
-} from "react-icons/io";
-import { MdGamepad, MdWhatshot } from "react-icons/md";
+import { IoIosMusicalNotes, IoMdSchool } from "react-icons/io";
+import { MdGamepad, MdHelp, MdWhatshot } from "react-icons/md";
 import { SECTIONS } from "../utils/classify";
 
 const getBadgeData = (section) => {
@@ -54,7 +49,7 @@ const getBadgeData = (section) => {
       return {
         bg: "gray.400",
         name: "Other",
-        icon: IoMdHelpCircleOutline,
+        icon: MdHelp,
         color: "black",
       };
   }

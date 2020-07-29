@@ -1,10 +1,8 @@
 // import App from 'next/app'
 import { ColorModeProvider, CSSReset, ThemeProvider } from "@chakra-ui/core";
-import { AppProps } from "next/app";
-import "swagger-ui-react/swagger-ui.css";
 import "../style.css";
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps }) {
   return (
     <ThemeProvider>
       <ColorModeProvider>

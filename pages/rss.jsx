@@ -1,7 +1,6 @@
-import React from "react";
 import { API_BASE, API_ENDPOINT } from "../utils/routes";
 
-const getRssXml = (releases: any[]) => {
+const getRssXml = (releases) => {
   const rssItemsXml = blogPostsRssXml(releases);
   return `<?xml version="1.0" ?>
   <rss version="2.0" >
@@ -16,7 +15,7 @@ const getRssXml = (releases: any[]) => {
   </rss>`;
 };
 
-const blogPostsRssXml = (releases: any[]) => {
+const blogPostsRssXml = (releases) => {
   let rssItemsXml = "";
 
   releases.forEach((release) => {

@@ -1,4 +1,3 @@
-import { GetServerSideProps } from "next";
 import React, { useReducer } from "react";
 import Layout from "../components/Layout";
 import ReleaseList from "../components/ReleaseList";
@@ -7,11 +6,11 @@ import Toolbar from "../components/Toolbar";
 import {
   initialState,
   SearchContext,
-  searchReducer
+  searchReducer,
 } from "../context/SearchContext";
 import { API_BASE, API_ENDPOINT } from "../utils/routes";
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps = async (context) => {
   const res = await fetch(API_BASE + API_ENDPOINT.RELEASES);
   const data = await res.json();
   return { props: { data } };
