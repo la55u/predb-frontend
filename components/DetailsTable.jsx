@@ -8,8 +8,14 @@ const DetailsTable = ({ data, borderColor }) => {
       borderWidth="1px"
       borderRadius="md"
       borderColor={borderColor}
+      mb={6}
     >
       <Grid p={4} gap="0 20px" templateColumns="150px auto">
+        <Heading size="md" justifySelf="end" mb={2} color="gray.500">
+          Release info
+        </Heading>
+        <span></span>
+
         <Heading size="sm" justifySelf="end">
           Release
         </Heading>

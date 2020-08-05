@@ -2,9 +2,18 @@ import { Flex, Grid, Heading, Image, Text } from "@chakra-ui/core";
 import TimeAgo from "timeago-react";
 
 const RetailTable = ({ data, borderColor }) => {
+  console.log;
+  if (!data)
+    return (
+      <Text mt={5} textAlign="center" color="grey">
+        Retail info not available
+      </Text>
+    );
+
   return (
     <Flex
       justify="space-between"
+      align="start"
       borderWidth="1px"
       borderRadius="md"
       mt="20px"
@@ -14,73 +23,70 @@ const RetailTable = ({ data, borderColor }) => {
         <Heading size="sm" justifySelf="end">
           Series name
         </Heading>
-        <Text wordBreak="break-all">{"Game of Thrones"}</Text>
+        <Text wordBreak="break-all">{data.seriesName}</Text>
 
         <Heading size="sm" justifySelf="end">
           Network
         </Heading>
-        <Text>{"HBO"}</Text>
+        <Text>{data.network || "-"}</Text>
 
         <Heading size="sm" justifySelf="end">
           First aired
         </Heading>
         <Text>
-          {new Date().toLocaleString()} (
-          <TimeAgo datetime={new Date()} />)
+          {data.firstAired} (
+          <TimeAgo datetime={data.firstAired} />)
         </Text>
 
         <Heading size="sm" justifySelf="end">
           Air date
         </Heading>
-        <Text>
-          {new Date(data.added).toLocaleString()} (
-          <TimeAgo datetime={new Date(data.added)} />)
-        </Text>
+        <Text>{`${data.airsDayOfWeek}, ${data.airsTime}`}</Text>
 
         <Heading size="sm" justifySelf="end">
           Runtime
         </Heading>
-        <Text>{"45 min"}</Text>
+        <Text>{`${data.runtime} min` || "-"}</Text>
 
         <Heading size="sm" justifySelf="end">
           Genre
         </Heading>
-        <Text>{"Fantasy, Sci-fi"}</Text>
+        <Text>{data.genre?.join(", ")}</Text>
 
         <Heading size="sm" justifySelf="end">
           Imdb
         </Heading>
         <Text>
-          <a href="https://www.imdb.com/title/tt7008682" target="_blank">
-            https://www.imdb.com/title/tt7008682
+          <a href={`https://www.imdb.com/title/${data.imdbId}`} target="_blank">
+            {`https://www.imdb.com/title/${data.imdbId}`}
           </a>
         </Text>
 
         <Heading size="sm" justifySelf="end">
           Rating
         </Heading>
-        <Text>{"8.1 / 10 (241 votes)"}</Text>
+        <Text>
+          {data.siteRating === 0
+            ? "-"
+            : `${data.siteRating} / 10 (${data.siteRatingCount} votes, TVDB)`}
+        </Text>
 
         <Heading size="sm" justifySelf="end">
           Status
         </Heading>
-        <Text>{"Finished"}</Text>
+        <Text>{data.status}</Text>
 
         <Heading size="sm" justifySelf="end">
           Overview
         </Heading>
-        <Text>
-          Rainbow Johnson recounts her experience growing up in a mixed-race
-          family in the ’80s and the constant dilemmas they had to face over
-          whether to assimilate or stay true to themselves.
-        </Text>
+        <Text>{data.overview || "-"}</Text>
       </Grid>
 
       <Image
-        src="//picsum.photos/150/240"
-        alt=""
+        src={`https://thetvdb.com/banners/${data.poster}`}
+        alt="poster"
         m={4}
-        objectFit="cover"
+        objectFit="contain"
         htmlHeight="100%"
         htmlWidth="150px"
         minW="150px"

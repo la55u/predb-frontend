@@ -1,15 +1,26 @@
 // import App from 'next/app'
 import { ColorModeProvider, CSSReset, ThemeProvider } from "@chakra-ui/core";
+import Head from "next/head";
 import "../style.css";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <ThemeProvider>
-      <ColorModeProvider>
-        <CSSReset />
-        <Component {...pageProps} />
-      </ColorModeProvider>
-    </ThemeProvider>
+    <>
+      <Head>
+        <title>PREdb | The Scene PRE & NFO database</title>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Lato&display=swap"
+          rel="stylesheet"
+        />
+      </Head>
+
+      <ThemeProvider>
+        <ColorModeProvider>
+          <CSSReset />
+          <Component {...pageProps} />
+        </ColorModeProvider>
+      </ThemeProvider>
+    </>
   );
 }
 

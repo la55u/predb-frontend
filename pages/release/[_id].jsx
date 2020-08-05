@@ -3,39 +3,56 @@ import Head from "next/head";
 import DetailsTable from "../../components/DetailsTable";
 import Layout from "../../components/Layout";
 import NFO from "../../components/NFO";
-import Proof from "../../components/Proof";
-import RetailTable from "../../components/RetailTable";
+import RetailInfo_TV_TMDB from "../../components/RetailInfo_TV_TMDB";
 import { API_BASE } from "../../utils/routes";
 
 export const getServerSideProps = async (context) => {
+  // release data
   const { _id } = context.params;
   const url = `${API_BASE}/api/data/details/_id/${_id}`;
   console.log("getting:", url);
   const res = await fetch(url);
   const data = await res.json();
-  return { props: { data } };
+
+  // retail data
+  const retailRes = await fetch(
+    `${API_BASE}/api/retail/tmdb/series/${data.name}`
+  );
+  let retailData = await retailRes.json();
+  console.log("retailData:", retailData);
+  retailData = !retailData.success ? null : retailData.data;
+
+  return { props: { data, retailData } };
 };
 
-const Release = ({ data }) => {
+const Release = ({ retailData, data }) => {
   const { colorMode } = useColorMode();
 
   const borderColor = { dark: "gray.700", light: "gray.300" };
 
   return (
-    <Layout>
+    <>
       <Head>
         <title>Release | {data.name}</title>
       </Head>
-      <DetailsTable data={data} borderColor={borderColor[colorMode]} />
 
-      <RetailTable data={data} borderColor={borderColor[colorMode]} />
+      <Layout>
+        <DetailsTable data={data} borderColor={borderColor[colorMode]} />
 
-      <Proof proof={true} />
+        <RetailInfo_TV_TMDB
+          data={retailData}
+          borderColor={borderColor[colorMode]}
+        />
 
-      <NFO nfo={false} />
+        {/* <RetailTable data={retailData} borderColor={borderColor[colorMode]} /> */}
 
-      <pre>{JSON.stringify(data, null, 3)}</pre>
-    </Layout>
+        {/* <Proof proof={false} /> */}
+
+        <NFO nfo={true} borderColor={borderColor[colorMode]} />
+
+        {/* <pre>{JSON.stringify(data, null, 3)}</pre> */}
+      </Layout>
+    </>
   );
 };
 
