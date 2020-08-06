@@ -42,6 +42,11 @@ const RetailInfo_TV_TMDB = ({ data, borderColor }) => {
         </Text>
 
         <Text fontWeight="bold" justifySelf="end">
+          Type
+        </Text>
+        <Text>{data.type || "-"}</Text>
+
+        <Text fontWeight="bold" justifySelf="end">
           Country
         </Text>
         <Text>

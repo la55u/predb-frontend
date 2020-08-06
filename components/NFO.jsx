@@ -1,9 +1,14 @@
 import { Button, Flex } from "@chakra-ui/core";
+import { API_BASE, API_ENDPOINT } from "../utils/routes";
 
 // const nfo = "";
 
 const NFO = ({ data, borderColor }) => {
   if (!data.nfo) return null;
+
+  const downloadLink = `${API_BASE + API_ENDPOINT.DOWNLOAD}/${data.name}/${
+    data.nfo[0].filename
+  }`;
 
   return (
     <Flex
@@ -16,6 +21,7 @@ const NFO = ({ data, borderColor }) => {
     >
       <legend align="center">
         <Button
+          onClick={() => window.open(downloadLink, "_blank")}
           variantColor="teal"
           variant="ghost"
           rightIcon="download"
