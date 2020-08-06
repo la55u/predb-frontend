@@ -8,7 +8,7 @@ import {
 } from "@chakra-ui/core";
 import TimeAgo from "timeago-react";
 
-const RetailInfo_TV_TMDB = ({ data, borderColor }) => {
+const RetailInfo_Movie_TMDB = ({ data, borderColor }) => {
   const { colorMode } = useColorMode();
   const fallbackSrc = {
     dark: "/movie-placeholder-dark.png",
@@ -34,47 +34,62 @@ const RetailInfo_TV_TMDB = ({ data, borderColor }) => {
         <span></span>
 
         <Text fontWeight="bold" justifySelf="end">
-          Series name
+          Title
         </Text>
         <Text wordBreak="break-all">
-          {data.original_name}
-          {data.name !== data.original_name && ` (${data.name})`}
+          {data.original_title}
+          {data.title !== data.original_title && ` (${data.title})`}
         </Text>
 
         <Text fontWeight="bold" justifySelf="end">
-          Country
+          Original language
         </Text>
         <Text>
-          {data.origin_country.length > 0
-            ? data.origin_country.join(", ")
+          {data.original_language ? data.original_language.toUpperCase() : "-"}
+        </Text>
+
+        <Text fontWeight="bold" justifySelf="end">
+          Prod. companies
+        </Text>
+        <Text>
+          {data.production_companies.length > 0
+            ? data.production_companies.map((n) => n.name).join(", ")
             : "-"}
         </Text>
 
         <Text fontWeight="bold" justifySelf="end">
-          Network
+          Prod. countries
         </Text>
         <Text>
-          {data.networks.length > 0
-            ? data.networks.map((n) => n.name).join(", ")
+          {data.production_countries.length > 0
+            ? data.production_countries.map((n) => n.name).join(", ")
             : "-"}
         </Text>
 
         <Text fontWeight="bold" justifySelf="end">
-          First aired
+          Budget
         </Text>
         <Text>
-          {data.first_air_date} (
-          <TimeAgo datetime={data.first_air_date} />)
+          {data.budget
+            ? "$ " +
+              data.budget.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+            : "-"}
+        </Text>
+
+        <Text fontWeight="bold" justifySelf="end">
+          Revenue
+        </Text>
+        <Text>
+          {data.revenue
+            ? "$ " +
+              data.revenue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+            : "-"}
         </Text>
 
         <Text fontWeight="bold" justifySelf="end">
           Runtime
         </Text>
-        <Text>
-          {data.episode_run_time.length > 0
-            ? data.episode_run_time.map((t) => t + " min").join(", ")
-            : "-"}
-        </Text>
+        <Text>{data.runtime ? `${data.runtime} min` : "-"}</Text>
 
         <Text fontWeight="bold" justifySelf="end">
           Genre
@@ -86,12 +101,16 @@ const RetailInfo_TV_TMDB = ({ data, borderColor }) => {
         </Text>
 
         <Text fontWeight="bold" justifySelf="end">
-          Homepage
+          IMDB
         </Text>
         <Text>
-          <a href={data.homepage} target="_blank">
-            {data.homepage || "-"}
-          </a>
+          {data.imdb_id ? (
+            <a href={`https://imdb.com/title/${data.imdb_id}`} target="_blank">
+              {`https://imdb.com/title/${data.imdb_id}`}
+            </a>
+          ) : (
+            "-"
+          )}
         </Text>
 
         <Text fontWeight="bold" justifySelf="end">
@@ -104,9 +123,11 @@ const RetailInfo_TV_TMDB = ({ data, borderColor }) => {
         </Text>
 
         <Text fontWeight="bold" justifySelf="end">
-          Status
+          Released
         </Text>
-        <Text>{data.status || "-"}</Text>
+        <Text>
+          {data.release_date || "-"} (<TimeAgo datetime={data.release_date} />)
+        </Text>
 
         <Text fontWeight="bold" justifySelf="end">
           Overview
@@ -130,4 +151,4 @@ const RetailInfo_TV_TMDB = ({ data, borderColor }) => {
   );
 };
 
-export default RetailInfo_TV_TMDB;
+export default RetailInfo_Movie_TMDB;

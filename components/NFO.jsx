@@ -1,14 +1,9 @@
-import { Button, Flex, Text } from "@chakra-ui/core";
+import { Button, Flex } from "@chakra-ui/core";
 
 // const nfo = "";
 
-const NFO = ({ nfo, borderColor }) => {
-  if (!nfo)
-    return (
-      <Text mt={5} textAlign="center" color="grey">
-        NFO file not available
-      </Text>
-    );
+const NFO = ({ data, borderColor }) => {
+  if (!data.nfo) return null;
 
   return (
     <Flex
@@ -20,15 +15,15 @@ const NFO = ({ nfo, borderColor }) => {
       borderColor={borderColor}
     >
       <legend align="center">
-        <Button variantColor="teal" variant="ghost" mx={2}>
-          filename-group.nfo
-          {/* <IconButton
-            aria-label="Download NFO file"
-            icon="download"
-            variant="ghost"
-            variantColor="teal"
-            ml={1}
-          /> */}
+        <Button
+          variantColor="teal"
+          variant="ghost"
+          rightIcon="download"
+          mx={2}
+          title={data.nfo[0].filename}
+          aria-label="Download NFO file"
+        >
+          NFO
         </Button>
       </legend>
 

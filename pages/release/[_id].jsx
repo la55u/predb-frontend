@@ -3,29 +3,33 @@ import Head from "next/head";
 import DetailsTable from "../../components/DetailsTable";
 import Layout from "../../components/Layout";
 import NFO from "../../components/NFO";
+import RetailInfo_Movie_TMDB from "../../components/RetailInfo_Movie_TMDB";
 import RetailInfo_TV_TMDB from "../../components/RetailInfo_TV_TMDB";
+import { getSection } from "../../utils/classify";
 import { API_BASE } from "../../utils/routes";
 
 export const getServerSideProps = async (context) => {
-  // release data
+  // fetch release data
   const { _id } = context.params;
   const url = `${API_BASE}/api/data/details/_id/${_id}`;
   console.log("getting:", url);
   const res = await fetch(url);
   const data = await res.json();
 
-  // retail data
-  const retailRes = await fetch(
-    `${API_BASE}/api/retail/tmdb/series/${data.name}`
-  );
+  // fetch retail data
+  const category = getSection(data.name, data.section).includes("TV")
+    ? "series"
+    : "movie";
+  const retailUrl = `${API_BASE}/api/retail/tmdb/${category}/${data.name}`;
+  const retailRes = await fetch(retailUrl);
   let retailData = await retailRes.json();
   console.log("retailData:", retailData);
   retailData = !retailData.success ? null : retailData.data;
 
-  return { props: { data, retailData } };
+  return { props: { data, retailData, category } };
 };
 
-const Release = ({ retailData, data }) => {
+const Release = ({ retailData, data, category }) => {
   const { colorMode } = useColorMode();
 
   const borderColor = { dark: "gray.700", light: "gray.300" };
@@ -39,16 +43,25 @@ const Release = ({ retailData, data }) => {
       <Layout>
         <DetailsTable data={data} borderColor={borderColor[colorMode]} />
 
-        <RetailInfo_TV_TMDB
-          data={retailData}
-          borderColor={borderColor[colorMode]}
-        />
+        {category === "series" && (
+          <RetailInfo_TV_TMDB
+            data={retailData}
+            borderColor={borderColor[colorMode]}
+          />
+        )}
+
+        {category === "movie" && (
+          <RetailInfo_Movie_TMDB
+            data={retailData}
+            borderColor={borderColor[colorMode]}
+          />
+        )}
 
         {/* <RetailTable data={retailData} borderColor={borderColor[colorMode]} /> */}
 
         {/* <Proof proof={false} /> */}
 
-        <NFO nfo={true} borderColor={borderColor[colorMode]} />
+        <NFO data={data} borderColor={borderColor[colorMode]} />
 
         {/* <pre>{JSON.stringify(data, null, 3)}</pre> */}
       </Layout>
