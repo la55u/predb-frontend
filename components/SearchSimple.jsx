@@ -8,32 +8,33 @@ import {
   InputRightElement,
 } from "@chakra-ui/core";
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { clear } from "..//redux/slices/searchSlice";
 import useDebounce from "../hooks/useDebounce";
-import http from "../utils/http";
-import { API_ENDPOINT } from "../utils/routes";
+import { searchSimple } from "../redux/slices/searchSlice";
 
-const SearchSimple = ({ dispatch }) => {
+const SearchSimple = ({}) => {
   const [query, setQuery] = useState("");
-
-  console.log("SearchSimple rerender");
+  const dispatch = useDispatch();
   const debouncedQuery = useDebounce(query, 200);
 
   useEffect(() => {
     if (query) getResults();
+    else handleClear();
   }, [debouncedQuery]);
 
   const getResults = async () => {
-    if (query.length < 3) return; // todo warning
-
-    dispatch({ type: "SEARCH_START" });
-    try {
-      const res = await http.post(API_ENDPOINT.SEARCH_SIMPLE, {
-        input: query,
-      });
-      dispatch({ type: "SEARCH_SUCCESS", payload: res });
-    } catch (error) {
-      console.error("error fetching data:", error);
+    if (query.length < 3) {
+      // todo warning
+      return;
     }
+
+    dispatch(searchSimple(query));
+  };
+
+  const handleClear = () => {
+    setQuery("");
+    dispatch(clear());
   };
 
   const handleChange = (e) => {
@@ -54,7 +55,7 @@ const SearchSimple = ({ dispatch }) => {
               variant="ghost"
               icon="close"
               aria-label="Clear input"
-              onClick={() => setQuery("")}
+              onClick={handleClear}
             />
           </InputRightElement>
         )}

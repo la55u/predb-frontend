@@ -1,4 +1,4 @@
-import { Flex, Grid, Heading, Text } from "@chakra-ui/core";
+import { Box, Flex, Grid, Heading, Text } from "@chakra-ui/core";
 import TimeAgo from "timeago-react";
 
 const DetailsTable = ({ data, borderColor }) => {
@@ -9,12 +9,16 @@ const DetailsTable = ({ data, borderColor }) => {
       borderRadius="md"
       borderColor={borderColor}
       mb={6}
+      as="fieldset"
     >
-      <Grid p={4} gap="0 20px" templateColumns="150px auto">
-        <Heading size="md" justifySelf="end" mb={2} color="gray.500">
+      <legend align="center">
+        <Heading size="md" justifySelf="end" mx={4} mt={1} color="gray.500">
           Release info
         </Heading>
-        <span></span>
+      </legend>
+
+      <Grid p={4} gap="0 20px" templateColumns="150px auto">
+        {/* <span></span> */}
 
         <Text fontWeight="bold" justifySelf="end">
           Release
@@ -71,15 +75,27 @@ const DetailsTable = ({ data, borderColor }) => {
         <Text fontWeight="bold" justifySelf="end">
           Nukes
         </Text>
-        <Text>
+        <Text wordBreak="break-all">
           {!data.nukes || data.nukes.length === 0 ? (
             "-"
           ) : (
-            <>
+            <Box as="ol" paddingLeft="20px">
               {data.nukes.map((nuke) => (
-                <Text key={nuke.reason}>{`[${nuke.type}] ${nuke.reason}`}</Text>
+                <li key={nuke.reason}>
+                  <Text
+                    color={
+                      ["MODNUKE", "NUKE"].includes(nuke.type.toUpperCase())
+                        ? "red.500"
+                        : "green.500"
+                    }
+                    display="inline"
+                  >
+                    [{nuke.type}]{" "}
+                  </Text>
+                  <Text display="inline">{nuke.reason}</Text>
+                </li>
               ))}
-            </>
+            </Box>
           )}
         </Text>
       </Grid>
