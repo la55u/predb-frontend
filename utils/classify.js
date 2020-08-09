@@ -11,7 +11,7 @@ export const getSection = (name, section) => {
   // S01E01 or S01D01 format
   if (/S\d+[ED]\d+/i.test(name) || /^TV/i.test(section)) {
     if (/720|1080|2160|[PI]/i.test(name)) return SECTIONS.TV_HD;
-    else if (/S\d+D\d+/i.test(name)) return SECTIONS.TV_DISC;
+    else if (/S\d+D\d+/i.test(name)) return SECTIONS.TV_DISC; // S01D01
     return SECTIONS.TV_SD;
   }
 

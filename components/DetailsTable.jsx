@@ -1,4 +1,4 @@
-import { Flex, Grid, Heading, Text } from "@chakra-ui/core";
+import { Box, Flex, Grid, Heading, Text } from "@chakra-ui/core";
 import TimeAgo from "timeago-react";
 
 const DetailsTable = ({ data, borderColor }) => {
@@ -8,72 +8,94 @@ const DetailsTable = ({ data, borderColor }) => {
       borderWidth="1px"
       borderRadius="md"
       borderColor={borderColor}
+      mb={6}
+      as="fieldset"
     >
-      <Grid p={4} gap="0 20px" templateColumns="150px auto">
-        <Heading size="sm" justifySelf="end">
-          Release
+      <legend align="center">
+        <Heading size="md" justifySelf="end" mx={4} mt={1} color="gray.500">
+          Release info
         </Heading>
+      </legend>
+
+      <Grid p={4} gap="0 20px" templateColumns="150px auto">
+        {/* <span></span> */}
+
+        <Text fontWeight="bold" justifySelf="end">
+          Release
+        </Text>
         <Text wordBreak="break-all">{data.name}</Text>
 
-        <Heading size="sm" justifySelf="end">
+        <Text fontWeight="bold" justifySelf="end">
           Group
-        </Heading>
+        </Text>
         <Text>{data.group}</Text>
 
-        <Heading size="sm" justifySelf="end">
+        <Text fontWeight="bold" justifySelf="end">
           Added
-        </Heading>
+        </Text>
         <Text>
           {new Date(data.added).toLocaleString()} (
           <TimeAgo datetime={new Date(data.added)} />)
         </Text>
 
-        <Heading size="sm" justifySelf="end">
+        <Text fontWeight="bold" justifySelf="end">
           Section
-        </Heading>
+        </Text>
         <Text>{data.section}</Text>
 
-        <Heading size="sm" justifySelf="end">
+        <Text fontWeight="bold" justifySelf="end">
           No. of files
-        </Heading>
+        </Text>
         <Text>{data.files || "-"}</Text>
 
-        <Heading size="sm" justifySelf="end">
+        <Text fontWeight="bold" justifySelf="end">
           Size
-        </Heading>
+        </Text>
         <Text>{data.size ? `${data.size} MB` : "-"}</Text>
 
-        <Heading size="sm" justifySelf="end">
+        <Text fontWeight="bold" justifySelf="end">
           Genre
-        </Heading>
+        </Text>
         <Text>{data.genre || "-"}</Text>
 
-        <Heading size="sm" justifySelf="end">
+        <Text fontWeight="bold" justifySelf="end">
           Retail link
-        </Heading>
+        </Text>
         <Text>{data.url || "-"}</Text>
 
-        <Heading size="sm" justifySelf="end">
+        <Text fontWeight="bold" justifySelf="end">
           Trace
-        </Heading>
+        </Text>
         <Text fontStyle="italic">
           {data.traces
             ? data.traces.map((tr) => `#${tr.rank} ${tr.site}`).join(", ")
             : "-"}
         </Text>
 
-        <Heading size="sm" justifySelf="end">
+        <Text fontWeight="bold" justifySelf="end">
           Nukes
-        </Heading>
-        <Text>
+        </Text>
+        <Text wordBreak="break-all">
           {!data.nukes || data.nukes.length === 0 ? (
             "-"
           ) : (
-            <>
+            <Box as="ol" paddingLeft="20px">
               {data.nukes.map((nuke) => (
-                <Text key={nuke.reason}>{`[${nuke.type}] ${nuke.reason}`}</Text>
+                <li key={nuke.reason}>
+                  <Text
+                    color={
+                      ["MODNUKE", "NUKE"].includes(nuke.type.toUpperCase())
+                        ? "red.500"
+                        : "green.500"
+                    }
+                    display="inline"
+                  >
+                    [{nuke.type}]{" "}
+                  </Text>
+                  <Text display="inline">{nuke.reason}</Text>
+                </li>
               ))}
-            </>
+            </Box>
           )}
         </Text>
       </Grid>

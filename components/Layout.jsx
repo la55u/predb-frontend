@@ -1,5 +1,4 @@
 import { Box, Flex, useColorMode } from "@chakra-ui/core";
-import Head from "next/head";
 import { Container } from "./Container";
 import { Footer } from "./Footer";
 import Header from "./Header";
@@ -10,14 +9,6 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      <Head>
-        <title>PREdb | The Scene PRE & NFO database</title>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Lato&display=swap"
-          rel="stylesheet"
-        />
-      </Head>
-
       <Flex
         bg={bgColor[colorMode]}
         direction="column"
@@ -26,7 +17,7 @@ const Layout = ({ children }) => {
       >
         <Header />
 
-        <Box as="main" pt={24} pb={24} flexGrow="1">
+        <Box as="main" py={24} flexGrow="1">
           <Container>{children}</Container>
         </Box>
 

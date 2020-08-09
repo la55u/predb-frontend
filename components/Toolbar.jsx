@@ -1,9 +1,9 @@
 import { Flex, FormLabel, Heading, Switch } from "@chakra-ui/core";
+import { useSelector } from "react-redux";
 import ModalSubscribe from "./ModalSubscribe";
 
-const Toolbar = ({ took, resultsCnt }) => {
-  // const { error, data } = useContext(StateContext);
-  // console.log("ctx", data);
+const Toolbar = () => {
+  const { took, resultsCnt } = useSelector((state) => state.search);
 
   return (
     <>
@@ -25,7 +25,7 @@ const Toolbar = ({ took, resultsCnt }) => {
           </Flex>
         </Flex>
 
-        {resultsCnt > 0 && (
+        {took > 0 && (
           <Heading size="xs" color="teal.400">
             {resultsCnt} results found in {took} ms
           </Heading>

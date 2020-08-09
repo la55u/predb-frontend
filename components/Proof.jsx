@@ -1,12 +1,7 @@
 import { Flex, IconButton, Image, Text } from "@chakra-ui/core";
 
 const Proof = ({ proof }) => {
-  if (!proof)
-    return (
-      <Text mt={5} textAlign="center">
-        No proof file available for this release
-      </Text>
-    );
+  if (!proof) return null;
 
   return (
     <Flex mt={5} align="center" direction="column">
@@ -16,6 +11,8 @@ const Proof = ({ proof }) => {
           aria-label="Download proof file"
           icon="download"
           variant="ghost"
+          variantColor="teal"
+          ml={1}
         />
       </Text>
       <Image

@@ -1,18 +1,35 @@
 import { Box, Flex, Spinner } from "@chakra-ui/core";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useSocket } from "../hooks/useSocket";
+import {
+  addRelease,
+  getAllRelease,
+  updateRelease,
+} from "../redux/slices/releasesSlice";
 import { API_BASE } from "../utils/routes";
 import { NoResults } from "./NoResults";
 import ReleaseRow from "./ReleaseRow";
 
-const ReleaseList = ({ initialReleases, loading, searchResults }) => {
-  const [allRelease, setAllRelease] = useState([...initialReleases]);
-  const socket = useSocket(API_BASE);
-  // const { data, loading, error } = useContext(SearchContext);
+const ReleaseList = () => {
+  const dispatch = useDispatch();
 
-  // if the search is active show results otherwise show all release
-  const list = searchResults ? searchResults : allRelease;
-  // console.log("list", list);
+  const { releaselist, loading } = useSelector((state) => state.releases);
+  const { results, took, loading: searchLoading } = useSelector(
+    (state) => state.search
+  );
+
+  // if took is set, the user is searching -> show results, otherwise show the latest releases
+  const list = took > 0 ? results : releaselist;
+
+  const socket = useSocket(API_BASE);
+
+  useEffect(() => {
+    async function dispatchGetAll() {
+      await dispatch(getAllRelease());
+    }
+    dispatchGetAll();
+  }, [dispatch]);
 
   useEffect(() => {
     if (socket) {
@@ -23,32 +40,22 @@ const ReleaseList = ({ initialReleases, loading, searchResults }) => {
 
   const handleNew = (payload) => {
     console.log("new:", payload);
-    setAllRelease((all) => [
-      { ...payload, new: true },
-      ...all.slice(0, all.length - 1),
-    ]);
+    dispatch(addRelease(payload));
   };
 
   const handleUpdate = (payload) => {
     console.log("update:", payload);
-    setAllRelease((all) => {
-      const newAll = [...all];
-      const idx = all.findIndex((r) => r._id === payload._id);
-      if (idx !== -1) {
-        newAll[idx] = payload;
-      }
-      return newAll;
-    });
+    dispatch(updateRelease(payload));
   };
 
-  if (loading)
+  if (loading || searchLoading)
     return (
       <Flex justify="center" h="50vh" align="center">
         <Spinner color="teal.400" size="xl" />
       </Flex>
     );
 
-  if (searchResults?.length === 0) return <NoResults />;
+  if (took > 0 && results.length === 0) return <NoResults />;
 
   return (
     <>
