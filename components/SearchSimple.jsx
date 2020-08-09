@@ -28,7 +28,6 @@ const SearchSimple = ({}) => {
       // todo warning
       return;
     }
-
     dispatch(searchSimple(query));
   };
 
