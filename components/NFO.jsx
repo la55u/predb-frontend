@@ -29,11 +29,11 @@ const NFO = ({ data, borderColor }) => {
     <Flex
       py={2}
       as="fieldset"
-      align="center"
       direction="column"
       borderWidth="1px"
       borderRadius="md"
       borderColor={borderColor}
+      overflowX="auto"
     >
       <legend align="center">
         <Button
@@ -51,14 +51,17 @@ const NFO = ({ data, borderColor }) => {
 
       <pre
         style={{
-          fontSize: "10pt",
-          textAlign: "left",
+          display: "flex",
+          maxWidth: "calc(1200px - 2.5rem) ",
+          width: "calc(100vw - 2.5rem)",
+
+          justifyContent: "center",
+          fontSize: "14px",
           fontFamily: "'Courier New', monospace",
           lineHeight: "14px",
-          WebkitFontSmooth: "auto",
         }}
       >
-        <code>{` ${nfoContent} `}</code>
+        <code>{`${nfoContent}`}</code>
       </pre>
     </Flex>
   );
