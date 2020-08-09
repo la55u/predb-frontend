@@ -36,7 +36,7 @@ export const Footer = () => {
           <NextLink href="/rss" passHref>
             <Link mx={2}>RSS</Link>
           </NextLink>
-          <NextLink href="/swagger" passHref>
+          <NextLink href="#" passHref>
             <Link mx={2} mr={[2, 0]}>
               API
             </Link>
