@@ -43,7 +43,7 @@ export const getSection = (name, section) => {
 
   // TUTORIAL
   if (
-    /TUTORIAL|BOOKWARE|Udemy|Lynda|PluralSight|EggHead|LinkedIn|SkillShare|^Sonic|Sitepoint|^PACKT|OREILLY/i.test(
+    /TUTORIAL|BOOKWARE|Udemy|Lynda|PluralSight|EggHead|LinkedIn|SkillShare|^Sonic.Academy|Sitepoint|^PACKT|OREILLY/i.test(
       name
     )
   ) {
