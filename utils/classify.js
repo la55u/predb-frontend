@@ -7,6 +7,16 @@ export const getSection = (name, section) => {
     else return SECTIONS.XXX_VIDEO;
   }
 
+  // SPORT
+  if (
+    /^(Moto2|Moto3|Tennis|Formula|UEFA|NFL|NBA|AFL|WNBA|NBL|NRL|WWE|WWF|Boxing|UFC|UEL|FA\.Cup|A-League|EPL|Fussball|Coppa\.Italia).*[.\-_][12][09]\d{2}[.\-_]/i.test(
+      name
+    ) &&
+    /TV/.test(section)
+  ) {
+    return SECTIONS.SPORT;
+  }
+
   // TV
   // S01E01 or S01D01 format
   if (/S\d+[ED]\d+/i.test(name) || /^TV/i.test(section)) {
@@ -65,7 +75,7 @@ export const getSection = (name, section) => {
 
   // MOVIE
   // name must contain a year
-  if (/[.\-_][12]\d{3}[.\-_]/.test(name)) {
+  if (/[.\-_][12][09]\d{2}[.\-_]/.test(name)) {
     if (/720|1080|2160[PI]/i.test(name)) return SECTIONS.MOVIE_HD;
     else if (/COMPLETE|PAL|NTSC/i.test(name)) return SECTIONS.MOVIE_DICS;
     return SECTIONS.MOVIE_SD;
@@ -104,6 +114,7 @@ export const SECTIONS = {
   XXX_PICS: "XXX_PICS",
   XXX_VIDEO: "XXX_VIDEO",
 
+  SPORT: "SPORT",
   TUTORIAL: "TUTORIAL",
   UNKNOWN: "UNKNOWN",
 };
