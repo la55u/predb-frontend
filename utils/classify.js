@@ -47,7 +47,10 @@ export const getSection = (name, section) => {
   }
 
   // BOOK
-  if (/[.\-_]E?BOOK/i.test(name) || /BOOK/i.test(section)) {
+  if (
+    /[.\-_]E?BOOK[.\-_]|MOBI|AZW3|EPUB|MAGAZINE/i.test(name) &&
+    /BOOK/i.test(section)
+  ) {
     return SECTIONS.EBOOK;
   }
 
