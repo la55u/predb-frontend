@@ -51,7 +51,12 @@ const ReleaseList = () => {
   if (loading || searchLoading)
     return (
       <Flex justify="center" h="50vh" align="center">
-        <Spinner color="teal.400" size="xl" />
+        <Spinner
+          color="teal.400"
+          size="xl"
+          thickness="3px"
+          label="Loading..."
+        />
       </Flex>
     );
 
