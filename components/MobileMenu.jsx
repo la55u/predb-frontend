@@ -133,6 +133,7 @@ export const MobileMenu = () => {
               align="center"
               w="100%"
               href="https://github.com/la55u/predb-frontend"
+              target="_blank"
               textDecor="none !important"
             >
               <Box w="15%">
@@ -148,6 +149,7 @@ export const MobileMenu = () => {
               align="center"
               w="100%"
               href="https://github.com/la55u/predb-frontend/swagger.yml"
+              target="_blank"
               textDecor="none !important"
             >
               <Box w="15%">
