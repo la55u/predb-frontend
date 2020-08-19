@@ -14,6 +14,7 @@ import { Container } from "./Container";
 import { GithubLink } from "./GithubLink";
 import { HeaderContainer } from "./HeaderContainer";
 import Logo from "./Logo";
+import { MobileMenu } from "./MobileMenu";
 
 const Header = (props) => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -27,7 +28,11 @@ const Header = (props) => {
             <Logo />
           </Box>
 
-          <Flex align="center" color="gray.500">
+          <Flex
+            align="center"
+            color="gray.500"
+            display={["none", "none", "flex"]}
+          >
             <NextLink href="/notifications" passHref>
               <Button mt="2px" as="a" color="current" size="sm" variant="ghost">
                 Notifications
@@ -74,6 +79,8 @@ const Header = (props) => {
               </a>
             </NextLink>
           </Flex>
+
+          <MobileMenu />
         </Flex>
       </Container>
     </HeaderContainer>

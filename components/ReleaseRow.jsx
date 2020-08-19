@@ -44,8 +44,8 @@ const ReleaseRow = ({ release }) => {
         content: `''`,
         position: "absolute",
         // height: "1px",
-        left: "30px",
-        right: "30px",
+        left: [0, 0, "30px"],
+        right: [0, 0, "30px"],
         height: "100%",
         bottom: 0,
         borderColor: borderColor[colorMode],
@@ -62,11 +62,11 @@ const ReleaseRow = ({ release }) => {
         gap="0 6px"
         alignItems="center"
         templateColumns={{
-          base: "3fr 1fr 1fr 1fr",
+          base: "3fr 1fr 1fr 1.6fr",
           md: "0.5fr 0.5fr 2.5fr 0.2fr 0.2fr 0.3fr",
         }}
         templateAreas={{
-          base: `"added files size cat" "namewrap namewrap namewrap namewrap" `,
+          base: `"added size size cat" "namewrap namewrap namewrap namewrap" `,
           md: `"added cat namewrap action files size"`,
         }}
       >
@@ -148,7 +148,8 @@ const ReleaseRow = ({ release }) => {
 
         <Box
           gridArea="files"
-          justifySelf={["end", "end", "center"]}
+          display={["none", "none", "block"]}
+          justifySelf={"center"}
           color={{ base: gray[colorMode], md: "current" }}
         >
           {release.files ? release.files + "F" : "-"}

@@ -40,7 +40,7 @@ const RetailInfo_TV_TMDB = ({ data, borderColor }) => {
           </Text>
           <Text wordBreak="break-all">
             {data.original_name}
-            {data.name !== data.original_name && `(${data.name})`}
+            {data.name !== data.original_name && ` (${data.name})`}
           </Text>
 
           <Text fontWeight="bold" justifySelf="end">

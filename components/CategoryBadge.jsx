@@ -1,5 +1,5 @@
 import { Button } from "@chakra-ui/core";
-import { FaBook } from "react-icons/fa";
+import { FaBook, FaFootballBall } from "react-icons/fa";
 import { FiFilm, FiMonitor, FiPackage } from "react-icons/fi";
 import { IoIosMusicalNotes, IoMdSchool } from "react-icons/io";
 import { MdGamepad, MdHelp, MdWhatshot } from "react-icons/md";
@@ -36,7 +36,7 @@ const getBadgeData = (section) => {
     case SECTIONS.MOVIE_DICS:
       return { bg: "green.400", name: "Movie", icon: FiFilm };
     case SECTIONS.EBOOK:
-      return { bg: "yellow.700", name: "Book", icon: FaBook };
+      return { bg: "#b38b6d", name: "Book", icon: FaBook };
     case SECTIONS.APP_MAC:
     case SECTIONS.APP_WIN:
     case SECTIONS.APP_LINUX:
@@ -44,7 +44,8 @@ const getBadgeData = (section) => {
       return { bg: "purple.400", name: "App", icon: FiPackage };
     case SECTIONS.TUTORIAL:
       return { bg: "yellow.400", name: "Educational", icon: IoMdSchool };
-
+    case SECTIONS.SPORT:
+      return { bg: "teal.300", name: "Sport", icon: FaFootballBall };
     default:
       return {
         bg: "gray.400",
