@@ -15,6 +15,7 @@ import { GithubLink } from "./GithubLink";
 import { HeaderContainer } from "./HeaderContainer";
 import Logo from "./Logo";
 import { MobileMenu } from "./MobileMenu";
+import { ThemeSwitcher } from "./ThemeSwitcher";
 
 const Header = (props) => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -56,15 +57,7 @@ const Header = (props) => {
               <GithubLink />
             </Stack>
 
-            <IconButton
-              aria-label={`Switch dark/light theme`}
-              variant="ghost"
-              color="current"
-              ml="2"
-              fontSize="20px"
-              onClick={toggleColorMode}
-              icon={colorMode === "light" ? "moon" : "sun"}
-            />
+            <ThemeSwitcher />
 
             <NextLink href="/login">
               <a>

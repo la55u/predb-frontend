@@ -16,12 +16,15 @@ import { BsFillPersonFill } from "react-icons/bs";
 import { FaRss } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoIosStats } from "react-icons/io";
+import { ThemeSwitcher } from "./ThemeSwitcher";
 
 export const MobileMenu = () => {
   return (
     <Box display={["block", "block", "none"]}>
+      <ThemeSwitcher />
+
       <Menu>
-        <MenuButton as={Button} rightIcon={GiHamburgerMenu} size="sm">
+        <MenuButton as={Button} rightIcon={GiHamburgerMenu} size="sm" ml={3}>
           Menu
         </MenuButton>
 
