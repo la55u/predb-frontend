@@ -7,11 +7,15 @@ const Toolbar = () => {
 
   return (
     <>
-      <Flex justify="space-between" align="center" mt={5}>
-        <Flex>
-          <Flex align="center">
-            <ModalSubscribe />
+      <Flex justify="space-between" align="center" wrap="wrap" mt={5}>
+        <Flex
+          align="center"
+          justify="space-between"
+          w={["100%", "100%", "auto"]}
+        >
+          <ModalSubscribe />
 
+          <div>
             <FormLabel pb={0} ml={4} htmlFor="live">
               Live updates
             </FormLabel>
@@ -22,11 +26,11 @@ const Toolbar = () => {
               defaultIsChecked={true}
               color="teal"
             />
-          </Flex>
+          </div>
         </Flex>
 
         {took > 0 && (
-          <Heading size="xs" color="teal.400">
+          <Heading size="xs" color="teal.400" mt={[4, 4, 0]}>
             {resultsCnt} results found in {took} ms
           </Heading>
         )}
