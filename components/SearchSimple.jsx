@@ -52,7 +52,7 @@ const SearchSimple = ({}) => {
             <IconButton
               size="sm"
               variant="ghost"
-              icon={CloseIcon}
+              icon={<CloseIcon />}
               aria-label="Clear input"
               onClick={handleClear}
             />
