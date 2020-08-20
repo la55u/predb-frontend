@@ -5,10 +5,8 @@ import {
   FormHelperText,
   FormLabel,
   Heading,
-  Icon,
   Input,
   InputGroup,
-  InputLeftElement,
   Stack,
   useColorMode,
 } from "@chakra-ui/core";
@@ -42,9 +40,6 @@ const Restore = () => {
           <FormControl>
             <FormLabel>Email</FormLabel>
             <InputGroup>
-              <InputLeftElement>
-                <Icon name="at-sign" color="gray.400" />
-              </InputLeftElement>
               <Input
                 type="email"
                 isRequired
@@ -61,7 +56,7 @@ const Restore = () => {
           <Button
             ml="auto"
             mt={5}
-            variantColor="teal"
+            colorScheme="teal"
             rightIcon="arrow-forward"
             type="submit"
           >

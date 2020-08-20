@@ -1,6 +1,5 @@
 import {
   Alert,
-  AlertIcon,
   Box,
   Button,
   Checkbox,
@@ -16,6 +15,7 @@ import {
   Stack,
   useColorMode,
 } from "@chakra-ui/core";
+import { InfoIcon, ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { useRouter } from "next/dist/client/router";
 import NextLink from "next/link";
 import { useState } from "react";
@@ -74,7 +74,7 @@ const Login = () => {
           borderRadius="md"
           mx="auto"
         >
-          <AlertIcon />
+          <InfoIcon />
           Registration complete! You may now log in.
         </Alert>
       )}
@@ -120,7 +120,7 @@ const Login = () => {
                 <IconButton
                   size="sm"
                   variant="ghost"
-                  icon={showPassword ? "view-off" : "view"}
+                  icon={showPassword ? <ViewOffIcon /> : <ViewIcon />}
                   aria-label={showPassword ? "Hide" : "Show"}
                   onClick={() => setShowPassword((s) => !s)}
                 />
@@ -138,8 +138,8 @@ const Login = () => {
           <Button
             ml="auto"
             mt={5}
-            variantColor="teal"
-            rightIcon={FiLogIn}
+            colorScheme="teal"
+            rightIcon={<FiLogIn />}
             type="submit"
           >
             Log in

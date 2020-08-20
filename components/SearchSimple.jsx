@@ -1,12 +1,12 @@
 import {
   Box,
-  Icon,
   IconButton,
   Input,
   InputGroup,
   InputLeftElement,
   InputRightElement,
 } from "@chakra-ui/core";
+import { CloseIcon, SearchIcon } from "@chakra-ui/icons";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { clear } from "..//redux/slices/searchSlice";
@@ -44,7 +44,7 @@ const SearchSimple = ({}) => {
     <Box mt={10}>
       <InputGroup>
         <InputLeftElement>
-          <Icon name="search" />
+          <SearchIcon />
         </InputLeftElement>
 
         {query && (
@@ -52,7 +52,7 @@ const SearchSimple = ({}) => {
             <IconButton
               size="sm"
               variant="ghost"
-              icon="close"
+              icon={<CloseIcon />}
               aria-label="Clear input"
               onClick={handleClear}
             />

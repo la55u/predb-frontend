@@ -11,6 +11,8 @@ export const HeaderContainer = (props) => (
     borderBottomWidth="1px"
     width="full"
     height="4rem"
+    display="flex"
+    alignItems="center"
     {...props}
   />
 );

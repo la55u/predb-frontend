@@ -1,5 +1,6 @@
 import { Button, Flex } from "@chakra-ui/core";
 import { useEffect, useState } from "react";
+import { FiDownload } from "react-icons/fi";
 import { API_BASE, API_ENDPOINT } from "../utils/routes";
 
 // const nfo = "";
@@ -38,9 +39,9 @@ const NFO = ({ data, borderColor }) => {
       <legend align="center">
         <Button
           onClick={() => window.open(downloadLink, "_blank")}
-          variantColor="teal"
+          colorScheme="teal"
           variant="ghost"
-          rightIcon="download"
+          rightIcon={<FiDownload />}
           mx={2}
           title={data.nfo[0].filename}
           aria-label="Download NFO file"

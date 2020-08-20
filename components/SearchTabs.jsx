@@ -5,7 +5,7 @@ import SearchSimple from "./SearchSimple";
 
 const SearchTabs = () => {
   return (
-    <Tabs variant="enclosed" variantColor="teal">
+    <Tabs variant="enclosed" colorScheme="teal">
       <TabList>
         <Tab>Simple</Tab>
         <Tab>Advanced</Tab>

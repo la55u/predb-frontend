@@ -11,9 +11,10 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  SlideIn,
+  ScaleFade,
   useDisclosure,
 } from "@chakra-ui/core";
+import { BellIcon } from "@chakra-ui/icons";
 import { useRef } from "react";
 import { FaSave } from "react-icons/fa";
 
@@ -24,42 +25,43 @@ const ModalSubscribe = () => {
 
   return (
     <>
-      <Button variantColor="teal" size="sm" rightIcon="bell" onClick={onOpen}>
+      <Button
+        colorScheme="teal"
+        size="sm"
+        rightIcon={<BellIcon />}
+        onClick={onOpen}
+      >
         Subscribe
       </Button>
 
-      <SlideIn in={isOpen}>
+      <ScaleFade in={isOpen}>
         {(styles) => (
-          <Modal
-            preserveScrollBarGap
-            initialFocusRef={initialRef}
-            isOpen={isOpen}
-            onClose={onClose}
-          >
-            <ModalOverlay opacity={styles.opacity} />
-            <ModalContent {...styles}>
-              <ModalHeader>Subscribe for new results</ModalHeader>
-              <ModalCloseButton />
-              <ModalBody pb={6}>
-                <FormControl>
-                  <FormLabel>Label</FormLabel>
-                  <Input ref={initialRef} placeholder="My label..." />
-                  <FormHelperText>
-                    Enter a label that helps you identify your search
-                  </FormHelperText>
-                </FormControl>
-              </ModalBody>
+          <Modal initialFocusRef={initialRef} isOpen={isOpen} onClose={onClose}>
+            <ModalOverlay opacity={styles.opacity}>
+              <ModalContent {...styles}>
+                <ModalHeader>Subscribe for new results</ModalHeader>
+                <ModalCloseButton />
+                <ModalBody pb={6}>
+                  <FormControl>
+                    <FormLabel>Label</FormLabel>
+                    <Input ref={initialRef} placeholder="My label..." />
+                    <FormHelperText>
+                      Enter a label that helps you identify your search
+                    </FormHelperText>
+                  </FormControl>
+                </ModalBody>
 
-              <ModalFooter>
-                <Button variantColor="teal" rightIcon={FaSave} mr={3}>
-                  Save
-                </Button>
-                <Button onClick={onClose}>Cancel</Button>
-              </ModalFooter>
-            </ModalContent>
+                <ModalFooter>
+                  <Button colorScheme="teal" rightIcon={FaSave} mr={3}>
+                    Save
+                  </Button>
+                  <Button onClick={onClose}>Cancel</Button>
+                </ModalFooter>
+              </ModalContent>
+            </ModalOverlay>
           </Modal>
         )}
-      </SlideIn>
+      </ScaleFade>
     </>
   );
 };
