@@ -5,7 +5,7 @@ import {
   Flex,
   IconButton,
   Stack,
-  useColorMode,
+  useColorModeValue,
 } from "@chakra-ui/core";
 import { jsx } from "@emotion/core";
 import NextLink from "next/link";
@@ -18,13 +18,12 @@ import { MobileMenu } from "./MobileMenu";
 import { ThemeSwitcher } from "./ThemeSwitcher";
 
 const Header = (props) => {
-  const { colorMode, toggleColorMode } = useColorMode();
-  const bg = { light: "gray.100", dark: "gray.800" };
+  const bg = useColorModeValue("gray.100", "gray.800");
 
   return (
-    <HeaderContainer bg={bg[colorMode]} {...props}>
-      <Container h="100%">
-        <Flex size="100%" align="center" justify="space-between">
+    <HeaderContainer bg={bg} {...props}>
+      <Container h="100%" d="flex" align="center">
+        <Flex w="100%" alignItems="center" justify="space-between">
           <Box display="flex" alignItems="center">
             <Logo />
           </Box>
@@ -62,12 +61,12 @@ const Header = (props) => {
             <NextLink href="/login">
               <a>
                 <IconButton
-                  aria-label="Login"
+                  aria-label="Log in"
                   variant="ghost"
                   color="current"
                   ml="2"
                   fontSize="20px"
-                  icon={BsFillPersonFill}
+                  icon={<BsFillPersonFill />}
                 />
               </a>
             </NextLink>

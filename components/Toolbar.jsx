@@ -1,4 +1,4 @@
-import { Flex, FormLabel, Heading, Switch } from "@chakra-ui/core";
+import { Flex, FormControl, FormLabel, Heading, Switch } from "@chakra-ui/core";
 import { useSelector } from "react-redux";
 import ModalSubscribe from "./ModalSubscribe";
 
@@ -15,8 +15,8 @@ const Toolbar = () => {
         >
           <ModalSubscribe />
 
-          <div>
-            <FormLabel pb={0} ml={4} htmlFor="live">
+          <FormControl ml={4} as={Flex} alignItems="center" w="auto">
+            <FormLabel pb={0} htmlFor="live">
               Live updates
             </FormLabel>
             <Switch
@@ -24,13 +24,17 @@ const Toolbar = () => {
               pt="2px"
               id="live"
               defaultIsChecked={true}
-              color="teal"
+              colorScheme="teal"
             />
-          </div>
+          </FormControl>
         </Flex>
 
         {took > 0 && (
-          <Heading size="xs" color="teal.400" mt={[4, 4, 0]}>
+          <Heading
+            size="xs"
+            color={resultsCnt ? "teal.400" : "red.500"}
+            mt={[4, 4, 0]}
+          >
             {resultsCnt} results found in {took} ms
           </Heading>
         )}

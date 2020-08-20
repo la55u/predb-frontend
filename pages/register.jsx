@@ -14,6 +14,7 @@ import {
   useColorMode,
   useToast,
 } from "@chakra-ui/core";
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import NextLink from "next/link";
 import { useState } from "react";
 import Layout from "../components/Layout";
@@ -79,9 +80,6 @@ const Register = () => {
           <FormControl>
             <FormLabel>Email</FormLabel>
             <InputGroup>
-              {/* <InputLeftElement>
-                <Icon name="at-sign" color="gray.400" />
-              </InputLeftElement> */}
               <Input
                 isRequired
                 placeholder="Email address..."
@@ -98,9 +96,6 @@ const Register = () => {
           <FormControl>
             <FormLabel>Password</FormLabel>
             <InputGroup>
-              {/* <InputLeftElement>
-                <Icon name="lock" color="gray.400" />
-              </InputLeftElement> */}
               <Input
                 isRequired
                 type={showPassword ? "text" : "password"}
@@ -124,9 +119,6 @@ const Register = () => {
           <FormControl>
             <FormLabel>Confirm password</FormLabel>
             <InputGroup>
-              {/* <InputLeftElement>
-                <Icon name="lock" color="gray.400" />
-              </InputLeftElement> */}
               <Input
                 isRequired
                 type={showPasswordConfirm ? "text" : "password"}
@@ -144,7 +136,7 @@ const Register = () => {
                 <IconButton
                   size="sm"
                   variant="ghost"
-                  icon={showPasswordConfirm ? "view-off" : "view"}
+                  icon={showPasswordConfirm ? <ViewOffIcon /> : <ViewIcon />}
                   aria-label={showPasswordConfirm ? "Hide" : "Show"}
                   onClick={() => setShowPasswordConfirm((s) => !s)}
                 />
@@ -152,7 +144,7 @@ const Register = () => {
             </InputGroup>
           </FormControl>
 
-          <Button ml="auto" mt={5} variantColor="teal" type="submit">
+          <Button ml="auto" mt={5} colorScheme="teal" type="submit">
             Register
           </Button>
         </Stack>

@@ -1,15 +1,7 @@
-import {
-  Box,
-  Flex,
-  Grid,
-  Icon,
-  Link,
-  PseudoBox,
-  Text,
-  useColorMode,
-} from "@chakra-ui/core";
+import { Box, Flex, Grid, Link, Text, useColorMode } from "@chakra-ui/core";
+import { CheckIcon } from "@chakra-ui/icons";
 import NextLink from "next/link";
-import React, { useState } from "react";
+import { useState } from "react";
 import { IoIosNuclear } from "react-icons/io";
 import TimeAgo from "timeago-react";
 import { getSection } from "../utils/classify";
@@ -33,7 +25,7 @@ const ReleaseRow = ({ release }) => {
   const section = getSection(release.name, release.section);
 
   return (
-    <PseudoBox
+    <Box
       role="group"
       px={[1, 1, 1, 4]}
       py={2}
@@ -55,7 +47,7 @@ const ReleaseRow = ({ release }) => {
       _hover={{
         bg: hoverColor[colorMode],
         borderRadius: "md",
-        shadow: shadow[colorMode],
+        boxShadow: shadow[colorMode],
       }}
     >
       <Grid
@@ -86,7 +78,7 @@ const ReleaseRow = ({ release }) => {
         </Box>
 
         <Box gridArea="namewrap">
-          <PseudoBox wordBreak="break-word" my={[1, 1, 0]}>
+          <Box wordBreak="break-word" my={[1, 1, 0]}>
             <NextLink
               href="/release/[_id]"
               as={`/release/${release._id}`}
@@ -96,7 +88,7 @@ const ReleaseRow = ({ release }) => {
                 {release.name}
               </Link>
             </NextLink>
-          </PseudoBox>
+          </Box>
 
           <Flex justifyContent="space-between">
             <Box as="small" fontStyle="italic" color={gray[colorMode]}>
@@ -124,14 +116,14 @@ const ReleaseRow = ({ release }) => {
               {release.proof && (
                 <Flex as="small" ml={4} color={gray[colorMode]} align="center">
                   <span>Proof</span>
-                  <Icon ml={1} fontSize="9px" name="check" color="green.500" />
+                  <CheckIcon ml={1} fontSize="9px" color="green.500" />
                 </Flex>
               )}
 
               {release.nfo?.length > 0 && (
                 <Flex as="small" ml={4} color={gray[colorMode]} align="center">
                   <span>NFO</span>
-                  <Icon ml={1} name="check" color="green.500" fontSize="9px" />
+                  <CheckIcon ml={1} color="green.500" fontSize="9px" />
                 </Flex>
               )}
             </Flex>
@@ -162,7 +154,7 @@ const ReleaseRow = ({ release }) => {
           {release.size ? release.size + " MB" : "-"}
         </Box>
       </Grid>
-    </PseudoBox>
+    </Box>
   );
 };
 

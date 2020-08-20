@@ -13,7 +13,7 @@ export const Pagination = () => {
           key={i}
           variant={page === i + 1 ? "outline" : "ghost"}
           size="sm"
-          variantColor="teal"
+          colorScheme="teal"
         >
           {i + 1}
         </Button>

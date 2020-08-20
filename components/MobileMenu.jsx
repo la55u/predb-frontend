@@ -1,15 +1,19 @@
 import {
   Box,
   Button,
-  Flex,
-  Icon,
-  Link,
   Menu,
   MenuButton,
   MenuDivider,
   MenuItem,
   MenuList,
+  MenuTransition,
 } from "@chakra-ui/core";
+import {
+  BellIcon,
+  EmailIcon,
+  InfoOutlineIcon,
+  SearchIcon,
+} from "@chakra-ui/icons";
 import NextLink from "next/link";
 import { AiFillApi, AiOutlineGithub } from "react-icons/ai";
 import { BsFillPersonFill } from "react-icons/bs";
@@ -23,158 +27,83 @@ export const MobileMenu = () => {
     <Box display={["block", "block", "none"]}>
       <ThemeSwitcher />
 
-      <Menu>
-        <MenuButton as={Button} rightIcon={GiHamburgerMenu} size="sm" ml={3}>
+      <Menu placement="bottom-end">
+        <MenuButton
+          as={Button}
+          rightIcon={<GiHamburgerMenu />}
+          size="sm"
+          ml={3}
+        >
           Menu
         </MenuButton>
 
-        <MenuList placement="bottom-end">
-          <MenuItem>
-            <NextLink href="/" passHref>
-              <Flex
-                as={Link}
-                align="center"
-                w="100%"
-                textDecor="none !important"
+        <MenuTransition>
+          {(styles) => (
+            <MenuList css={styles}>
+              <MenuItem icon={<SearchIcon />}>
+                <NextLink href="/">
+                  <a>Search</a>
+                </NextLink>
+              </MenuItem>
+
+              <MenuItem icon={<BellIcon />}>
+                <NextLink href="/notifications">
+                  <a>Notifications</a>
+                </NextLink>
+              </MenuItem>
+
+              <MenuItem icon={<IoIosStats />}>
+                <NextLink href="/stats">
+                  <a>Stats</a>
+                </NextLink>
+              </MenuItem>
+
+              <MenuItem icon={<InfoOutlineIcon />}>
+                <NextLink href="/about">
+                  <a>About</a>
+                </NextLink>
+              </MenuItem>
+
+              <MenuItem icon={<EmailIcon />}>
+                <NextLink href="/contact">
+                  <a>Contact</a>
+                </NextLink>
+              </MenuItem>
+
+              <MenuItem icon={<BsFillPersonFill />}>
+                <NextLink href="/login">
+                  <a>Profile</a>
+                </NextLink>
+              </MenuItem>
+
+              <MenuDivider />
+
+              <MenuItem
+                icon={<AiOutlineGithub />}
+                as="a"
+                href="https://github.com/la55u/predb-frontend"
+                target="_blank"
               >
-                <Box w="15%">
-                  <Icon name="search" />
-                </Box>
-                <span> Search</span>
-              </Flex>
-            </NextLink>
-          </MenuItem>
+                Source code
+              </MenuItem>
 
-          <MenuItem>
-            <NextLink href="/notifications">
-              <Flex
-                as={Link}
-                align="center"
-                w="100%"
-                textDecor="none !important"
+              <MenuItem
+                icon={<AiFillApi />}
+                as="a"
+                href="https://github.com/la55u/predb-frontend/swagger.yml"
+                target="_blank"
               >
-                <Box w="15%">
-                  <Icon name="bell" />
-                </Box>
-                <span>Notifications</span>
-              </Flex>
-            </NextLink>
-          </MenuItem>
+                API
+              </MenuItem>
 
-          <MenuItem>
-            <NextLink href="/stats">
-              <Flex
-                as={Link}
-                align="center"
-                w="100%"
-                textDecor="none !important"
-              >
-                <Box w="15%">
-                  <Box as={IoIosStats} display="inline" mr={2} />
-                </Box>
-                <span>Stats</span>
-              </Flex>
-            </NextLink>
-          </MenuItem>
-
-          <MenuItem>
-            <NextLink href="/about">
-              <Flex
-                as={Link}
-                align="center"
-                w="100%"
-                textDecor="none !important"
-              >
-                <Box w="15%">
-                  <Icon name="info-outline" />
-                </Box>
-                <span>About</span>
-              </Flex>
-            </NextLink>
-          </MenuItem>
-
-          <MenuItem>
-            <NextLink href="/contact">
-              <Flex
-                as={Link}
-                align="center"
-                w="100%"
-                textDecor="none !important"
-              >
-                <Box w="15%">
-                  <Icon name="email" />
-                </Box>
-                <span>Contact</span>
-              </Flex>
-            </NextLink>
-          </MenuItem>
-
-          <MenuItem>
-            <NextLink href="/login">
-              <Flex
-                as={Link}
-                align="center"
-                w="100%"
-                textDecor="none !important"
-              >
-                <Box w="15%">
-                  <Box as={BsFillPersonFill} display="inline" mr={2} />
-                </Box>
-                <span>Profile</span>
-              </Flex>
-            </NextLink>
-          </MenuItem>
-
-          <MenuDivider />
-
-          <MenuItem>
-            <Flex
-              as="a"
-              align="center"
-              w="100%"
-              href="https://github.com/la55u/predb-frontend"
-              target="_blank"
-              textDecor="none !important"
-            >
-              <Box w="15%">
-                <Box as={AiOutlineGithub} display="inline" mr={2} />
-              </Box>
-              <span>Source code</span>
-            </Flex>
-          </MenuItem>
-
-          <MenuItem>
-            <Flex
-              as="a"
-              align="center"
-              w="100%"
-              href="https://github.com/la55u/predb-frontend/swagger.yml"
-              target="_blank"
-              textDecor="none !important"
-            >
-              <Box w="15%">
-                <Box as={AiFillApi} display="inline" mr={2} />
-              </Box>
-              <span>API</span>
-            </Flex>
-          </MenuItem>
-
-          <MenuItem>
-            <NextLink href="/rss">
-              <Flex
-                as={Link}
-                align="center"
-                w="100%"
-                textDecor="none !important"
-              >
-                <Box w="15%">
-                  <Box as={FaRss} display="inline" mr={2} />
-                </Box>
-                <span>RSS</span>
-              </Flex>
-            </NextLink>
-          </MenuItem>
-        </MenuList>
+              <MenuItem icon={<FaRss />}>
+                <NextLink href="/rss">
+                  <a>RSS</a>
+                </NextLink>
+              </MenuItem>
+            </MenuList>
+          )}
+        </MenuTransition>
       </Menu>
     </Box>
   );

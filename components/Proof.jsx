@@ -1,4 +1,4 @@
-import { Flex, IconButton, Image, Text } from "@chakra-ui/core";
+import { DownloadIcon, Flex, IconButton, Image, Text } from "@chakra-ui/core";
 
 const Proof = ({ proof }) => {
   if (!proof) return null;
@@ -9,9 +9,9 @@ const Proof = ({ proof }) => {
         dolittle.2020.multi.complete.uhd.bluray-orca-proof.jpg
         <IconButton
           aria-label="Download proof file"
-          icon="download"
+          icon={DownloadIcon}
           variant="ghost"
-          variantColor="teal"
+          colorScheme="teal"
           ml={1}
         />
       </Text>

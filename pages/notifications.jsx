@@ -30,12 +30,12 @@ const Notifications = () => {
           p={4}
           borderWidth="1px"
           justify="space-between"
-          shadow="md"
-          rounded="md"
+          boxShadow="md"
+          borderRadius="md"
           align="center"
         >
           <Flex mb={2}>
-            <Box as={AiFillTag} size="22px" />
+            <Box as={AiFillTag} w="22px" />
             <Text ml={4}>My tagname</Text>
           </Flex>
 
@@ -45,7 +45,7 @@ const Notifications = () => {
           <Text>Last match: 2 days ago</Text>
 
           <Flex justify="end" mt={4}>
-            <Button size="sm" rightIcon="bell" variantColor="teal">
+            <Button size="sm" rightIcon="bell" colorScheme="teal">
               Test
             </Button>
             <Button ml={2} size="sm" rightIcon="search">
@@ -55,7 +55,7 @@ const Notifications = () => {
               ml={2}
               size="sm"
               rightIcon="delete"
-              variantColor="red"
+              colorScheme="red"
               variant="ghost"
             >
               Remove

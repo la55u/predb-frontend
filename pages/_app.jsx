@@ -1,9 +1,9 @@
-// import App from 'next/app'
-import { ColorModeProvider, CSSReset, ThemeProvider } from "@chakra-ui/core";
+import { ChakraProvider, CSSReset } from "@chakra-ui/core";
 import Head from "next/head";
 import { Provider } from "react-redux";
 import store from "../redux/store";
 import "../style.css";
+import { theme } from "../theme";
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -17,12 +17,10 @@ function MyApp({ Component, pageProps }) {
       </Head>
 
       <Provider store={store}>
-        <ThemeProvider>
-          <ColorModeProvider>
-            <CSSReset />
-            <Component {...pageProps} />
-          </ColorModeProvider>
-        </ThemeProvider>
+        <ChakraProvider theme={theme}>
+          <CSSReset />
+          <Component {...pageProps} />
+        </ChakraProvider>
       </Provider>
     </>
   );
