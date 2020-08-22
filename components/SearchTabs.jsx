@@ -12,10 +12,10 @@ const SearchTabs = () => {
       </TabList>
 
       <TabPanels>
-        <TabPanel>
+        <TabPanel px={0}>
           <SearchSimple />
         </TabPanel>
-        <TabPanel>
+        <TabPanel px={0}>
           <SearchAdvanced />
         </TabPanel>
       </TabPanels>
