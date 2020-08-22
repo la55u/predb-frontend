@@ -27,7 +27,7 @@ export const MobileMenu = () => {
     <Box display={["block", "block", "none"]}>
       <ThemeSwitcher />
 
-      <Menu placement="bottom-end">
+      <Menu placement="bottom-end" closeOnBlur>
         <MenuButton
           as={Button}
           rightIcon={<GiHamburgerMenu />}
