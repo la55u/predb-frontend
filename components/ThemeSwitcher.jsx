@@ -7,7 +7,8 @@ export const ThemeSwitcher = () => {
 
   return (
     <IconButton
-      aria-label={`Switch dark/light theme`}
+      aria-label="Switch dark/light theme"
+      title="Switch dark/light theme"
       variant="ghost"
       color="current"
       ml="2"

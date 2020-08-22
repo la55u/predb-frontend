@@ -9,7 +9,7 @@ export const NoResults = () => (
     color="gray.500"
     direction="column"
   >
-    <Box as={<MdZoomOut />} w="100px" mb={5} />
+    <Box as={MdZoomOut} w="100px" h="100px" mb={5} />
     <Text>No results found</Text>
   </Flex>
 );

@@ -16,12 +16,11 @@ const Toolbar = () => {
           <ModalSubscribe />
 
           <FormControl ml={4} as={Flex} alignItems="center" w="auto">
-            <FormLabel pb={0} htmlFor="live">
+            <FormLabel htmlFor="live" mb={0}>
               Live updates
             </FormLabel>
             <Switch
               size="sm"
-              pt="2px"
               id="live"
               defaultIsChecked={true}
               colorScheme="teal"

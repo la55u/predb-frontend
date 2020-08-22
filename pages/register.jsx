@@ -108,7 +108,7 @@ const Register = () => {
                 <IconButton
                   size="sm"
                   variant="ghost"
-                  icon={showPassword ? "view-off" : "view"}
+                  icon={showPassword ? <ViewOffIcon /> : <ViewIcon />}
                   aria-label="Clear input"
                   onClick={() => setShowPassword((s) => !s)}
                 />
