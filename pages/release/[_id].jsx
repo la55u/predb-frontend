@@ -1,5 +1,7 @@
-import { useColorMode } from "@chakra-ui/core";
+import { useColorModeValue } from "@chakra-ui/core";
 import Head from "next/head";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import DetailsTable from "../../components/DetailsTable";
 import Layout from "../../components/Layout";
 import NFO from "../../components/NFO";
@@ -8,62 +10,69 @@ import RetailInfo_TV_TMDB from "../../components/RetailInfo_TV_TMDB";
 import { getSection } from "../../utils/classify";
 import { API_BASE } from "../../utils/routes";
 
-export const getServerSideProps = async (context) => {
-  // fetch release data
-  const { _id } = context.params;
-  const url = `${API_BASE}/api/data/details/_id/${_id}`;
-  console.log("getting:", url);
-  const res = await fetch(url);
-  const data = await res.json();
+// export const getServerSideProps = async (context) => {
+//   return { props: { data, retailData, category } };
+// };
 
-  // fetch retail data
-  const category = getSection(data.name, data.section).includes("TV")
-    ? "series"
-    : "movie";
-  const retailUrl = `${API_BASE}/api/retail/tmdb/${category}/${data.name}`;
-  const retailRes = await fetch(retailUrl);
-  let retailData = await retailRes.json();
-  console.log("retailData:", retailData);
-  retailData = !retailData.success ? null : retailData.data;
+const Release = () => {
+  const [data, setData] = useState();
+  const [retailData, setRetailData] = useState();
+  const [category, setCategory] = useState();
+  const borderColor = useColorModeValue("gray.300", "gray.700");
+  const router = useRouter();
+  const { _id } = router.query;
 
-  return { props: { data, retailData, category } };
-};
+  useEffect(() => {
+    getData();
+  }, []);
 
-const Release = ({ retailData, data, category }) => {
-  const { colorMode } = useColorMode();
+  const getData = async () => {
+    // fetch release data
 
-  const borderColor = { dark: "gray.700", light: "gray.300" };
+    const url = `${API_BASE}/api/data/details/_id/${_id}`;
+    console.log("getting:", url);
+    const res = await fetch(url);
+    const data = await res.json();
+
+    setData(data);
+
+    // fetch retail data
+    const category = getSection(data.name, data.section).includes("TV")
+      ? "series"
+      : "movie";
+
+    setCategory(category);
+
+    const retailUrl = `${API_BASE}/api/retail/tmdb/${category}/${data.name}`;
+    const retailRes = await fetch(retailUrl);
+    let retailData = await retailRes.json();
+    console.log("retailData:", retailData);
+    retailData = !retailData.success ? null : retailData.data;
+    setRetailData(retailData);
+  };
 
   return (
     <>
       <Head>
-        <title>Release | {data.name}</title>
+        <title>Release | {data?.name}</title>
       </Head>
 
       <Layout>
-        <DetailsTable data={data} borderColor={borderColor[colorMode]} />
+        {data && <DetailsTable data={data} borderColor={borderColor} />}
 
-        {category === "series" && (
-          <RetailInfo_TV_TMDB
-            data={retailData}
-            borderColor={borderColor[colorMode]}
-          />
+        {retailData && category === "series" && (
+          <RetailInfo_TV_TMDB data={retailData} borderColor={borderColor} />
         )}
 
-        {category === "movie" && (
-          <RetailInfo_Movie_TMDB
-            data={retailData}
-            borderColor={borderColor[colorMode]}
-          />
+        {retailData && category === "movie" && (
+          <RetailInfo_Movie_TMDB data={retailData} borderColor={borderColor} />
         )}
 
-        {/* <RetailTable data={retailData} borderColor={borderColor[colorMode]} /> */}
+        {/* <RetailTable data={retailData} borderColor={borderColor} /> */}
 
         {/* <Proof proof={false} /> */}
 
-        <NFO data={data} borderColor={borderColor[colorMode]} />
-
-        {/* <pre>{JSON.stringify(data, null, 3)}</pre> */}
+        {data && <NFO data={data} borderColor={borderColor} />}
       </Layout>
     </>
   );

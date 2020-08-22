@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "NEXT_PUBLIC_GIT_SHA=`git rev-parse --short HEAD` next dev",
     "build": "NEXT_PUBLIC_GIT_SHA=`git rev-parse --short HEAD` next build",
-    "start": "next start"
+    "start": "next start",
+    "anal": "ANALYZE=true next build"
   },
   "dependencies": {
     "@chakra-ui/core": "next",
@@ -24,5 +25,7 @@
     "swr": "^0.3.0",
     "timeago-react": "^3.0.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@next/bundle-analyzer": "^9.5.2"
+  }
 }
