@@ -3,14 +3,17 @@ import { API_BASE, API_ENDPOINT } from "../../utils/routes";
 
 export const getAllRelease = createAsyncThunk(
   "releases/getAllRelease",
-  async (_, thunkAPI) => {
+  async (page, thunkAPI) => {
     console.log("getAllRelease async");
     try {
-      const response = await fetch(API_BASE + API_ENDPOINT.RELEASES, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        `${API_BASE + API_ENDPOINT.RELEASES}?page=${page || 1}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       if (!response.ok) {
         const error = await response.json();
