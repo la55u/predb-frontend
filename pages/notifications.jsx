@@ -28,8 +28,9 @@ const Notifications = () => {
       </Text>
 
       <Stack mt={8} spacing={4}>
-        {[1, 2, 3, 4].map((notif) => (
+        {[1, 2, 3, 4].map((notif, i) => (
           <Box
+            key={i}
             p={4}
             borderWidth="1px"
             justify="space-between"
