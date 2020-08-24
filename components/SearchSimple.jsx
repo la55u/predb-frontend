@@ -28,7 +28,7 @@ const SearchSimple = ({}) => {
       // todo warning
       return;
     }
-    dispatch(searchSimple(query));
+    dispatch(searchSimple({ input: query }));
   };
 
   const handleClear = () => {

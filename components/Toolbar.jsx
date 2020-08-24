@@ -34,7 +34,8 @@ const Toolbar = () => {
             color={resultsCnt ? "teal.400" : "red.500"}
             mt={[4, 4, 0]}
           >
-            {resultsCnt} results found in {took} ms
+            {resultsCnt < 10000 ? resultsCnt : `>${resultsCnt}`} results found
+            in {took} ms
           </Heading>
         )}
       </Flex>

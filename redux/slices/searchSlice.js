@@ -3,11 +3,11 @@ import { API_BASE, API_ENDPOINT } from "../../utils/routes";
 
 export const searchSimple = createAsyncThunk(
   "search/simple",
-  async (input, thunkAPI) => {
+  async (data, thunkAPI) => {
     try {
       const response = await fetch(API_BASE + API_ENDPOINT.SEARCH_SIMPLE, {
         method: "POST",
-        body: JSON.stringify({ input }),
+        body: JSON.stringify(data),
         headers: {
           "Content-Type": "application/json",
         },
@@ -29,6 +29,8 @@ export const searchSimple = createAsyncThunk(
 const searchSlice = createSlice({
   name: "search",
   initialState: {
+    simpleSearch: "", // set when api call returns, only used in pagination component
+    advancedSearch: {}, // set when api call returns, only used in pagination component
     loading: false,
     results: [],
     resultsCnt: 0, // number of all results
