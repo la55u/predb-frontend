@@ -1,4 +1,5 @@
 import { IconButton, useClipboard, useToast } from "@chakra-ui/core";
+import { CheckIcon, CopyIcon } from "@chakra-ui/icons";
 
 const CopyButton = ({ value }) => {
   const { onCopy, hasCopied } = useClipboard(value);
@@ -22,7 +23,7 @@ const CopyButton = ({ value }) => {
       variant="ghost"
       color="current"
       size="md"
-      icon={hasCopied ? "check" : "copy"}
+      icon={hasCopied ? <CheckIcon /> : <CopyIcon />}
       onClick={handleClick}
     />
   );
