@@ -24,7 +24,7 @@ export const Pagination = () => {
   return (
     <Flex mt={10} justify="center">
       {[...Array(pagesCnt)].map((n, i) => (
-        <Link href={`?page=${i + 1}`}>
+        <Link key={i} href={`?page=${i + 1}`}>
           <Button
             aria-label={`Go to page ${i + 1}`}
             key={i}

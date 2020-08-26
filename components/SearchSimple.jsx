@@ -1,5 +1,6 @@
 import {
   Box,
+  FormControl,
   IconButton,
   Input,
   InputGroup,
@@ -36,36 +37,34 @@ const SearchSimple = ({}) => {
     dispatch(clear());
   };
 
-  const handleChange = (e) => {
-    setQuery(e.target.value);
-  };
-
   return (
     <Box mt={10}>
-      <InputGroup>
-        <InputLeftElement>
-          <SearchIcon />
-        </InputLeftElement>
+      <FormControl>
+        <InputGroup>
+          <InputLeftElement>
+            <SearchIcon />
+          </InputLeftElement>
 
-        {query && (
-          <InputRightElement>
-            <IconButton
-              size="sm"
-              variant="ghost"
-              icon={<CloseIcon />}
-              aria-label="Clear input"
-              onClick={handleClear}
-            />
-          </InputRightElement>
-        )}
+          {query && (
+            <InputRightElement>
+              <IconButton
+                size="sm"
+                variant="ghost"
+                icon={<CloseIcon />}
+                aria-label="Clear input"
+                onClick={handleClear}
+              />
+            </InputRightElement>
+          )}
 
-        <Input
-          placeholder="Search any release..."
-          size="lg"
-          value={query}
-          onChange={handleChange}
-        />
-      </InputGroup>
+          <Input
+            placeholder="Search any release..."
+            size="lg"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+        </InputGroup>
+      </FormControl>
     </Box>
   );
 };

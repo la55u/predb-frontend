@@ -13,7 +13,7 @@ import ReleaseRow from "./ReleaseRow";
 
 const ReleaseList = () => {
   const dispatch = useDispatch();
-
+  const socket = useSocket(API_BASE);
   const { releaselist, loading } = useSelector((state) => state.releases);
   const { results, took, loading: searchLoading } = useSelector(
     (state) => state.search
@@ -22,14 +22,9 @@ const ReleaseList = () => {
   // if took is set, the user is searching -> show results, otherwise show the latest releases
   const list = took > 0 ? results : releaselist;
 
-  const socket = useSocket(API_BASE);
-
   useEffect(() => {
-    async function dispatchGetAll() {
-      await dispatch(getAllRelease());
-    }
-    dispatchGetAll();
-  }, [dispatch]);
+    dispatch(getAllRelease());
+  }, []);
 
   useEffect(() => {
     if (socket) {
