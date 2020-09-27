@@ -81,6 +81,7 @@ const Register = () => {
             <FormLabel>Email</FormLabel>
             <InputGroup>
               <Input
+                variant="filled"
                 isRequired
                 placeholder="Email address..."
                 value={credentials.email}
@@ -98,6 +99,7 @@ const Register = () => {
             <InputGroup>
               <Input
                 isRequired
+                variant="filled"
                 type={showPassword ? "text" : "password"}
                 placeholder="Password..."
                 value={credentials.password}
@@ -121,6 +123,7 @@ const Register = () => {
             <InputGroup>
               <Input
                 isRequired
+                variant="filled"
                 type={showPasswordConfirm ? "text" : "password"}
                 placeholder="Password..."
                 value={credentials.passwordConfirm}
@@ -144,7 +147,13 @@ const Register = () => {
             </InputGroup>
           </FormControl>
 
-          <Button ml="auto" mt={5} colorScheme="teal" type="submit">
+          <Button
+            ml="auto"
+            mt={5}
+            colorScheme="teal"
+            type="submit"
+            alignSelf="flex-end"
+          >
             Register
           </Button>
         </Stack>

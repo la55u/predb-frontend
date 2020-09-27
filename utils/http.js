@@ -6,7 +6,7 @@ async function request(endpoint, params, method, extraOptions = {}) {
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
-      //   Authorization: "Bearer " + getToken(),
+      Authorization: "Bearer " + getToken(),
     },
     mode: "cors", // no-cors, cors, same-origin
     cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
@@ -29,7 +29,7 @@ async function request(endpoint, params, method, extraOptions = {}) {
   let err = "";
 
   // checking status code
-  if (![200, 201, 202, 204].includes(response.status)) {
+  if (response.ok) {
     try {
       const jsonresp = await response.json();
       if (jsonresp.error) {
@@ -73,22 +73,9 @@ function del(endpoint, params, extraOptions) {
   return request(endpoint, params, "DELETE", extraOptions);
 }
 
-// function uploadFile(endpoint, file, extraOptions) {
-//   return request(endpoint, file, "POST", {
-//     // when uploading a file, content-type header must not be set
-//     headers: {
-//       Accept: "application/json",
-//       Authorization: "Bearer " + getToken(),
-//     },
-//     noStringify: true, // prevent strinigifying payload
-//     ...extraOptions,
-//   });
-// }
-
 export default {
   get,
   post,
   del,
   put,
-  //   uploadFile,
 };

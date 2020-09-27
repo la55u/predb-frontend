@@ -11,7 +11,7 @@ import { CloseIcon, SearchIcon } from "@chakra-ui/icons";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { clear } from "..//redux/slices/searchSlice";
-import useDebounce from "../hooks/useDebounce";
+import { useDebounce } from "../hooks/useDebounce";
 import { searchSimple } from "../redux/slices/searchSlice";
 
 const SearchSimple = ({}) => {
@@ -58,8 +58,9 @@ const SearchSimple = ({}) => {
           )}
 
           <Input
+            borderRadius="md"
+            variant="filled"
             placeholder="Search any release..."
-            size="lg"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />

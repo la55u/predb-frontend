@@ -39,7 +39,7 @@ export const MobileMenu = () => {
 
         <MenuTransition>
           {(styles) => (
-            <MenuList css={styles}>
+            <MenuList sx={styles}>
               <MenuItem icon={<SearchIcon />}>
                 <NextLink href="/">
                   <a>Search</a>

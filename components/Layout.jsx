@@ -20,6 +20,7 @@ const Layout = ({ children }) => {
           <Container>{children}</Container>
         </Box>
 
+        {/* <ToastProvider /> */}
         <Footer />
       </Flex>
     </>
