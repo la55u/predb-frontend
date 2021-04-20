@@ -9,7 +9,7 @@ import {
   InputGroup,
   Stack,
   useColorMode,
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import { useState } from "react";
 import Layout from "../components/Layout";
 

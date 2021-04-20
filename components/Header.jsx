@@ -1,29 +1,52 @@
-/** @jsx jsx */
 import {
   Box,
   Button,
+  Container,
   Flex,
   IconButton,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
   Stack,
   useColorModeValue,
-} from "@chakra-ui/core";
-import { jsx } from "@emotion/core";
+} from "@chakra-ui/react";
 import NextLink from "next/link";
 import { BsFillPersonFill } from "react-icons/bs";
-import { Container } from "./Container";
+import { FiLogOut } from "react-icons/fi";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../redux/slices/authSlice";
+import { addToast } from "../redux/slices/toastSlice";
 import { GithubLink } from "./GithubLink";
-import { HeaderContainer } from "./HeaderContainer";
 import Logo from "./Logo";
 import { MobileMenu } from "./MobileMenu";
 import { ThemeSwitcher } from "./ThemeSwitcher";
 
 const Header = (props) => {
-  const bg = useColorModeValue("gray.100", "gray.800");
+  const { isLoggedIn } = useSelector((state) => state.auth);
+  const colorvalues = useColorModeValue({ bg: "light.bg" }, { bg: "dark.bg" });
+
+  const dispatch = useDispatch();
+
+  console.log("isloggedin", isLoggedIn);
 
   return (
-    <HeaderContainer bg={bg} {...props}>
-      <Container h="100%" d="flex" align="center">
-        <Flex w="100%" alignItems="center" justify="space-between">
+    <Box
+      pos="fixed"
+      as="header"
+      top="0"
+      zIndex="4"
+      left="0"
+      right="0"
+      width="full"
+      height="4rem"
+      display="flex"
+      alignItems="center"
+      shadow="md"
+      bg={colorvalues.bg}
+    >
+      <Container variant="fullwidth">
+        <Flex w="full" alignItems="center" justify="space-between">
           <Box display="flex" alignItems="center">
             <Logo />
           </Box>
@@ -58,24 +81,54 @@ const Header = (props) => {
 
             <ThemeSwitcher />
 
-            <NextLink href="/login">
-              <a>
-                <IconButton
-                  aria-label="Log in"
-                  variant="ghost"
-                  color="current"
-                  ml="2"
+            {!isLoggedIn ? (
+              <NextLink href="/login">
+                <a>
+                  <IconButton
+                    aria-label="Log in"
+                    variant="ghost"
+                    color="currentcolor"
+                    ml="2"
+                    fontSize="20px"
+                    icon={<BsFillPersonFill />}
+                  />
+                </a>
+              </NextLink>
+            ) : (
+              <Menu placement="bottom-end">
+                <MenuButton
+                  as={IconButton}
+                  color="teal.400"
                   fontSize="20px"
+                  variant="ghost"
+                  ml="2"
                   icon={<BsFillPersonFill />}
                 />
-              </a>
-            </NextLink>
+                <MenuList>
+                  <NextLink href="/profile" passHref>
+                    <MenuItem as="a" icon={<BsFillPersonFill />}>
+                      Profile
+                    </MenuItem>
+                  </NextLink>
+
+                  <MenuItem
+                    icon={<FiLogOut />}
+                    onClick={() => {
+                      dispatch(logout());
+                      dispatch(addToast({ title: "You logged out!" }));
+                    }}
+                  >
+                    Log out
+                  </MenuItem>
+                </MenuList>
+              </Menu>
+            )}
           </Flex>
 
           <MobileMenu />
         </Flex>
       </Container>
-    </HeaderContainer>
+    </Box>
   );
 };
 

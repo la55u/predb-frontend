@@ -1,12 +1,13 @@
 import { Heading } from "@chakra-ui/react";
 import Layout from "../components/Layout";
 
-const About = () => {
+const Profile = () => {
   return (
     <Layout>
-      <Heading>About</Heading>
+      <Heading>Profile page</Heading>
+      <p>Coming soon...</p>
     </Layout>
   );
 };
 
-export default About;
+export default Profile;

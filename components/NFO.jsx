@@ -1,4 +1,4 @@
-import { Button, Flex } from "@chakra-ui/core";
+import { Button, Flex } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { FiDownload } from "react-icons/fi";
 import { API_BASE, API_ENDPOINT } from "../utils/routes";

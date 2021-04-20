@@ -1,4 +1,4 @@
-import { useColorModeValue } from "@chakra-ui/core";
+import { useColorModeValue } from "@chakra-ui/react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";

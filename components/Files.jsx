@@ -1,4 +1,4 @@
-import { Box, Heading, useColorMode } from "@chakra-ui/core";
+import { Box, Heading, useColorMode } from "@chakra-ui/react";
 
 const RetailInfo_Movie_TMDB = ({ data, borderColor }) => {
   const { colorMode } = useColorMode();

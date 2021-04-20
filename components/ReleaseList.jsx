@@ -1,4 +1,4 @@
-import { Box, Flex, Spinner } from "@chakra-ui/core";
+import { Box, Flex, Spinner } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSocket } from "../hooks/useSocket";

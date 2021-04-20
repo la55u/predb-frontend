@@ -1,4 +1,4 @@
-import { Button } from "@chakra-ui/core";
+import { Button } from "@chakra-ui/react";
 import { FaBook, FaFootballBall } from "react-icons/fa";
 import { FiFilm, FiMonitor, FiPackage } from "react-icons/fi";
 import { IoIosMusicalNotes, IoMdSchool } from "react-icons/io";

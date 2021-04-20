@@ -1,4 +1,4 @@
-import { Box, Flex, Grid, Heading, Text } from "@chakra-ui/core";
+import { Box, Flex, Grid, Heading, Text } from "@chakra-ui/react";
 import TimeAgo from "timeago-react";
 
 const DetailsTable = ({ data, borderColor }) => {

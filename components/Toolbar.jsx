@@ -1,4 +1,10 @@
-import { Flex, FormControl, FormLabel, Heading, Switch } from "@chakra-ui/core";
+import {
+  Flex,
+  FormControl,
+  FormLabel,
+  Heading,
+  Switch,
+} from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import ModalSubscribe from "./ModalSubscribe";
 

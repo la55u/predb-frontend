@@ -13,10 +13,10 @@ import {
   Stack,
   useColorMode,
   useToast,
-} from "@chakra-ui/core";
-import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
+} from "@chakra-ui/react";
 import NextLink from "next/link";
 import { useState } from "react";
+import { HiOutlineEye, HiOutlineEyeOff } from "react-icons/hi";
 import Layout from "../components/Layout";
 import { API_BASE, API_ENDPOINT } from "../utils/routes";
 
@@ -81,6 +81,7 @@ const Register = () => {
             <FormLabel>Email</FormLabel>
             <InputGroup>
               <Input
+                variant="filled"
                 isRequired
                 placeholder="Email address..."
                 value={credentials.email}
@@ -98,6 +99,7 @@ const Register = () => {
             <InputGroup>
               <Input
                 isRequired
+                variant="filled"
                 type={showPassword ? "text" : "password"}
                 placeholder="Password..."
                 value={credentials.password}
@@ -108,7 +110,7 @@ const Register = () => {
                 <IconButton
                   size="sm"
                   variant="ghost"
-                  icon={showPassword ? <ViewOffIcon /> : <ViewIcon />}
+                  icon={showPassword ? <HiOutlineEyeOff /> : <HiOutlineEye />}
                   aria-label="Clear input"
                   onClick={() => setShowPassword((s) => !s)}
                 />
@@ -121,6 +123,7 @@ const Register = () => {
             <InputGroup>
               <Input
                 isRequired
+                variant="filled"
                 type={showPasswordConfirm ? "text" : "password"}
                 placeholder="Password..."
                 value={credentials.passwordConfirm}
@@ -136,7 +139,9 @@ const Register = () => {
                 <IconButton
                   size="sm"
                   variant="ghost"
-                  icon={showPasswordConfirm ? <ViewOffIcon /> : <ViewIcon />}
+                  icon={
+                    showPasswordConfirm ? <HiOutlineEyeOff /> : <HiOutlineEye />
+                  }
                   aria-label={showPasswordConfirm ? "Hide" : "Show"}
                   onClick={() => setShowPasswordConfirm((s) => !s)}
                 />
@@ -144,7 +149,13 @@ const Register = () => {
             </InputGroup>
           </FormControl>
 
-          <Button ml="auto" mt={5} colorScheme="teal" type="submit">
+          <Button
+            ml="auto"
+            mt={5}
+            colorScheme="teal"
+            type="submit"
+            alignSelf="flex-end"
+          >
             Register
           </Button>
         </Stack>

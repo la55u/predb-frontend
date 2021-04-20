@@ -1,4 +1,4 @@
-import { IconButton, Link } from "@chakra-ui/core";
+import { IconButton, Link } from "@chakra-ui/react";
 import { DiGithubBadge } from "react-icons/di";
 
 export const GithubLink = () => (

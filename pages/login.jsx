@@ -1,5 +1,7 @@
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import {
   Alert,
+  AlertIcon,
   Box,
   Button,
   Checkbox,
@@ -13,18 +15,18 @@ import {
   InputRightElement,
   Link,
   Stack,
-  useColorMode,
-} from "@chakra-ui/core";
-import { InfoIcon, ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { useRouter } from "next/dist/client/router";
 import NextLink from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FiLogIn } from "react-icons/fi";
+import { useDispatch, useSelector } from "react-redux";
 import Layout from "../components/Layout";
-import { API_BASE, API_ENDPOINT } from "../utils/routes";
+import { login } from "../redux/slices/authSlice";
+import { addToast } from "../redux/slices/toastSlice";
 
 const Login = () => {
-  const { colorMode } = useColorMode();
   const [showPassword, setShowPassword] = useState(false);
   const [credentials, setCredentials] = useState({
     email: "",
@@ -32,36 +34,30 @@ const Login = () => {
     remember: false,
   });
   const router = useRouter();
+  const dispatch = useDispatch();
+  const { isLoggedIn } = useSelector((state) => state.auth);
 
-  const borderColor = { dark: "gray.700", light: "gray.300" };
+  const borderColor = useColorModeValue({
+    dark: "gray.700",
+    light: "gray.300",
+  });
+
+  useEffect(() => {
+    // redirect user to homepage after successful login
+    if (isLoggedIn) {
+      router.replace("/");
+      dispatch(addToast({ title: "You are logged in!" }));
+    }
+  }, [isLoggedIn]);
 
   const handleInput = (e) => {
     const { name, value, type } = e.target;
     setCredentials((c) => ({ ...c, [name]: value }));
   };
 
-  const initialLoginState = { token: "", error: false, loading: false };
-
-  const loginReducer = (state, action) => {
-    switch (action.type) {
-      case "LOGIN_BEGIN":
-        return { ...state, loading: true };
-      case "LOGIN_SUCCESS":
-        return { ...state, loading: false, token: action.payload };
-      case "LOGIN_FAIL":
-        return { ...state, loading: false, error: action.payload };
-    }
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch(API_BASE + API_ENDPOINT.LOGIN, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(credentials),
-    });
-    const data = await res.json();
-    console.log("login data:", data);
+    dispatch(login(credentials));
   };
 
   return (
@@ -74,7 +70,7 @@ const Login = () => {
           borderRadius="md"
           mx="auto"
         >
-          <InfoIcon />
+          <AlertIcon />
           Registration complete! You may now log in.
         </Alert>
       )}
@@ -83,7 +79,7 @@ const Login = () => {
         as="form"
         mt={20}
         p={5}
-        borderColor={borderColor[colorMode]}
+        borderColor={borderColor}
         borderWidth="1px"
         borderRadius="md"
         w={["100%", "100%", "500px"]}
@@ -96,6 +92,7 @@ const Login = () => {
             <FormLabel>Email</FormLabel>
             <InputGroup>
               <Input
+                variant="filled"
                 isRequired
                 placeholder="Email address..."
                 value={credentials.email}
@@ -109,6 +106,7 @@ const Login = () => {
             <FormLabel>Password</FormLabel>
             <InputGroup>
               <Input
+                variant="filled"
                 isRequired
                 type={showPassword ? "text" : "password"}
                 placeholder="Password..."
@@ -136,11 +134,11 @@ const Login = () => {
           </Flex>
 
           <Button
-            ml="auto"
             mt={5}
             colorScheme="teal"
             rightIcon={<FiLogIn />}
             type="submit"
+            alignSelf="flex-end"
           >
             Log in
           </Button>
