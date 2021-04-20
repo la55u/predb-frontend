@@ -9,10 +9,7 @@ export function useSocket(url) {
 
     setSocket(socketIo);
 
-    function cleanup() {
-      socketIo.disconnect();
-    }
-    return cleanup;
+    return () => socketIo.disconnect();
 
     // should only run once and not on every re-render,
     // so pass an empty array

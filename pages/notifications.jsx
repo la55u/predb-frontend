@@ -1,3 +1,4 @@
+import { BellIcon, SearchIcon } from "@chakra-ui/icons";
 import {
   Box,
   Button,
@@ -6,8 +7,7 @@ import {
   Heading,
   Stack,
   Text,
-} from "@chakra-ui/core";
-import { BellIcon, SearchIcon } from "@chakra-ui/icons";
+} from "@chakra-ui/react";
 import { AiFillTag } from "react-icons/ai";
 import { FiTrash2 } from "react-icons/fi";
 import Layout from "../components/Layout";
@@ -40,12 +40,12 @@ const Notifications = () => {
             <Flex mb={2}>
               <Box as={AiFillTag} w="22px" />
               <Heading size="sm" ml={4}>
-                My tagname
+                My tagname {i}
               </Heading>
             </Flex>
 
             <Text>Created: {new Date().toLocaleString()}</Text>
-            <Text>Notification type: Git hook</Text>
+            <Text>Notification type: Webhook</Text>
             <Text>Matched: 10 times</Text>
             <Text>Last match: 2 days ago</Text>
 

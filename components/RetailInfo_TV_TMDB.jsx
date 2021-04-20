@@ -6,7 +6,7 @@ import {
   Image,
   Text,
   useColorMode,
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import TimeAgo from "timeago-react";
 
 const RetailInfo_TV_TMDB = ({ data, borderColor }) => {

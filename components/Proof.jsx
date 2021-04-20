@@ -1,4 +1,4 @@
-import { DownloadIcon, Flex, IconButton, Image, Text } from "@chakra-ui/core";
+import { DownloadIcon, Flex, IconButton, Image, Text } from "@chakra-ui/react";
 
 const Proof = ({ proof }) => {
   if (!proof) return null;

@@ -1,3 +1,4 @@
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import {
   Alert,
   AlertIcon,
@@ -15,8 +16,7 @@ import {
   Link,
   Stack,
   useColorModeValue,
-} from "@chakra-ui/core";
-import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
+} from "@chakra-ui/react";
 import { useRouter } from "next/dist/client/router";
 import NextLink from "next/link";
 import { useEffect, useState } from "react";

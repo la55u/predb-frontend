@@ -1,9 +1,10 @@
-import { ChakraProvider, CSSReset } from "@chakra-ui/core";
+import { ChakraProvider } from "@chakra-ui/react";
+import "focus-visible/dist/focus-visible";
 import Head from "next/head";
 import { Provider } from "react-redux";
 import store from "../redux/store";
 import "../style.css";
-import { theme } from "../theme";
+import { theme } from "../styles";
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -17,8 +18,7 @@ function MyApp({ Component, pageProps }) {
       </Head>
 
       <Provider store={store}>
-        <ChakraProvider theme={theme}>
-          <CSSReset />
+        <ChakraProvider theme={theme} resetCSS>
           <Component {...pageProps} />
         </ChakraProvider>
       </Provider>

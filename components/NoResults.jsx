@@ -1,4 +1,4 @@
-import { Box, Flex, Text } from "@chakra-ui/core";
+import { Box, Flex, Text } from "@chakra-ui/react";
 import { MdZoomOut } from "react-icons/md";
 
 export const NoResults = () => (
