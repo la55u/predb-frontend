@@ -2,7 +2,7 @@ import { IconButton, useClipboard, useToast } from "@chakra-ui/react";
 import { HiCheck } from "react-icons/hi";
 import { RiFileCopyLine } from "react-icons/ri";
 
-const CopyButton = ({ value }) => {
+const CopyButton = ({ value, ...rest }) => {
   const { onCopy, hasCopied } = useClipboard(value);
   const toast = useToast();
 
@@ -26,6 +26,7 @@ const CopyButton = ({ value }) => {
       size="md"
       icon={hasCopied ? <HiCheck /> : <RiFileCopyLine />}
       onClick={handleClick}
+      {...rest}
     />
   );
 };
