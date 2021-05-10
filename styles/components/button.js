@@ -4,7 +4,6 @@ const baseStyle = {
 
 const variants = {
   solid: (props) => {
-    console.log(props);
     return {
       shadow: "md",
     };

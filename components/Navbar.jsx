@@ -3,6 +3,7 @@ import {
   Button,
   Container,
   Flex,
+  Icon,
   IconButton,
   Menu,
   MenuButton,
@@ -22,7 +23,7 @@ import Logo from "./Logo";
 import { MobileMenu } from "./MobileMenu";
 import { ThemeSwitcher } from "./ThemeSwitcher";
 
-const Header = (props) => {
+const Navbar = (props) => {
   const { isLoggedIn } = useSelector((state) => state.auth);
   const colorvalues = useColorModeValue({ bg: "light.bg" }, { bg: "dark.bg" });
 
@@ -33,7 +34,7 @@ const Header = (props) => {
   return (
     <Box
       pos="fixed"
-      as="header"
+      as="nav"
       top="0"
       zIndex="4"
       left="0"
@@ -106,13 +107,16 @@ const Header = (props) => {
                 />
                 <MenuList>
                   <NextLink href="/profile" passHref>
-                    <MenuItem as="a" icon={<BsFillPersonFill />}>
+                    <MenuItem
+                      as="a"
+                      icon={<Icon as={BsFillPersonFill} boxSize="20px" />}
+                    >
                       Profile
                     </MenuItem>
                   </NextLink>
 
                   <MenuItem
-                    icon={<FiLogOut />}
+                    icon={<Icon as={FiLogOut} boxSize="20px" />}
                     onClick={() => {
                       dispatch(logout());
                       dispatch(addToast({ title: "You logged out!" }));
@@ -132,4 +136,4 @@ const Header = (props) => {
   );
 };
 
-export default Header;
+export default Navbar;

@@ -1,6 +1,6 @@
 export default {
   dark: {
-    bg: "#08080b",
+    bg: "#0b0b13",
     col: "gainsboro",
   },
 

@@ -38,7 +38,7 @@ const SearchSimple = ({}) => {
 
   return (
     <Box mt={10}>
-      <InputGroup>
+      <InputGroup size="lg">
         <InputLeftElement>
           <SearchIcon />
         </InputLeftElement>
@@ -56,7 +56,8 @@ const SearchSimple = ({}) => {
         )}
 
         <Input
-          borderRadius="md"
+          borderRadius="lg"
+          shadow="md"
           variant="filled"
           placeholder="Search any release..."
           value={query}
