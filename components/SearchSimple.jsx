@@ -61,6 +61,7 @@ const SearchSimple = ({}) => {
           variant="filled"
           placeholder="Search any release..."
           value={query}
+          aria-label="Search by release name"
           onChange={(e) => setQuery(e.target.value)}
         />
       </InputGroup>

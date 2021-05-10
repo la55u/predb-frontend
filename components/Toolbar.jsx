@@ -1,10 +1,4 @@
-import {
-  Flex,
-  FormControl,
-  FormLabel,
-  Heading,
-  Switch,
-} from "@chakra-ui/react";
+import { Flex, FormControl, HStack, Switch, Text } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import ModalSubscribe from "./ModalSubscribe";
 
@@ -13,36 +7,32 @@ const Toolbar = () => {
 
   return (
     <>
-      <Flex justify="space-between" align="center" wrap="wrap" mt={5}>
-        <Flex
-          align="center"
-          justify="space-between"
+      <Flex justify="space-between" align="center" mt={5} wrap="wrap">
+        <HStack
+          spacing={4}
           w={["100%", "100%", "auto"]}
+          maxW={["unset", "unset", "50%"]}
         >
           <ModalSubscribe />
 
-          <FormControl ml={4} as={Flex} alignItems="center" w="auto">
-            <FormLabel htmlFor="live" mb={0}>
-              Live updates
-            </FormLabel>
+          <FormControl d="flex" alignItems="center" w="auto">
             <Switch
               size="sm"
               id="live"
-              defaultIsChecked={true}
+              aria-label="Toggle live updates"
+              defaultChecked={true}
               colorScheme="teal"
-            />
+            >
+              Live updates
+            </Switch>
           </FormControl>
-        </Flex>
+        </HStack>
 
         {took > 0 && (
-          <Heading
-            size="xs"
-            color={resultsCnt ? "teal.400" : "red.500"}
-            mt={[4, 4, 0]}
-          >
+          <Text color={resultsCnt ? "teal.400" : "red.500"} mt={[4, 4, 0]}>
             {resultsCnt < 10000 ? resultsCnt : `>${resultsCnt}`} results found
             in {took} ms
-          </Heading>
+          </Text>
         )}
       </Flex>
     </>

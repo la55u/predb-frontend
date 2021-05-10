@@ -99,6 +99,7 @@ const Navbar = (props) => {
               <Menu placement="bottom-end">
                 <MenuButton
                   as={IconButton}
+                  title="Account"
                   color="teal.400"
                   fontSize="20px"
                   variant="ghost"

@@ -11,6 +11,10 @@ function MyApp({ Component, pageProps }) {
     <>
       <Head>
         <title>PREdb | The Scene PRE & NFO database</title>
+        <meta
+          name="description"
+          content="The all in one warez scene PRE tracker, NFO database and notification system"
+        />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link
           href="https://fonts.googleapis.com/css2?family=Lato&display=swap"

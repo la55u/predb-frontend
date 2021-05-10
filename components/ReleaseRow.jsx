@@ -17,14 +17,14 @@ import CopyButton from "./CopyButon";
 const ReleaseRow = ({ release }) => {
   const colorvalues = useColorModeValue(
     {
-      borderColor: "gray.300",
+      borderColor: "gray.200",
       hoverColor: "gray.300",
       gray: "gray.500",
       shadow:
         "0 8px 10px 0 rgba(10, 31, 68, 0.4), 0 0 1px 0 rgba(10, 31, 68, 0.2)",
     },
     {
-      borderColor: "gray.700",
+      borderColor: "gray.800",
       hoverColor: "gray.800",
       gray: "gray.500",
       shadow:
