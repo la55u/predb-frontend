@@ -8,7 +8,6 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
-import { useState } from "react";
 import { IoIosNuclear } from "react-icons/io";
 import TimeAgo from "timeago-react";
 import { getSection } from "../utils/classify";
@@ -16,18 +15,16 @@ import CategoryBadge from "./CategoryBadge";
 import CopyButton from "./CopyButon";
 
 const ReleaseRow = ({ release }) => {
-  const [hovering, setHovering] = useState(false);
-
   const colorvalues = useColorModeValue(
     {
-      borderColor: "gray.300",
+      borderColor: "gray.200",
       hoverColor: "gray.300",
       gray: "gray.500",
       shadow:
         "0 8px 10px 0 rgba(10, 31, 68, 0.4), 0 0 1px 0 rgba(10, 31, 68, 0.2)",
     },
     {
-      borderColor: "gray.700",
+      borderColor: "gray.800",
       hoverColor: "gray.800",
       gray: "gray.500",
       shadow:
@@ -43,8 +40,6 @@ const ReleaseRow = ({ release }) => {
       px={[1, 1, 1, 4]}
       py={2}
       position="relative"
-      onMouseEnter={() => setHovering(true)}
-      onMouseLeave={() => setHovering(false)}
       _before={{
         content: `''`,
         position: "absolute",
@@ -142,7 +137,11 @@ const ReleaseRow = ({ release }) => {
           d={{ base: "none", md: "block" }}
           justifySelf="center"
         >
-          {hovering && <CopyButton value={release.name} />}
+          <CopyButton
+            d="none"
+            _groupHover={{ d: "flex" }}
+            value={release.name}
+          />
         </Box>
 
         <Box

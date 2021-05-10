@@ -80,6 +80,7 @@ export const MobileMenu = () => {
             as="a"
             href="https://github.com/la55u/predb-frontend"
             target="_blank"
+            rel="noopener noreferrer"
           >
             Source code
           </MenuItem>
@@ -89,6 +90,7 @@ export const MobileMenu = () => {
             as="a"
             href="https://github.com/la55u/predb-frontend/swagger.yml"
             target="_blank"
+            rel="noopener noreferrer"
           >
             API
           </MenuItem>

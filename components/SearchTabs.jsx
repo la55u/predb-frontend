@@ -5,8 +5,8 @@ import SearchSimple from "./SearchSimple";
 
 const SearchTabs = () => {
   return (
-    <Tabs variant="enclosed" colorScheme="teal">
-      <TabList>
+    <Tabs variant="line" colorScheme="teal">
+      <TabList borderBottom="none">
         <Tab>Simple</Tab>
         <Tab>Advanced</Tab>
       </TabList>
