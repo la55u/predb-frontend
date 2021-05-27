@@ -3,7 +3,8 @@ import { useSelector } from "react-redux";
 import ModalSubscribe from "./ModalSubscribe";
 
 const Toolbar = () => {
-  const { took, resultsCnt } = useSelector((state) => state.search);
+  const took = useSelector((state) => state.search.took);
+  const resultsCnt = useSelector((state) => state.search.resultsCnt);
 
   return (
     <>

@@ -1,6 +1,23 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { API_BASE, API_ENDPOINT } from "../../utils/routes";
 
+export const getCount = createAsyncThunk("releases/getCount", async (_, thunkAPI) => {
+  try {
+    const res = await fetch(API_BASE + API_ENDPOINT.COUNT, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!res.ok) {
+      return thunkAPI.rejectWithValue({ error: "Error getting total count" });
+    }
+    const json = await res.json();
+    return json.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue({ error: error.message });
+  }
+});
+
 export const getAllRelease = createAsyncThunk(
   "releases/getAllRelease",
   async (page, thunkAPI) => {
@@ -12,7 +29,7 @@ export const getAllRelease = createAsyncThunk(
           headers: {
             "Content-Type": "application/json",
           },
-        }
+        },
       );
 
       if (!response.ok) {
@@ -25,13 +42,13 @@ export const getAllRelease = createAsyncThunk(
     } catch (error) {
       return thunkAPI.rejectWithValue({ error: error.message });
     }
-  }
+  },
 );
 
 const releasesSlice = createSlice({
   name: "releases",
   initialState: {
-    count: 0,
+    count: null,
     releaselist: [],
     loading: false,
   },
@@ -42,11 +59,10 @@ const releasesSlice = createSlice({
         { ...action.payload, new: true },
         ...state.releaselist.slice(0, state.releaselist.length - 1),
       ];
+      state.count = state.count + 1;
     },
     updateRelease: (state, action) => {
-      const idx = state.releaselist.findIndex(
-        (r) => r._id === action.payload._id
-      );
+      const idx = state.releaselist.findIndex((r) => r._id === action.payload._id);
       if (idx !== -1) {
         state.releaselist[idx] = action.payload;
       }
@@ -65,6 +81,16 @@ const releasesSlice = createSlice({
     },
     [getAllRelease.rejected]: (state, action) => {
       state.error = action.payload.error;
+    },
+
+    [getCount.pending]: (state) => {
+      //
+    },
+    [getCount.fulfilled]: (state, action) => {
+      state.count = action.payload;
+    },
+    [getCount.rejected]: (state, action) => {
+      //
     },
   },
 });
