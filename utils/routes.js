@@ -21,4 +21,5 @@ export const API_ENDPOINT = {
   REGISTER: "/api/auth/register",
   RESTORE: "/api/auth/restore",
   DELETE: "/api/auth/delete",
+  ME: "/api/auth/me",
 };

@@ -53,6 +53,7 @@ export const register = createAsyncThunk("auth/register", async (data, thunkAPI)
     }
     const json = await res.json();
     console.log("register json:", json);
+    return json;
   } catch (error) {
     return thunkAPI.rejectWithValue({ error: error.message });
   }
@@ -61,8 +62,20 @@ export const register = createAsyncThunk("auth/register", async (data, thunkAPI)
 export const deleteAccount = createAsyncThunk(
   "auth/deleteAccount",
   async (_, thunkAPI) => {
-    // TODO
-    console.log("TODO deleteAccount");
+    try {
+      const res = await fetch(API_BASE + API_ENDPOINT.DELETE, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("auth"),
+        },
+      });
+      if (!res.ok) {
+        return thunkAPI.rejectWithValue({ error: "Error during account deletion!" });
+      }
+    } catch (error) {
+      return thunkAPI.rejectWithValue({ error: error.message });
+    }
   },
 );
 
@@ -90,7 +103,7 @@ const authSlice = createSlice({
     [login.fulfilled]: (state, action) => {
       state.loading = false;
       state.isAuthenticated = true;
-      localStorage.setItem("auth", action.payload);
+      localStorage.setItem("auth", JSON.stringify(action.payload));
     },
     [login.rejected]: (state, action) => {
       state.loading = false;
@@ -127,6 +140,8 @@ const authSlice = createSlice({
     },
     [deleteAccount.fulfilled]: (state) => {
       state.loading = false;
+      localStorage.clear();
+      window.location.href = "/";
     },
     [deleteAccount.rejected]: (state, action) => {
       state.loading = false;

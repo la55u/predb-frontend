@@ -37,7 +37,7 @@ const Login = () => {
   });
   const router = useRouter();
   const dispatch = useDispatch();
-  const { user, loading } = useSelector((state) => state.auth);
+  const { user, loading, isAuthenticated } = useSelector((state) => state.auth);
 
   const colors = useColorModeValue(
     { borderColor: "gray.300" },
@@ -46,11 +46,11 @@ const Login = () => {
 
   useEffect(() => {
     // redirect user to homepage after successful login
-    if (user) {
+    if (isAuthenticated) {
       router.push("/");
-      dispatch(addToast({ title: "You are logged in!" }));
+      dispatch(addToast({ title: "Login successful!" }));
     }
-  }, [user]);
+  }, [isAuthenticated]);
 
   const handleInput = (e) => {
     const { name, value, type } = e.target;

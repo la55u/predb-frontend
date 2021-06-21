@@ -11,9 +11,17 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { useDispatch } from "react-redux";
+import { deleteAccount } from "../../redux/slices/authSlice";
 
 export const DeleteAccountModal = () => {
+  const dispatch = useDispatch();
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const handleDelete = () => {
+    dispatch(deleteAccount());
+    onClose();
+  };
 
   return (
     <>
@@ -40,10 +48,14 @@ export const DeleteAccountModal = () => {
             </Text>
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
+            <Button mr={3} onClick={onClose}>
               Cancel
             </Button>
-            <Button variant="ghost" colorScheme="red">
+            <Button
+              colorScheme="red"
+              leftIcon={<RiDeleteBin6Line />}
+              onClick={handleDelete}
+            >
               Delete
             </Button>
           </ModalFooter>
