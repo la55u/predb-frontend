@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { makeHeaders } from "../../hooks/useFetch";
 import { API_BASE, API_ENDPOINT } from "../../utils/routes";
 
 export const login = createAsyncThunk("auth/login", async (data, thunkAPI) => {
@@ -80,8 +81,18 @@ export const deleteAccount = createAsyncThunk(
 );
 
 export const getMe = createAsyncThunk("auth/getMe", async (_, thunkAPI) => {
-  // TODO
-  console.log("TODO getMe");
+  try {
+    const res = await fetch(API_BASE + API_ENDPOINT.ME, {
+      headers: makeHeaders(true),
+    });
+    if (!res.ok) {
+      return thunkAPI.rejectWithValue({ error: "Error getting user details!" });
+    }
+    const json = await res.json();
+    return json;
+  } catch (error) {
+    return thunkAPI.rejectWithValue({ error: error.message });
+  }
 });
 
 const authSlice = createSlice({
@@ -93,10 +104,11 @@ const authSlice = createSlice({
     isAuthenticated: false,
   },
   reducers: {
-    // standard reducer logic, with auto-generated action types per reducer
+    setAuthenticated: (state) => {
+      state.isAuthenticated = true;
+    },
   },
   extraReducers: {
-    // Add reducers for additional action types here, and handle loading state as needed
     [login.pending]: (state) => {
       state.loading = true;
     },
@@ -135,6 +147,18 @@ const authSlice = createSlice({
       state.error = action.payload.error;
     },
 
+    [getMe.pending]: (state) => {
+      state.loading = true;
+    },
+    [getMe.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.user = action.payload;
+    },
+    [getMe.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.payload.error;
+    },
+
     [deleteAccount.pending]: (state) => {
       state.loading = true;
     },
@@ -150,5 +174,5 @@ const authSlice = createSlice({
   },
 });
 
-// export const { clear } = searchSlice.actions;
+export const { setAuthenticated } = authSlice.actions;
 export default authSlice.reducer;

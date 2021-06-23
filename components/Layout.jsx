@@ -4,12 +4,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { getMe } from "../redux/slices/authSlice";
 import { Footer } from "./Footer";
 import Navbar from "./Navbar";
+import { setAuthenticated } from "../redux/slices/authSlice";
 
 const Layout = ({ children }) => {
   const dispatch = useDispatch();
   const { isAuthenticated, user } = useSelector((state) => state.auth);
 
   useEffect(() => {
+    const t = localStorage.getItem("auth");
+    if (t) {
+      dispatch(setAuthenticated());
+    }
     if (isAuthenticated && !user) dispatch(getMe());
   }, [isAuthenticated]);
 

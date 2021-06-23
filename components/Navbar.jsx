@@ -80,30 +80,29 @@ const Navbar = (props) => {
             <ThemeSwitcher />
 
             {!user ? (
-              <NextLink href="/login">
-                <a>
-                  <IconButton
-                    aria-label="Log in"
-                    variant="ghost"
-                    color="currentcolor"
-                    ml="2"
-                    fontSize="20px"
-                    icon={<BsFillPersonFill />}
-                  />
-                </a>
+              <NextLink href="/login" passHref>
+                <IconButton
+                  as="a"
+                  aria-label="Log in"
+                  variant="ghost"
+                  color="currentcolor"
+                  ml="2"
+                  size="sm"
+                  icon={<Icon as={BsFillPersonFill} boxSize="20px" />}
+                />
               </NextLink>
             ) : (
               <Menu placement="bottom-end">
                 <MenuButton
-                  //as={IconButton}
-                  //title="Account"
-                  color="teal.400"
-                  fontSize="20px"
+                  as={Button}
+                  fontWeight="semibold"
+                  color="currentcolor"
                   variant="ghost"
                   ml="2"
-                  rightIcon={<BsFillPersonFill />}
+                  size="sm"
+                  rightIcon={<Icon as={BsFillPersonFill} boxSize="20px" />}
                 >
-                  {user.email}
+                  {user.email.split("@")[0]}
                 </MenuButton>
                 <MenuList>
                   <NextLink href="/profile" passHref>
@@ -111,7 +110,6 @@ const Navbar = (props) => {
                       Profile
                     </MenuItem>
                   </NextLink>
-
                   <MenuItem
                     icon={<Icon as={FiLogOut} boxSize="20px" />}
                     onClick={handleLogout}

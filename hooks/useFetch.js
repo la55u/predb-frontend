@@ -18,11 +18,16 @@ const useFetch = (initialUrl, initialParams = {}, auth = false) => {
       setIsLoading(true);
       try {
         const response = await fetch(`${API_BASE}${url}${queryString}`, {
-          headers: getHeaders(auth),
+          headers: makeHeaders(auth),
         });
         const result = await response.json();
         if (response.ok) {
           setData(result);
+          const token = response.headers.get("x-token");
+          const refreshToken = response.headers.get("x-refresh-token");
+          if (token && refreshToken) {
+            localStorage.setItem("auth", { token, refreshToken });
+          }
         } else {
           setHasError(true);
           setErrorMessage(result);
@@ -47,7 +52,7 @@ const useFetch = (initialUrl, initialParams = {}, auth = false) => {
   };
 };
 
-const getHeaders = (auth) => {
+export const makeHeaders = (auth) => {
   if (!auth) {
     // normal header
     return { "Content-Type": "application/json" };
