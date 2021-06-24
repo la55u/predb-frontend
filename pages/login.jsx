@@ -9,12 +9,14 @@ import {
   FormControl,
   FormLabel,
   Heading,
+  HStack,
   IconButton,
   Input,
   InputGroup,
   InputRightElement,
   Link,
   Stack,
+  Text,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { useRouter } from "next/dist/client/router";
@@ -35,20 +37,20 @@ const Login = () => {
   });
   const router = useRouter();
   const dispatch = useDispatch();
-  const { isLoggedIn } = useSelector((state) => state.auth);
+  const { user, loading, isAuthenticated } = useSelector((state) => state.auth);
 
-  const borderColor = useColorModeValue({
-    dark: "gray.700",
-    light: "gray.300",
-  });
+  const colors = useColorModeValue(
+    { borderColor: "gray.300" },
+    { borderColor: "gray.700" },
+  );
 
   useEffect(() => {
     // redirect user to homepage after successful login
-    if (isLoggedIn) {
-      router.replace("/");
-      dispatch(addToast({ title: "You are logged in!" }));
+    if (isAuthenticated) {
+      router.push("/");
+      dispatch(addToast({ title: "Login successful!" }));
     }
-  }, [isLoggedIn]);
+  }, [isAuthenticated]);
 
   const handleInput = (e) => {
     const { name, value, type } = e.target;
@@ -71,7 +73,7 @@ const Login = () => {
           mx="auto"
         >
           <AlertIcon />
-          Registration complete! You may now log in.
+          Registration complete! You can log in now.
         </Alert>
       )}
 
@@ -79,7 +81,7 @@ const Login = () => {
         as="form"
         mt={20}
         p={5}
-        borderColor={borderColor}
+        borderColor={colors.borderColor}
         borderWidth="1px"
         borderRadius="md"
         w={["100%", "100%", "500px"]}
@@ -135,24 +137,39 @@ const Login = () => {
 
           <Button
             mt={5}
+            w="full"
             colorScheme="teal"
             rightIcon={<FiLogIn />}
             type="submit"
             alignSelf="flex-end"
+            isLoading={loading}
           >
             Log in
           </Button>
         </Stack>
       </Box>
 
-      <Box w={["100%", "100%", "500px"]} mx="auto" mt={10}>
-        <Heading size="sm">
-          Don't have an account yet?{" "}
-          <NextLink href="/register" passHref>
-            <Link color="teal.500">Register here</Link>
-          </NextLink>
-        </Heading>
-      </Box>
+      <Text my={6} textAlign="center" color={colors.borderColor}>
+        OR
+      </Text>
+
+      <HStack
+        borderWidth="1px"
+        borderColor={colors.borderColor}
+        borderRadius="md"
+        w={["100%", "100%", "500px"]}
+        mx="auto"
+        p={5}
+        justify="space-between"
+      >
+        <Heading size="md">Don't have an account yet? </Heading>
+
+        <NextLink href="/register" passHref>
+          <Button as="a" color="teal.500">
+            Register here
+          </Button>
+        </NextLink>
+      </HStack>
     </Layout>
   );
 };

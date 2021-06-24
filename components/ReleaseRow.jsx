@@ -1,12 +1,5 @@
 import { CheckIcon } from "@chakra-ui/icons";
-import {
-  Box,
-  Flex,
-  Grid,
-  Link,
-  Text,
-  useColorModeValue,
-} from "@chakra-ui/react";
+import { Box, Flex, Grid, Link, Text, useColorModeValue } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { IoIosNuclear } from "react-icons/io";
 import TimeAgo from "timeago-react";
@@ -20,16 +13,14 @@ const ReleaseRow = ({ release }) => {
       borderColor: "gray.200",
       hoverColor: "gray.300",
       gray: "gray.500",
-      shadow:
-        "0 8px 10px 0 rgba(10, 31, 68, 0.4), 0 0 1px 0 rgba(10, 31, 68, 0.2)",
+      shadow: "0 8px 10px 0 rgba(10, 31, 68, 0.4), 0 0 1px 0 rgba(10, 31, 68, 0.2)",
     },
     {
       borderColor: "gray.800",
       hoverColor: "gray.800",
       gray: "gray.500",
-      shadow:
-        "0 8px 10px 0 rgba(10, 31, 68, 0.1), 0 0 1px 0 rgba(10, 31, 68, 0.08)",
-    }
+      shadow: "0 8px 10px 0 rgba(10, 31, 68, 0.1), 0 0 1px 0 rgba(10, 31, 68, 0.08)",
+    },
   );
 
   const section = getSection(release.name, release.section);
@@ -74,11 +65,9 @@ const ReleaseRow = ({ release }) => {
           gridArea="added"
           color={{ base: colorvalues.gray, md: "current" }}
           title={new Date(release.added).toLocaleString()}
+          fontSize={["sm", "sm", "md"]}
         >
-          <TimeAgo
-            datetime={new Date(release.added)}
-            opts={{ minInterval: 60 }}
-          />
+          <TimeAgo datetime={new Date(release.added)} opts={{ minInterval: 60 }} />
         </Box>
 
         <Box gridArea="cat" justifySelf="end" px={3}>
@@ -97,18 +86,14 @@ const ReleaseRow = ({ release }) => {
               {!release.traces ? (
                 <Text>No site raced this</Text>
               ) : (
-                release.traces
-                  .map((tr) => `#${tr.rank}\u00A0${tr.site}`)
-                  .join(", ")
+                release.traces.map((tr) => `#${tr.rank}\u00A0${tr.site}`).join(", ")
               )}
             </Box>
 
             <Flex>
               {release.nukes && (
                 <Box
-                  title={release.nukes
-                    .map((n) => `[${n.type}] ${n.reason}`)
-                    .join("\r\n")}
+                  title={release.nukes.map((n) => `[${n.type}] ${n.reason}`).join("\r\n")}
                   as={IoIosNuclear}
                   color="orange.400"
                   cursor="help"
@@ -132,16 +117,8 @@ const ReleaseRow = ({ release }) => {
           </Flex>
         </Box>
 
-        <Box
-          gridArea="action"
-          d={{ base: "none", md: "block" }}
-          justifySelf="center"
-        >
-          <CopyButton
-            d="none"
-            _groupHover={{ d: "flex" }}
-            value={release.name}
-          />
+        <Box gridArea="action" d={{ base: "none", md: "block" }} justifySelf="center">
+          <CopyButton d="none" _groupHover={{ d: "flex" }} value={release.name} />
         </Box>
 
         <Box
@@ -156,6 +133,7 @@ const ReleaseRow = ({ release }) => {
           gridArea="size"
           justifySelf="end"
           color={{ base: colorvalues.gray, md: "current" }}
+          fontSize={["sm", "sm", "md"]}
         >
           {release.size ? release.size + " MB" : "-"}
         </Box>

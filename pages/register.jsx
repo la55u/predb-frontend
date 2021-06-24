@@ -5,20 +5,23 @@ import {
   FormHelperText,
   FormLabel,
   Heading,
+  HStack,
   IconButton,
   Input,
   InputGroup,
   InputRightElement,
-  Link,
   Stack,
-  useColorMode,
+  Text,
+  useColorModeValue,
   useToast,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
-import { useState } from "react";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { HiOutlineEye, HiOutlineEyeOff } from "react-icons/hi";
+import { useDispatch, useSelector } from "react-redux";
 import Layout from "../components/Layout";
-import { API_BASE, API_ENDPOINT } from "../utils/routes";
+import { register } from "../redux/slices/authSlice";
 
 const initialState = {
   email: "",
@@ -27,13 +30,21 @@ const initialState = {
 };
 
 const Register = () => {
-  const { colorMode } = useColorMode();
+  const toast = useToast();
+  const router = useRouter();
+  const dispatch = useDispatch();
   const [credentials, setCredentials] = useState(initialState);
   const [showPassword, setShowPassword] = useState(false);
-  const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
+  const { isAuthenticated, loading } = useSelector((state) => state.auth);
 
-  const toast = useToast();
-  const borderColor = { dark: "gray.700", light: "gray.300" };
+  const colors = useColorModeValue(
+    { borderColor: "gray.300" },
+    { borderColor: "gray.700" },
+  );
+
+  useEffect(() => {
+    if (isAuthenticated) router.push("/");
+  }, [isAuthenticated]);
 
   const handleInput = (e) => {
     const { name, value } = e.target;
@@ -42,13 +53,8 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch(API_BASE + API_ENDPOINT.REGISTER, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(credentials),
-    });
-    const data = await res.json();
-    console.log("register data:", data);
+
+    dispatch(register(credentials));
 
     setCredentials({ ...initialState });
     document.querySelector("form").reset();
@@ -67,7 +73,7 @@ const Register = () => {
         as="form"
         mt={20}
         p={5}
-        borderColor={borderColor[colorMode]}
+        borderColor={colors.borderColor}
         borderWidth="1px"
         borderRadius="md"
         w={["100%", "100%", "500px"]}
@@ -124,7 +130,7 @@ const Register = () => {
               <Input
                 isRequired
                 variant="filled"
-                type={showPasswordConfirm ? "text" : "password"}
+                type={showPassword ? "text" : "password"}
                 placeholder="Password..."
                 value={credentials.passwordConfirm}
                 onChange={handleInput}
@@ -139,11 +145,9 @@ const Register = () => {
                 <IconButton
                   size="sm"
                   variant="ghost"
-                  icon={
-                    showPasswordConfirm ? <HiOutlineEyeOff /> : <HiOutlineEye />
-                  }
-                  aria-label={showPasswordConfirm ? "Hide" : "Show"}
-                  onClick={() => setShowPasswordConfirm((s) => !s)}
+                  icon={showPassword ? <HiOutlineEyeOff /> : <HiOutlineEye />}
+                  aria-label={showPassword ? "Hide" : "Show"}
+                  onClick={() => setShowPassword((s) => !s)}
                 />
               </InputRightElement>
             </InputGroup>
@@ -152,23 +156,37 @@ const Register = () => {
           <Button
             ml="auto"
             mt={5}
+            w="full"
             colorScheme="teal"
             type="submit"
             alignSelf="flex-end"
+            isLoading={loading}
           >
             Register
           </Button>
         </Stack>
       </Box>
 
-      <Box w={["100%", "100%", "500px"]} mx="auto" mt={10}>
-        <Heading size="sm">
-          Already have an account?{" "}
-          <NextLink href="/login" passHref>
-            <Link color="teal.500">Log in here</Link>
-          </NextLink>
-        </Heading>
-      </Box>
+      <Text my={6} textAlign="center" color={colors.borderColor}>
+        OR
+      </Text>
+
+      <HStack
+        borderWidth="1px"
+        borderColor={colors.borderColor}
+        borderRadius="md"
+        w={["100%", "100%", "500px"]}
+        mx="auto"
+        p={5}
+        justify="space-between"
+      >
+        <Heading size="md">Already have an account? </Heading>
+        <NextLink href="/login" passHref>
+          <Button as="a" color="teal.500">
+            Log in here
+          </Button>
+        </NextLink>
+      </HStack>
     </Layout>
   );
 };

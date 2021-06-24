@@ -24,12 +24,14 @@ import { MobileMenu } from "./MobileMenu";
 import { ThemeSwitcher } from "./ThemeSwitcher";
 
 const Navbar = (props) => {
-  const { isLoggedIn } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
   const colorvalues = useColorModeValue({ bg: "light.bg" }, { bg: "dark.bg" });
 
-  const dispatch = useDispatch();
-
-  console.log("isloggedin", isLoggedIn);
+  const handleLogout = () => {
+    dispatch(logout());
+    dispatch(addToast({ title: "You logged out!" }));
+  };
 
   return (
     <Box
@@ -52,11 +54,13 @@ const Navbar = (props) => {
             <Logo />
           </Box>
 
-          <Flex
-            align="center"
-            color="gray.500"
-            display={["none", "none", "flex"]}
-          >
+          <Flex align="center" color="gray.500" display={["none", "none", "flex"]}>
+            <NextLink href="/" passHref>
+              <Button mt="2px" as="a" color="current" size="sm" variant="ghost">
+                Search
+              </Button>
+            </NextLink>
+
             <NextLink href="/notifications" passHref>
               <Button mt="2px" as="a" color="current" size="sm" variant="ghost">
                 Notifications
@@ -64,14 +68,7 @@ const Navbar = (props) => {
             </NextLink>
 
             <NextLink href="/stats" passHref>
-              <Button
-                mx={2}
-                mt="2px"
-                as="a"
-                color="current"
-                size="sm"
-                variant="ghost"
-              >
+              <Button mx={2} mt="2px" as="a" color="current" size="sm" variant="ghost">
                 Stats
               </Button>
             </NextLink>
@@ -82,46 +79,40 @@ const Navbar = (props) => {
 
             <ThemeSwitcher />
 
-            {!isLoggedIn ? (
-              <NextLink href="/login">
-                <a>
-                  <IconButton
-                    aria-label="Log in"
-                    variant="ghost"
-                    color="currentcolor"
-                    ml="2"
-                    fontSize="20px"
-                    icon={<BsFillPersonFill />}
-                  />
-                </a>
+            {!user ? (
+              <NextLink href="/login" passHref>
+                <IconButton
+                  as="a"
+                  aria-label="Log in"
+                  variant="ghost"
+                  color="currentcolor"
+                  ml="2"
+                  size="sm"
+                  icon={<Icon as={BsFillPersonFill} boxSize="20px" />}
+                />
               </NextLink>
             ) : (
               <Menu placement="bottom-end">
                 <MenuButton
-                  as={IconButton}
-                  title="Account"
-                  color="teal.400"
-                  fontSize="20px"
+                  as={Button}
+                  fontWeight="semibold"
+                  color="currentcolor"
                   variant="ghost"
                   ml="2"
-                  icon={<BsFillPersonFill />}
-                />
+                  size="sm"
+                  rightIcon={<Icon as={BsFillPersonFill} boxSize="20px" />}
+                >
+                  {user.email.split("@")[0]}
+                </MenuButton>
                 <MenuList>
                   <NextLink href="/profile" passHref>
-                    <MenuItem
-                      as="a"
-                      icon={<Icon as={BsFillPersonFill} boxSize="20px" />}
-                    >
+                    <MenuItem as="a" icon={<Icon as={BsFillPersonFill} boxSize="20px" />}>
                       Profile
                     </MenuItem>
                   </NextLink>
-
                   <MenuItem
                     icon={<Icon as={FiLogOut} boxSize="20px" />}
-                    onClick={() => {
-                      dispatch(logout());
-                      dispatch(addToast({ title: "You logged out!" }));
-                    }}
+                    onClick={handleLogout}
                   >
                     Log out
                   </MenuItem>

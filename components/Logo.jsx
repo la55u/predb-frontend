@@ -1,20 +1,16 @@
 import { Flex, Heading, Text } from "@chakra-ui/react";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
-import { API_BASE, API_ENDPOINT } from "../utils/routes";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getCount } from "../redux/slices/releasesSlice";
 
 const Logo = () => {
-  const [count, setCount] = useState("...");
+  const dispatch = useDispatch();
+  const count = useSelector((state) => state.releases.count);
 
   useEffect(() => {
-    getCount();
+    if (!count) dispatch(getCount());
   }, []);
-
-  const getCount = async () => {
-    const res = await fetch(API_BASE + API_ENDPOINT.COUNT);
-    const data = await res.json();
-    setCount(data.data);
-  };
 
   return (
     <Flex align="baseline">
