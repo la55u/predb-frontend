@@ -5,30 +5,45 @@ import {
   Divider,
   Flex,
   Heading,
+  Spinner,
   Stack,
   Text,
 } from "@chakra-ui/react";
+import { useEffect } from "react";
 import { AiFillTag } from "react-icons/ai";
 import { FiTrash2 } from "react-icons/fi";
+import { useDispatch, useSelector } from "react-redux";
 import Layout from "../components/Layout";
+import { getNotifications } from "../redux/slices/notificationSlice";
 
 const Notifications = () => {
+  const { notifications, loading, error } = useSelector((s) => s.notifications);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!notifications) dispatch(getNotifications());
+  }, []);
+
+  if (loading) return <Spinner />;
+  if (error) return <p>{error}</p>;
+  if (!notifications) return null;
+
   return (
     <Layout>
       <Stack direction="row">
         <Heading>Notifications</Heading>
         <Divider orientation="vertical" h="40px" />
-        <Heading color="teal.500">4</Heading>
+        <Heading color="teal.500">{notifications.length}</Heading>
       </Stack>
 
       <Text mt={4}>
-        You have 4 active subscriptions. <br /> You can test each of them by
-        pressing the button below which will trigger a dummy notification on the
+        You have {notifications.length} saved searches. <br /> Here you can test each of
+        them by pressing the button below which will trigger a dummy notification on the
         configured channels.
       </Text>
 
       <Stack mt={8} spacing={4}>
-        {[1, 2, 3, 4].map((notif, i) => (
+        {notifications.map((notif, i) => (
           <Box
             key={i}
             p={4}

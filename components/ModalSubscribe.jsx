@@ -14,40 +14,49 @@ import {
   ModalOverlay,
   Select,
   useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
 import { useRef } from "react";
 import { FaSave } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { makeHeaders } from "../hooks/useFetch";
+import { createNotification } from "../redux/slices/notificationSlice";
+import { API_BASE } from "../utils/routes";
+import { addSuccessToast, addErrorToast } from "../redux/slices/toastSlice";
 
 const ModalSubscribe = () => {
   const initialRef = useRef();
-
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const dispatch = useDispatch();
+  const simpleSearch = useSelector((s) => s.search.simpleSearch);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formdata = new FormData(e.target);
+    const data = Object.fromEntries(formdata.entries());
+    dispatch(
+      createNotification({ data, search: { type: "simple", input: simpleSearch } }),
+    ).then(() => {
+      onClose();
+    });
+  };
 
   return (
     <>
-      <Button
-        colorScheme="teal"
-        size="sm"
-        rightIcon={<BellIcon />}
-        onClick={onOpen}
-      >
+      <Button colorScheme="teal" size="sm" rightIcon={<BellIcon />} onClick={onOpen}>
         Subscribe
       </Button>
 
-      <Modal
-        initialFocusRef={initialRef}
-        isOpen={isOpen}
-        onClose={onClose}
-        size="lg"
-      >
+      <Modal initialFocusRef={initialRef} isOpen={isOpen} onClose={onClose} size="lg">
         <ModalOverlay>
-          <ModalContent>
-            <ModalHeader>Subscribe for new results</ModalHeader>
+          <ModalContent as="form" onSubmit={handleSubmit}>
+            <ModalHeader>Notify me about new results</ModalHeader>
             <ModalCloseButton />
             <ModalBody pb={6}>
-              <FormControl>
+              <FormControl isRequired>
                 <FormLabel>Label</FormLabel>
                 <Input
+                  name="label"
                   ref={initialRef}
                   placeholder="My favorite movie..."
                   variant="filled"
@@ -57,9 +66,9 @@ const ModalSubscribe = () => {
                 </FormHelperText>
               </FormControl>
 
-              <FormControl mt={3}>
+              <FormControl mt={3} isRequired>
                 <FormLabel>Notification type</FormLabel>
-                <Select variant="filled" placeholder="Select...">
+                <Select variant="filled" placeholder="Select..." name="type">
                   <option value="webhook">Webhook</option>
                   <option value="push">Web Push Notification</option>
                   <option value="email">Email</option>
@@ -68,7 +77,7 @@ const ModalSubscribe = () => {
             </ModalBody>
 
             <ModalFooter>
-              <Button colorScheme="teal" rightIcon={<FaSave />} mr={3}>
+              <Button type="submit" colorScheme="teal" rightIcon={<FaSave />} mr={3}>
                 Save
               </Button>
               <Button onClick={onClose}>Cancel</Button>
