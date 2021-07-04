@@ -55,7 +55,7 @@ const Notifications = () => {
             <Flex mb={2}>
               <Box as={AiFillTag} w="22px" />
               <Heading size="sm" ml={4}>
-                My tagname {i}
+                {notif._id}
               </Heading>
             </Flex>
 

@@ -7,34 +7,46 @@ import {
   InputLeftElement,
   InputRightElement,
 } from "@chakra-ui/react";
-import React, { useEffect, useRef, useState } from "react";
-import { useDispatch } from "react-redux";
-import { clear } from "..//redux/slices/searchSlice";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { clearSimple } from "..//redux/slices/searchSlice";
 import { useDebounce } from "../hooks/useDebounce";
 import { searchSimple } from "../redux/slices/searchSlice";
 
-const SearchSimple = ({}) => {
-  const [query, setQuery] = useState("");
-  const dispatch = useDispatch();
-  const debouncedQuery = useDebounce(query, 200);
-
-  useEffect(() => {
-    if (query) getResults();
-    else handleClear();
-  }, [debouncedQuery]);
-
-  const getResults = async () => {
-    if (query.length < 3) {
-      // todo warning
-      return;
-    }
-    dispatch(searchSimple({ input: query }));
+function debounce(callback, delay) {
+  let timeout;
+  return function () {
+    clearTimeout(timeout);
+    timeout = setTimeout(callback, delay);
   };
+}
+
+const SearchSimple = ({}) => {
+  //const [query, setQuery] = useState("");
+  const dispatch = useDispatch();
+  // const debouncedQuery = useDebounce(query, 200);
+  const simpleSearch = useSelector((s) => s.search.simpleSearch);
+  const inputRef = useRef();
 
   const handleClear = () => {
-    setQuery("");
-    dispatch(clear());
+    //setQuery("");
+    inputRef.current.value = "";
+    dispatch(clearSimple());
   };
+
+  const handleSearch = (e) => {
+    const query = inputRef.current.value;
+    if (query.length === 0) {
+      handleClear();
+    } else if (query.length < 3) {
+      // todo warning
+      return;
+    } else {
+      dispatch(searchSimple({ input: query }));
+    }
+  };
+
+  const handleChange = useCallback(debounce(handleSearch, 500), []);
 
   return (
     <Box mt={10}>
@@ -43,7 +55,7 @@ const SearchSimple = ({}) => {
           <SearchIcon />
         </InputLeftElement>
 
-        {query && (
+        {simpleSearch && (
           <InputRightElement>
             <IconButton
               size="sm"
@@ -56,13 +68,15 @@ const SearchSimple = ({}) => {
         )}
 
         <Input
+          ref={inputRef}
           borderRadius="lg"
           shadow="md"
           variant="filled"
           placeholder="Search any release..."
-          value={query}
+          // value={query}
           aria-label="Search by release name"
-          onChange={(e) => setQuery(e.target.value)}
+          //onChange={(e) => setQuery(e.target.value)}
+          onChange={handleChange}
         />
       </InputGroup>
     </Box>
