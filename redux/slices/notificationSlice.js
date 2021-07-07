@@ -27,27 +27,26 @@ export const getNotifications = createAsyncThunk(
 export const createNotification = createAsyncThunk(
   "notifications/createNotification",
   async (data, thunkAPI) => {
-    authFetch(API_ENDPOINT.NOTIFICATIONS, {
-      method: "POST",
-      body: JSON.stringify(data),
-    })
-      .then((json) => {
-        thunkAPI.dispatch(
-          addSuccessToast({
-            title: "Notification saved",
-            description: "You will be notified when we find a new match.",
-          }),
-        );
-      })
-      .catch((error) => {
-        thunkAPI.dispatch(
-          addErrorToast({
-            title: "Error saving notification",
-            description: "Please try again later",
-          }),
-        );
-        return thunkAPI.rejectWithValue({ error: error.errors });
+    try {
+      const json = await authFetch(API_ENDPOINT.NOTIFICATIONS, {
+        method: "POST",
+        body: JSON.stringify(data),
       });
+      thunkAPI.dispatch(
+        addSuccessToast({
+          title: "Notification saved",
+          description: "You will be notified when we find a new match.",
+        }),
+      );
+    } catch (error) {
+      thunkAPI.dispatch(
+        addErrorToast({
+          title: "Error saving notification",
+          description: "Please try again later",
+        }),
+      );
+      return thunkAPI.rejectWithValue({ error: error.message });
+    }
   },
 );
 

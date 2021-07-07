@@ -7,6 +7,7 @@ import {
   Heading,
   Spinner,
   Stack,
+  HStack,
   Text,
 } from "@chakra-ui/react";
 import { useEffect } from "react";
@@ -52,15 +53,24 @@ const Notifications = () => {
             boxShadow="md"
             borderRadius="md"
           >
-            <Flex mb={2}>
-              <Box as={AiFillTag} w="22px" />
+            <HStack mb={2}>
+              <Box as={AiFillTag} boxSize="26px" />
               <Heading size="sm" ml={4}>
-                {notif._id}
+                {notif.data.label}
               </Heading>
-            </Flex>
+            </HStack>
 
-            <Text>Created: {new Date().toLocaleString()}</Text>
-            <Text>Notification type: Webhook</Text>
+            <Text>
+              Created at:{" "}
+              {new Date(notif.data.createdAt).toLocaleString(undefined, {
+                dateStyle: "long",
+                timeStyle: "short",
+              })}
+            </Text>
+            <Text>
+              Notification type: {notif.data.type.replace(/^\w/, (c) => c.toUpperCase())}
+            </Text>
+            <Text>Search mode: {notif.data.searchType}</Text>
             <Text>Matched: 10 times</Text>
             <Text>Last match: 2 days ago</Text>
 
