@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { makeHeaders } from "../../hooks/useFetch";
+import { authFetch } from "../../utils/helpers";
 import { API_BASE, API_ENDPOINT } from "../../utils/routes";
+import { addErrorToast, addSuccessToast } from "./toastSlice";
 
 export const login = createAsyncThunk("auth/login", async (data, thunkAPI) => {
   try {
@@ -63,20 +65,20 @@ export const register = createAsyncThunk("auth/register", async (data, thunkAPI)
 export const deleteAccount = createAsyncThunk(
   "auth/deleteAccount",
   async (_, thunkAPI) => {
-    try {
-      const res = await fetch(API_BASE + API_ENDPOINT.DELETE, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("auth"),
-        },
-      });
-      if (!res.ok) {
-        return thunkAPI.rejectWithValue({ error: "Error during account deletion!" });
-      }
-    } catch (error) {
-      return thunkAPI.rejectWithValue({ error: error.message });
+    const res = await fetch(API_BASE + API_ENDPOINT.DELETE, {
+      method: "DELETE",
+      headers: makeHeaders(true),
+    });
+    if (!res.ok) {
+      thunkAPI.dispatch(
+        addErrorToast({
+          title: "Could not delete account",
+          description: "Please try again later",
+        }),
+      );
+      return thunkAPI.rejectWithValue({ error: "Could not delete account!" });
     }
+    thunkAPI.dispatch(addSuccessToast({ title: "Account deleted" }));
   },
 );
 

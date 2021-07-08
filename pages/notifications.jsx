@@ -5,30 +5,46 @@ import {
   Divider,
   Flex,
   Heading,
+  Spinner,
   Stack,
+  HStack,
   Text,
 } from "@chakra-ui/react";
+import { useEffect } from "react";
 import { AiFillTag } from "react-icons/ai";
 import { FiTrash2 } from "react-icons/fi";
+import { useDispatch, useSelector } from "react-redux";
 import Layout from "../components/Layout";
+import { getNotifications } from "../redux/slices/notificationSlice";
 
 const Notifications = () => {
+  const { notifications, loading, error } = useSelector((s) => s.notifications);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!notifications) dispatch(getNotifications());
+  }, []);
+
+  if (loading) return <Spinner />;
+  if (error) return <p>{error}</p>;
+  if (!notifications) return null;
+
   return (
     <Layout>
       <Stack direction="row">
         <Heading>Notifications</Heading>
         <Divider orientation="vertical" h="40px" />
-        <Heading color="teal.500">4</Heading>
+        <Heading color="teal.500">{notifications.length}</Heading>
       </Stack>
 
       <Text mt={4}>
-        You have 4 active subscriptions. <br /> You can test each of them by
-        pressing the button below which will trigger a dummy notification on the
+        You have {notifications.length} saved searches. <br /> Here you can test each of
+        them by pressing the button below which will trigger a dummy notification on the
         configured channels.
       </Text>
 
       <Stack mt={8} spacing={4}>
-        {[1, 2, 3, 4].map((notif, i) => (
+        {notifications.map((notif, i) => (
           <Box
             key={i}
             p={4}
@@ -37,15 +53,24 @@ const Notifications = () => {
             boxShadow="md"
             borderRadius="md"
           >
-            <Flex mb={2}>
-              <Box as={AiFillTag} w="22px" />
+            <HStack mb={2}>
+              <Box as={AiFillTag} boxSize="26px" />
               <Heading size="sm" ml={4}>
-                My tagname {i}
+                {notif.data.label}
               </Heading>
-            </Flex>
+            </HStack>
 
-            <Text>Created: {new Date().toLocaleString()}</Text>
-            <Text>Notification type: Webhook</Text>
+            <Text>
+              Created at:{" "}
+              {new Date(notif.data.createdAt).toLocaleString(undefined, {
+                dateStyle: "long",
+                timeStyle: "short",
+              })}
+            </Text>
+            <Text>
+              Notification type: {notif.data.type.replace(/^\w/, (c) => c.toUpperCase())}
+            </Text>
+            <Text>Search mode: {notif.data.searchType}</Text>
             <Text>Matched: 10 times</Text>
             <Text>Last match: 2 days ago</Text>
 

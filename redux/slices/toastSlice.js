@@ -1,28 +1,42 @@
+import { createStandaloneToast } from "@chakra-ui/toast";
 import { createSlice } from "@reduxjs/toolkit";
+import { theme } from "../../styles";
+
+const toast = createStandaloneToast({ theme });
 
 const toastSlice = createSlice({
   name: "toast",
-  initialState: {
-    id: 0,
-    title: "Hello",
-    description: "",
-    status: "success",
-    duration: 5000,
-    position: "bottom",
-  },
+  initialState: {},
   reducers: {
-    // standard reducer logic, with auto-generated action types per reducer
     addToast: (state, action) => {
-      state.title = action.payload.title;
-      state.description = action.payload.description;
-      state.status = action.payload.status || "success";
-      state.id++;
+      const { title, description, status } = action.payload;
+      toast({
+        title,
+        description,
+        status,
+      });
+    },
+    addSuccessToast: (state, action) => {
+      const { title, description } = action.payload;
+      toast({
+        title,
+        description,
+        status: "success",
+        duration: 5000,
+      });
+    },
+    addErrorToast: (state, action) => {
+      const { title, description } = action.payload;
+      toast({
+        title,
+        description,
+        status: "error",
+        duration: 8000,
+      });
     },
   },
-  extraReducers: {
-    // Add reducers for additional action types here, and handle loading state as needed
-  },
+  extraReducers: {},
 });
 
-export const { addToast } = toastSlice.actions;
+export const { addToast, addSuccessToast, addErrorToast } = toastSlice.actions;
 export default toastSlice.reducer;

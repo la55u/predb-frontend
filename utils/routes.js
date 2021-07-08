@@ -22,4 +22,6 @@ export const API_ENDPOINT = {
   RESTORE: "/api/auth/restore",
   DELETE: "/api/auth/delete",
   ME: "/api/auth/me",
+
+  NOTIFICATIONS: "/api/notifications",
 };

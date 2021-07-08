@@ -42,7 +42,7 @@ export const DeleteAccountModal = () => {
           <ModalCloseButton />
           <ModalBody>
             <Text>
-              All your data associated with your profile, such as email address, saved
+              All data associated with your profile, such as email address, saved
               searches, triggers and settings will be deleted. This action can not be
               undone.
             </Text>

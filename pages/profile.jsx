@@ -24,20 +24,11 @@ import { GiSettingsKnobs } from "react-icons/gi";
 import Layout from "../components/Layout";
 import { ActionGroup } from "../components/profile/ActionGroup";
 import { DeleteAccountModal } from "../components/profile/DeleteAccountModal";
-import useFetch from "../hooks/useFetch";
-import { API_ENDPOINT } from "../utils/routes";
 
 const Profile = () => {
-  const { data, isLoading, hasError } = useFetch(API_ENDPOINT.ME, {}, true);
-
   return (
     <Layout>
       <Heading mb={10}>Profile page</Heading>
-
-      <ActionGroup>
-        <pre></pre>
-        {JSON.stringify()}
-      </ActionGroup>
 
       <ActionGroup title="Preferences" position="relative">
         <Icon
