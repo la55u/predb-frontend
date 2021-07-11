@@ -15,6 +15,7 @@ import { AiFillTag } from "react-icons/ai";
 import { FiTrash2 } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import Layout from "../components/Layout";
+import { NotificationCard } from "../components/notifications/NotificationCard";
 import { getNotifications } from "../redux/slices/notificationSlice";
 
 const Notifications = () => {
@@ -45,53 +46,7 @@ const Notifications = () => {
 
       <Stack mt={8} spacing={4}>
         {notifications.map((notif, i) => (
-          <Box
-            key={i}
-            p={4}
-            borderWidth="1px"
-            justify="space-between"
-            boxShadow="md"
-            borderRadius="md"
-          >
-            <HStack mb={2}>
-              <Box as={AiFillTag} boxSize="26px" />
-              <Heading size="sm" ml={4}>
-                {notif.data.label}
-              </Heading>
-            </HStack>
-
-            <Text>
-              Created at:{" "}
-              {new Date(notif.data.createdAt).toLocaleString(undefined, {
-                dateStyle: "long",
-                timeStyle: "short",
-              })}
-            </Text>
-            <Text>
-              Notification type: {notif.data.type.replace(/^\w/, (c) => c.toUpperCase())}
-            </Text>
-            <Text>Search mode: {notif.data.searchType}</Text>
-            <Text>Matched: 10 times</Text>
-            <Text>Last match: 2 days ago</Text>
-
-            <Flex justify="end" mt={4}>
-              <Button size="sm" rightIcon={<BellIcon />} colorScheme="teal">
-                Test
-              </Button>
-              <Button ml={2} size="sm" rightIcon={<SearchIcon />}>
-                View matches
-              </Button>
-              <Button
-                ml={2}
-                size="sm"
-                rightIcon={<FiTrash2 />}
-                colorScheme="red"
-                variant="ghost"
-              >
-                Remove
-              </Button>
-            </Flex>
-          </Box>
+          <NotificationCard notification={notif} key={i} />
         ))}
       </Stack>
     </Layout>

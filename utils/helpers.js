@@ -14,6 +14,8 @@ export const authFetch = async (path, params = {}) => {
           if (token && refreshToken) {
             localStorage.setItem("auth", JSON.stringify({ token, refreshToken }));
           }
+
+          if (response.status === 204) return {};
           return response.json();
         } else {
           throw Error(response.statusText);
