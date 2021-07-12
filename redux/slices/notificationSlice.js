@@ -50,6 +50,26 @@ export const createNotification = createAsyncThunk(
   },
 );
 
+export const removeNotification = createAsyncThunk(
+  "notifications/removeNotification",
+  async (id, thunkAPI) => {
+    try {
+      const json = await authFetch(`${API_ENDPOINT.NOTIFICATIONS}/${id}`, {
+        method: "DELETE",
+      });
+      thunkAPI.dispatch(addSuccessToast({ title: "Notification removed" }));
+    } catch (error) {
+      thunkAPI.dispatch(
+        addErrorToast({
+          title: "Error removing notification",
+          description: error.message,
+        }),
+      );
+      return thunkAPI.rejectWithValue({ error: error.message });
+    }
+  },
+);
+
 const notificationSlice = createSlice({
   name: "notification",
   initialState: {

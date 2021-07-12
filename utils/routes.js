@@ -12,6 +12,7 @@ export const API_ENDPOINT = {
   RELEASES: "/api/data",
   COUNT: "/api/data/count",
   DOWNLOAD: "/api/data/download",
+  STATS: "/api/stats",
 
   SEARCH_SIMPLE: "/api/search",
   SEARCH_ADVANCED: "/api/search/advanced",
