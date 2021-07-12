@@ -36,10 +36,10 @@ export const NotificationCard = ({ notification }) => {
       <Text>Last match: 2 days ago</Text>
 
       <Flex justify="end" mt={4}>
-        <Button size="sm" rightIcon={<BellIcon />} colorScheme="teal">
+        <Button size="sm" variant="outline" rightIcon={<BellIcon />}>
           Test
         </Button>
-        <Button ml={2} size="sm" rightIcon={<SearchIcon />}>
+        <Button ml={2} size="sm" variant="outline" rightIcon={<SearchIcon />}>
           View matches
         </Button>
         <Button
@@ -47,7 +47,7 @@ export const NotificationCard = ({ notification }) => {
           size="sm"
           rightIcon={<FiTrash2 />}
           colorScheme="red"
-          variant="ghost"
+          variant="outline"
           onClick={handleRemove}
         >
           Remove

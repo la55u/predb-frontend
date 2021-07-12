@@ -3,6 +3,7 @@ import authReducer from "./slices/authSlice";
 import notificationSlice from "./slices/notificationSlice";
 import releasesReducer from "./slices/releasesSlice";
 import searchReducer from "./slices/searchSlice";
+import statsSlice from "./slices/statsSlice";
 import toastReducer from "./slices/toastSlice";
 
 export default configureStore({
@@ -12,6 +13,7 @@ export default configureStore({
     auth: authReducer,
     toast: toastReducer,
     notifications: notificationSlice,
+    stats: statsSlice,
   },
   devTools: true,
 });

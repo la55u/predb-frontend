@@ -26,29 +26,31 @@ const Notifications = () => {
     if (!notifications) dispatch(getNotifications());
   }, []);
 
-  if (loading) return <Spinner />;
   if (error) return <p>{error}</p>;
-  if (!notifications) return null;
 
   return (
     <Layout>
       <Stack direction="row">
         <Heading>Notifications</Heading>
         <Divider orientation="vertical" h="40px" />
-        <Heading color="teal.500">{notifications.length}</Heading>
+        <Heading color="teal.500">{notifications?.length}</Heading>
       </Stack>
 
-      <Text mt={4}>
-        You have {notifications.length} saved searches. <br /> Here you can test each of
-        them by pressing the button below which will trigger a dummy notification on the
-        configured channels.
-      </Text>
+      {notifications && (
+        <>
+          <Text mt={4}>
+            You have {notifications.length} saved searches. <br /> Here you can test each
+            of them by pressing the button below which will trigger a dummy notification
+            on the configured channels.
+          </Text>
 
-      <Stack mt={8} spacing={4}>
-        {notifications.map((notif, i) => (
-          <NotificationCard notification={notif} key={i} />
-        ))}
-      </Stack>
+          <Stack mt={8} spacing={4}>
+            {notifications.map((notif, i) => (
+              <NotificationCard notification={notif} key={i} />
+            ))}
+          </Stack>
+        </>
+      )}
     </Layout>
   );
 };
