@@ -69,8 +69,12 @@ const ModalSubscribe = () => {
               <FormControl mt={3} isRequired>
                 <FormLabel>Notification type</FormLabel>
                 <Select variant="filled" placeholder="Select..." name="type">
-                  <option value="webhook">Webhook</option>
-                  <option value="webpush">Web Push Notification</option>
+                  <option value="webhook" disabled>
+                    Webhook (coming soon)
+                  </option>
+                  <option value="webpush" disabled>
+                    Web Push Notification (coming soon)
+                  </option>
                   <option value="email">Email</option>
                 </Select>
               </FormControl>

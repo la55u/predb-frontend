@@ -70,7 +70,7 @@ const SearchSimple = ({}) => {
         <Input
           ref={inputRef}
           borderRadius="lg"
-          shadow="md"
+          shadow="sm"
           variant="filled"
           placeholder="Search any release..."
           // value={query}
