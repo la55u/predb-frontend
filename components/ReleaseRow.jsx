@@ -54,7 +54,7 @@ const ReleaseRow = ({ release }) => {
         alignItems="center"
         templateColumns={{
           base: "3fr 1fr 1fr 1.6fr",
-          md: "0.5fr 0.5fr 2.5fr 0.2fr 0.2fr 0.3fr",
+          md: "0.5fr 0.5fr 2.5fr 0.2fr 0.2fr 0.35fr",
         }}
         templateAreas={{
           base: `"added size size cat" "namewrap namewrap namewrap namewrap" `,

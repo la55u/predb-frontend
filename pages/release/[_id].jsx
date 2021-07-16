@@ -23,8 +23,8 @@ const Release = () => {
   const { _id } = router.query;
 
   useEffect(() => {
-    getData();
-  }, []);
+    if (_id) getData();
+  }, [_id]);
 
   const getData = async () => {
     // fetch release data

@@ -9,6 +9,8 @@ import {
   Stack,
   HStack,
   Text,
+  UnorderedList,
+  ListItem,
 } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { AiFillTag } from "react-icons/ai";
@@ -21,20 +23,36 @@ import { getNotifications } from "../redux/slices/notificationSlice";
 const Notifications = () => {
   const { notifications, loading, error } = useSelector((s) => s.notifications);
   const dispatch = useDispatch();
+  const isAuthenticated = useSelector((s) => s.auth.isAuthenticated);
 
   useEffect(() => {
-    if (!notifications) dispatch(getNotifications());
-  }, []);
-
-  if (error) return <p>{error}</p>;
+    if (!notifications && isAuthenticated) dispatch(getNotifications());
+  }, [isAuthenticated]);
 
   return (
     <Layout>
       <Stack direction="row">
         <Heading>Notifications</Heading>
-        <Divider orientation="vertical" h="40px" />
+        {notifications && <Divider orientation="vertical" h="40px" />}
         <Heading color="teal.500">{notifications?.length}</Heading>
       </Stack>
+
+      {!isAuthenticated && (
+        <Stack>
+          <Text>
+            Log in to create & receive notifications on new matches for your searches!
+          </Text>
+          <Text> Available notifications on new matches:</Text>
+          <UnorderedList pl={8}>
+            <ListItem>Email</ListItem>
+            <ListItem>Webhook</ListItem>
+            <ListItem>Web push notification</ListItem>
+            <ListItem>Zapier integration</ListItem>
+          </UnorderedList>
+        </Stack>
+      )}
+
+      {error && JSON.stringify(error)}
 
       {notifications && (
         <>

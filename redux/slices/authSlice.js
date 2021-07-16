@@ -26,24 +26,6 @@ export const login = createAsyncThunk("auth/login", async (data, thunkAPI) => {
   }
 });
 
-export const logout = createAsyncThunk("auth/logout", async (data, thunkAPI) => {
-  try {
-    const response = await fetch(API_BASE + API_ENDPOINT.LOGOUT, {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    if (!response.ok) {
-      return thunkAPI.rejectWithValue();
-    }
-  } catch (error) {
-    return thunkAPI.rejectWithValue({ error: error.message });
-  }
-});
-
 export const register = createAsyncThunk("auth/register", async (data, thunkAPI) => {
   try {
     const res = await fetch(API_BASE + API_ENDPOINT.REGISTER, {
@@ -106,6 +88,10 @@ const authSlice = createSlice({
     isAuthenticated: false,
   },
   reducers: {
+    logout: () => {
+      localStorage.removeItem("auth");
+      window.location.href = "/";
+    },
     setAuthenticated: (state) => {
       state.isAuthenticated = true;
     },
@@ -123,19 +109,6 @@ const authSlice = createSlice({
       state.loading = false;
       state.error = action.payload.error;
       state.isAuthenticated = false;
-    },
-
-    [logout.pending]: (state) => {
-      state.loading = true;
-    },
-    [logout.fulfilled]: (state) => {
-      state.loading = false;
-      localStorage.clear();
-      window.location.href = "/";
-    },
-    [logout.rejected]: (state, action) => {
-      state.loading = false;
-      state.error = action.payload.error;
     },
 
     [register.pending]: (state) => {
@@ -176,5 +149,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { setAuthenticated } = authSlice.actions;
+export const { setAuthenticated, logout } = authSlice.actions;
 export default authSlice.reducer;

@@ -1,8 +1,20 @@
-import { FormControl, FormLabel, Input, SimpleGrid } from "@chakra-ui/react";
+import {
+  Alert,
+  AlertIcon,
+  FormControl,
+  FormLabel,
+  Input,
+  SimpleGrid,
+} from "@chakra-ui/react";
 
 const SearchAdvanced = () => {
   return (
     <>
+      <Alert status="warning" variant="left-accent" borderRadius="md">
+        <AlertIcon />
+        Advanced search mode does not work yet. Check back later.
+      </Alert>
+
       <SimpleGrid minChildWidth="210px" spacingX="40px" spacingY="20px" pt={5}>
         <FormControl>
           <FormLabel fontSize="sm">Release name</FormLabel>
