@@ -9,7 +9,9 @@ export const NotificationCard = ({ notification }) => {
   const dispatch = useDispatch();
 
   const handleRemove = () => {
-    dispatch(removeNotification(notification._id));
+    if (confirm("Are you sure?")) {
+      dispatch(removeNotification(notification._id));
+    }
   };
 
   return (
@@ -32,7 +34,7 @@ export const NotificationCard = ({ notification }) => {
         Notification type: {notification.data.type.replace(/^\w/, (c) => c.toUpperCase())}
       </Text>
       <Text>Search mode: {notification.data.searchType}</Text>
-      <Text>Matched: 10 times</Text>
+      <Text>Matched: {notification.data.matchCnt} times</Text>
       <Text>Last match: 2 days ago</Text>
 
       <Flex justify="end" mt={4}>

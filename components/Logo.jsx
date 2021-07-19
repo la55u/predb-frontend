@@ -32,8 +32,9 @@ const Logo = () => {
           </Flex>
         </a>
       </Link>
+
       <Text d={["none", "none", "block"]} color="gray.500" pl={5}>
-        Indexing {count?.toLocaleString()} releases
+        {!count ? "..." : `Indexing ${count?.toLocaleString()} releases`}
       </Text>
     </Flex>
   );

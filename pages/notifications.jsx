@@ -42,19 +42,29 @@ const Notifications = () => {
           <Text>
             Log in to create & receive notifications on new matches for your searches!
           </Text>
-          <Text> Available notifications on new matches:</Text>
+          <PromoText />
+        </Stack>
+      )}
+
+      {isAuthenticated && notifications?.length === 0 && (
+        <>
+          <Text>
+            You did not create any notification yet. Search for something on the release
+            page, click Subscribe and get notified later when we find a new match!
+          </Text>
+          <Text> Available notification types:</Text>
           <UnorderedList pl={8}>
             <ListItem>Email</ListItem>
             <ListItem>Webhook</ListItem>
             <ListItem>Web push notification</ListItem>
             <ListItem>Zapier integration</ListItem>
           </UnorderedList>
-        </Stack>
+        </>
       )}
 
       {error && JSON.stringify(error)}
 
-      {notifications && (
+      {notifications?.length > 0 && (
         <>
           <Text mt={4}>
             You have {notifications.length} saved searches. <br /> Here you can test each
@@ -72,5 +82,17 @@ const Notifications = () => {
     </Layout>
   );
 };
+
+const PromoText = () => (
+  <>
+    <Text> Available notifications on new matches:</Text>
+    <UnorderedList pl={8}>
+      <ListItem>Email</ListItem>
+      <ListItem>Webhook</ListItem>
+      <ListItem>Web push notification</ListItem>
+      <ListItem>Zapier integration</ListItem>
+    </UnorderedList>
+  </>
+);
 
 export default Notifications;
