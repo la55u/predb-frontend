@@ -18,10 +18,10 @@ import {
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { HiOutlineEye, HiOutlineEyeOff } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 import Layout from "../components/Layout";
 import { register } from "../redux/slices/authSlice";
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
 const initialState = {
   email: "",
@@ -58,13 +58,6 @@ const Register = () => {
 
     setCredentials({ ...initialState });
     document.querySelector("form").reset();
-
-    toast({
-      title: "Email sent",
-      description: "Follow the instructions to complete the registration",
-      status: "success",
-      duration: 7000,
-    });
   };
 
   return (
@@ -116,7 +109,7 @@ const Register = () => {
                 <IconButton
                   size="sm"
                   variant="ghost"
-                  icon={showPassword ? <HiOutlineEyeOff /> : <HiOutlineEye />}
+                  icon={showPassword ? <ViewIcon /> : <ViewOffIcon />}
                   aria-label="Clear input"
                   onClick={() => setShowPassword((s) => !s)}
                 />
@@ -145,7 +138,7 @@ const Register = () => {
                 <IconButton
                   size="sm"
                   variant="ghost"
-                  icon={showPassword ? <HiOutlineEyeOff /> : <HiOutlineEye />}
+                  icon={showPassword ? <ViewIcon /> : <ViewOffIcon />}
                   aria-label={showPassword ? "Hide" : "Show"}
                   onClick={() => setShowPassword((s) => !s)}
                 />

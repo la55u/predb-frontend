@@ -35,7 +35,7 @@ export const createNotification = createAsyncThunk(
       thunkAPI.dispatch(
         addSuccessToast({
           title: "Notification saved",
-          description: "You will be notified when we find a new match.",
+          description: "You will be notified when a new match is found",
         }),
       );
     } catch (error) {

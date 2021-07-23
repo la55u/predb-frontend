@@ -1,4 +1,4 @@
-import { Button, Flex } from "@chakra-ui/react";
+import { Box, Button, Flex } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { FiDownload } from "react-icons/fi";
 import { API_BASE, API_ENDPOINT } from "../utils/routes";
@@ -16,7 +16,7 @@ const NFO = ({ data, borderColor }) => {
 
   const getNfo = async () => {
     const res = await fetch(
-      `${API_BASE}/api/data/file/${data.name}/${data.nfo[0].filename}`
+      `${API_BASE}/api/data/file/${data.name}/${data.nfo[0].filename}`,
     );
     const resdata = await res.json();
     if (resdata.success) setNfoContent(resdata.data);
@@ -27,14 +27,12 @@ const NFO = ({ data, borderColor }) => {
   }`;
 
   return (
-    <Flex
+    <Box
       py={2}
       as="fieldset"
-      direction="column"
       borderWidth="1px"
       borderRadius="md"
       borderColor={borderColor}
-      overflowX="auto"
     >
       <legend align="center">
         <Button
@@ -52,19 +50,15 @@ const NFO = ({ data, borderColor }) => {
 
       <pre
         style={{
-          display: "flex",
-          maxWidth: "calc(1200px - 2.5rem) ",
-          width: "calc(100vw - 2.5rem)",
-
           justifyContent: "center",
           fontSize: "14px",
-          fontFamily: "'Courier New', monospace",
+          fontFamily: "Courier New, monospace",
           lineHeight: "14px",
         }}
       >
-        <code>{`${nfoContent}`}</code>
+        {`${nfoContent}`}
       </pre>
-    </Flex>
+    </Box>
   );
 };
 

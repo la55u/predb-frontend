@@ -120,7 +120,7 @@ const Login = () => {
                 <IconButton
                   size="sm"
                   variant="ghost"
-                  icon={showPassword ? <ViewOffIcon /> : <ViewIcon />}
+                  icon={showPassword ? <ViewIcon /> : <ViewOffIcon />}
                   aria-label={showPassword ? "Hide" : "Show"}
                   onClick={() => setShowPassword((s) => !s)}
                 />

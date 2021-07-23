@@ -33,11 +33,22 @@ export const register = createAsyncThunk("auth/register", async (data, thunkAPI)
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     });
+    const json = await res.json();
     if (!res.ok) {
+      thunkAPI.dispatch(
+        addErrorToast({
+          title: "Registration failed",
+          description: json.message ?? "Unknown error",
+        }),
+      );
       return thunkAPI.rejectWithValue({ error: "Error during registration" });
     }
-    const json = await res.json();
-    console.log("register json:", json);
+    thunkAPI.dispatch(
+      addSuccessToast({
+        title: "Registration started",
+        description: "A confirmation email was sent to your email address.",
+      }),
+    );
     return json;
   } catch (error) {
     return thunkAPI.rejectWithValue({ error: error.message });
