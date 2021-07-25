@@ -1,9 +1,4 @@
-import {
-  BellIcon,
-  EmailIcon,
-  InfoOutlineIcon,
-  SearchIcon,
-} from "@chakra-ui/icons";
+import { BellIcon, EmailIcon, InfoOutlineIcon, SearchIcon } from "@chakra-ui/icons";
 import {
   Box,
   Button,
@@ -11,72 +6,82 @@ import {
   MenuButton,
   MenuDivider,
   MenuItem,
+  Link,
+  Icon,
   MenuList,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { AiFillApi, AiOutlineGithub } from "react-icons/ai";
 import { BsFillPersonFill } from "react-icons/bs";
-import { FaRss } from "react-icons/fa";
+import { FiLogIn, FiLogOut } from "react-icons/fi";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoIosStats } from "react-icons/io";
+import { useSelector } from "react-redux";
 import { ThemeSwitcher } from "./ThemeSwitcher";
 
 export const MobileMenu = () => {
+  const user = useSelector((state) => state.auth.user);
+
   return (
     <Box display={["block", "block", "none"]}>
       <ThemeSwitcher />
 
-      <Menu placement="bottom-end" closeOnBlur>
-        <MenuButton
-          as={Button}
-          rightIcon={<GiHamburgerMenu />}
-          size="sm"
-          ml={3}
-        >
+      <Menu placement="bottom-end" isLazy closeOnBlur>
+        <MenuButton as={Button} rightIcon={<GiHamburgerMenu />} size="sm" ml={3}>
           Menu
         </MenuButton>
 
         <MenuList>
-          <MenuItem icon={<SearchIcon />}>
-            <NextLink href="/">
-              <a>Search</a>
-            </NextLink>
-          </MenuItem>
+          <NextLink href="/" passHref>
+            <MenuItem as={Link} icon={<Icon as={SearchIcon} boxSize="20px" />}>
+              Search
+            </MenuItem>
+          </NextLink>
 
-          <MenuItem icon={<BellIcon />}>
-            <NextLink href="/notifications">
-              <a>Notifications</a>
-            </NextLink>
-          </MenuItem>
+          <NextLink href="/notifications" passHref>
+            <MenuItem as={Link} icon={<Icon as={BellIcon} boxSize="20px" />}>
+              Notifications
+            </MenuItem>
+          </NextLink>
 
-          <MenuItem icon={<IoIosStats />}>
-            <NextLink href="/stats">
-              <a>Stats</a>
-            </NextLink>
-          </MenuItem>
+          <NextLink href="/stats" passHref>
+            <MenuItem as={Link} icon={<Icon as={IoIosStats} boxSize="20px" />}>
+              Stats
+            </MenuItem>
+          </NextLink>
 
-          <MenuItem icon={<InfoOutlineIcon />}>
-            <NextLink href="/about">
-              <a>About</a>
-            </NextLink>
-          </MenuItem>
+          <NextLink href="/about" passHref>
+            <MenuItem as={Link} icon={<Icon as={InfoOutlineIcon} boxSize="20px" />}>
+              About
+            </MenuItem>
+          </NextLink>
 
-          <MenuItem icon={<EmailIcon />}>
-            <NextLink href="/contact">
-              <a>Contact</a>
+          {user ? (
+            <>
+              <MenuDivider />
+              <NextLink href="/profile" passHref>
+                <MenuItem as={Link} icon={<Icon as={BsFillPersonFill} boxSize="20px" />}>
+                  Profile
+                </MenuItem>
+              </NextLink>
+              <NextLink href="/profile" passHref>
+                <MenuItem as={Link} icon={<Icon as={FiLogOut} boxSize="20px" />}>
+                  Log out
+                </MenuItem>
+              </NextLink>
+            </>
+          ) : (
+            <NextLink href="/login" passHref>
+              <MenuItem as={Link} icon={<Icon as={FiLogIn} boxSize="20px" />}>
+                Log in
+              </MenuItem>
             </NextLink>
-          </MenuItem>
-
-          <MenuItem icon={<BsFillPersonFill />}>
-            <NextLink href="/login">
-              <a>Profile</a>
-            </NextLink>
-          </MenuItem>
+          )}
 
           <MenuDivider />
 
           <MenuItem
-            icon={<AiOutlineGithub />}
+            icon={<Icon as={AiOutlineGithub} boxSize="20px" />}
             as="a"
             href="https://github.com/la55u/predb-frontend"
             target="_blank"
@@ -86,19 +91,13 @@ export const MobileMenu = () => {
           </MenuItem>
 
           <MenuItem
-            icon={<AiFillApi />}
+            icon={<Icon as={AiFillApi} boxSize="20px" />}
             as="a"
             href="https://github.com/la55u/predb-frontend/swagger.yml"
             target="_blank"
             rel="noopener noreferrer"
           >
             API
-          </MenuItem>
-
-          <MenuItem icon={<FaRss />}>
-            <NextLink href="/rss">
-              <a>RSS</a>
-            </NextLink>
           </MenuItem>
         </MenuList>
       </Menu>
