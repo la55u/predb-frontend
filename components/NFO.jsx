@@ -1,26 +1,9 @@
-import { Box, Button, Flex } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { Box, Button, Image } from "@chakra-ui/react";
 import { FiDownload } from "react-icons/fi";
 import { API_BASE, API_ENDPOINT } from "../utils/routes";
 
-// const nfo = "";
-
 const NFO = ({ data, borderColor }) => {
   if (!data.nfo) return null;
-
-  const [nfoContent, setNfoContent] = useState(); // the actual nfo file
-
-  useEffect(() => {
-    if (data.nfo && !nfoContent) getNfo();
-  }, []);
-
-  const getNfo = async () => {
-    const res = await fetch(
-      `${API_BASE}/api/data/file/${data.name}/${data.nfo[0].filename}`,
-    );
-    const resdata = await res.json();
-    if (resdata.success) setNfoContent(resdata.data);
-  };
 
   const downloadLink = `${API_BASE + API_ENDPOINT.DOWNLOAD}/${data.name}/${
     data.nfo[0].filename
@@ -48,16 +31,11 @@ const NFO = ({ data, borderColor }) => {
         </Button>
       </legend>
 
-      <pre
-        style={{
-          justifyContent: "center",
-          fontSize: "14px",
-          fontFamily: "Courier New, monospace",
-          lineHeight: "14px",
-        }}
-      >
-        {`${nfoContent}`}
-      </pre>
+      <Image
+        src={`${API_BASE}/api/data/file/${data.name}/${data.nfo[0].filename}`}
+        mx="auto"
+        alt=""
+      />
     </Box>
   );
 };
