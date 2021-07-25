@@ -9,11 +9,11 @@
     "anal": "ANALYZE=true next build"
   },
   "dependencies": {
-    "@chakra-ui/icons": "^1.0.13",
-    "@chakra-ui/react": "^1.6.4",
+    "@chakra-ui/icons": "^1.0.14",
+    "@chakra-ui/react": "^1.6.5",
     "@emotion/react": "^11.4.0",
     "@emotion/styled": "^11.3.0",
-    "@reduxjs/toolkit": "^1.6.0",
+    "@reduxjs/toolkit": "^1.6.1",
     "focus-visible": "^5.2.0",
     "framer-motion": "^4.1.17",
     "lodash": "^4.17.21",
@@ -24,10 +24,10 @@
     "react-icons": "^4.2.0",
     "react-redux": "^7.2.4",
     "socket.io-client": "^2.3.0",
-    "timeago-react": "^3.0.2"
+    "timeago-react": "^3.0.3"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^11.0.1",
-    "prettier": "^2.3.1"
+    "prettier": "^2.3.2"
   }
 }

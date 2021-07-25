@@ -3,7 +3,7 @@ import "focus-visible/dist/focus-visible";
 import Head from "next/head";
 import { Provider } from "react-redux";
 import store from "../redux/store";
-import "../style.css";
+import "../styles/global.css";
 import { theme } from "../styles";
 
 // if(typeof window !== 'undefined'){
