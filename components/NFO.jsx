@@ -1,9 +1,10 @@
-import { Box, Button, Image } from "@chakra-ui/react";
+import { Box, Button, Image, useColorMode } from "@chakra-ui/react";
 import { FiDownload } from "react-icons/fi";
 import { API_BASE, API_ENDPOINT } from "../utils/routes";
 
 const NFO = ({ data, borderColor }) => {
   if (!data.nfo) return null;
+  const { colorMode } = useColorMode();
 
   const downloadLink = `${API_BASE + API_ENDPOINT.DOWNLOAD}/${data.name}/${
     data.nfo[0].filename
@@ -32,7 +33,7 @@ const NFO = ({ data, borderColor }) => {
       </legend>
 
       <Image
-        src={`${API_BASE}/api/data/file/${data.name}/${data.nfo[0].filename}`}
+        src={`${API_BASE}/api/data/file/${data.name}/${data.nfo[0].filename}/${colorMode}`}
         mx="auto"
         alt=""
       />

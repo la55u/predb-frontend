@@ -23,7 +23,7 @@ import Logo from "./Logo";
 import { MobileMenu } from "./MobileMenu";
 import { ThemeSwitcher } from "./ThemeSwitcher";
 
-const Navbar = (props) => {
+const Navbar = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const colorvalues = useColorModeValue({ bg: "light.bg" }, { bg: "dark.bg" });
