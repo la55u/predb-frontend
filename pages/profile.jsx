@@ -100,6 +100,15 @@ const Profile = () => {
               <span> seconds</span>
             </HStack>
           </FormControl>
+
+          <Button
+            leftIcon={<FaSave />}
+            alignSelf="flex-start"
+            variant="outline"
+            colorScheme="green"
+          >
+            Save settings
+          </Button>
         </Stack>
       </ActionGroup>
 
@@ -126,7 +135,7 @@ const Profile = () => {
             variant="outline"
             colorScheme="green"
           >
-            Save
+            Change password
           </Button>
         </Stack>
       </ActionGroup>
@@ -138,7 +147,7 @@ const Profile = () => {
               To comply with GDPR regulations, you can view all the data stored about you
               here.
             </Text>
-            <Button leftIcon={<FiDownload />} w="180px">
+            <Button variant="outline" leftIcon={<FiDownload />} w="180px">
               Download JSON
             </Button>
           </Flex>
