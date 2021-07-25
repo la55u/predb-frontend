@@ -1,5 +1,4 @@
-import { Box, Button, Flex, Image } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { Box, Button, Image } from "@chakra-ui/react";
 import { FiDownload } from "react-icons/fi";
 import { API_BASE, API_ENDPOINT } from "../utils/routes";
 
@@ -35,18 +34,8 @@ const NFO = ({ data, borderColor }) => {
       <Image
         src={`${API_BASE}/api/data/file/${data.name}/${data.nfo[0].filename}`}
         mx="auto"
+        alt=""
       />
-
-      {/* <pre
-        style={{
-          justifyContent: "center",
-          fontSize: "14px",
-          fontFamily: "Courier New, monospace",
-          lineHeight: "14px",
-        }}
-      >
-        {`${nfoContent}`}
-      </pre> */}
     </Box>
   );
 };
