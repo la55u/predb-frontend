@@ -7,10 +7,9 @@ import {
   InputLeftElement,
   InputRightElement,
 } from "@chakra-ui/react";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { clearSimple } from "..//redux/slices/searchSlice";
-import { useDebounce } from "../hooks/useDebounce";
 import { searchSimple } from "../redux/slices/searchSlice";
 
 function debounce(callback, delay) {
@@ -21,15 +20,19 @@ function debounce(callback, delay) {
   };
 }
 
-const SearchSimple = ({}) => {
-  //const [query, setQuery] = useState("");
+const SearchSimple = () => {
+  const page = useSelector((s) => s.search.page);
   const dispatch = useDispatch();
-  // const debouncedQuery = useDebounce(query, 200);
   const simpleSearch = useSelector((s) => s.search.simpleSearch);
   const inputRef = useRef();
 
+  useEffect(() => {
+    if (page && inputRef.current.value) {
+      dispatch(searchSimple({ input: inputRef.current.value, page: page }));
+    }
+  }, [page]);
+
   const handleClear = () => {
-    //setQuery("");
     inputRef.current.value = "";
     dispatch(clearSimple());
   };

@@ -32,6 +32,7 @@ const searchSlice = createSlice({
     results: [],
     resultsCnt: 0, // number of all results
     took: 0, // time it took in ms to complete the request on the backend
+    page: 1, // set by pagination component
   },
   reducers: {
     // setSimpleSearch : (state, action)=> {
@@ -43,6 +44,9 @@ const searchSlice = createSlice({
       state.results = [];
       state.took = 0;
       state.simpleSearch = "";
+    },
+    setPage: (state, action) => {
+      state.page = action.payload;
     },
   },
   extraReducers: {
@@ -68,5 +72,5 @@ const searchSlice = createSlice({
 export const selectResults = (state) => state.results;
 export const selectReleaselist = (state) => state.releaselist;
 
-export const { clearSimple } = searchSlice.actions;
+export const { clearSimple, setPage } = searchSlice.actions;
 export default searchSlice.reducer;

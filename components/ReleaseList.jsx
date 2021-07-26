@@ -2,11 +2,7 @@ import { Box, Flex, Spinner } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSocket } from "../hooks/useSocket";
-import {
-  addRelease,
-  getAllRelease,
-  updateRelease,
-} from "../redux/slices/releasesSlice";
+import { addRelease, getAllRelease, updateRelease } from "../redux/slices/releasesSlice";
 import { API_BASE } from "../utils/routes";
 import { NoResults } from "./NoResults";
 import ReleaseRow from "./ReleaseRow";
@@ -15,9 +11,7 @@ const ReleaseList = () => {
   const dispatch = useDispatch();
   const socket = useSocket(API_BASE);
   const { releaselist, loading } = useSelector((state) => state.releases);
-  const { results, took, loading: searchLoading } = useSelector(
-    (state) => state.search
-  );
+  const { results, took, loading: searchLoading, page } = useSelector((s) => s.search);
 
   // if took is set, the user is searching -> show results, otherwise show the latest releases
   const list = took > 0 ? results : releaselist;
@@ -46,12 +40,7 @@ const ReleaseList = () => {
   if (loading || searchLoading)
     return (
       <Flex justify="center" h="50vh" align="center">
-        <Spinner
-          color="teal.400"
-          size="xl"
-          thickness="3px"
-          label="Loading..."
-        />
+        <Spinner color="teal.400" size="xl" thickness="3px" label="Loading..." />
       </Flex>
     );
 
