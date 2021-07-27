@@ -34,6 +34,7 @@ const NFO = ({ data, borderColor }) => {
 
       <Image
         src={`${API_BASE}/api/data/file/${data.name}/${data.nfo[0].filename}/${colorMode}`}
+        fallback={<div>Loading...</div>}
         mx="auto"
         alt=""
       />

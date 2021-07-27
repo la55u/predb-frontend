@@ -11,7 +11,7 @@ const ReleaseRow = ({ release }) => {
   const colorvalues = useColorModeValue(
     {
       borderColor: "gray.200",
-      hoverColor: "gray.100",
+      hoverColor: "gray.200",
       gray: "gray.500",
     },
     {
@@ -44,7 +44,7 @@ const ReleaseRow = ({ release }) => {
       _hover={{
         bg: colorvalues.hoverColor,
         borderRadius: "sm",
-        boxShadow: "md",
+        //boxShadow: "md",
       }}
     >
       <Grid

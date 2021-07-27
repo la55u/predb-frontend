@@ -13,6 +13,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
+import { useEffect, useState } from "react";
 import { BsFillPersonFill } from "react-icons/bs";
 import { FiLogOut } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
@@ -25,18 +26,32 @@ import { ThemeSwitcher } from "./ThemeSwitcher";
 
 const Navbar = () => {
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.auth);
+  const user = useSelector((state) => state.auth.user);
   const colorvalues = useColorModeValue({ bg: "light.bg" }, { bg: "dark.bg" });
+  const [scrolled, setScrolled] = useState(false);
 
   const handleLogout = () => {
     dispatch(logout());
     dispatch(addToast({ title: "You logged out!" }));
   };
 
+  useEffect(() => {
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (window.pageYOffset > 100) {
+          setScrolled(true);
+        } else {
+          setScrolled(false);
+        }
+      },
+      { passive: true },
+    );
+  }, []);
+
   return (
     <Box
       pos="fixed"
-      as="nav"
       top="0"
       zIndex="4"
       left="0"
@@ -45,8 +60,9 @@ const Navbar = () => {
       height="4rem"
       display="flex"
       alignItems="center"
-      shadow="md"
+      shadow={scrolled ? "md" : false}
       bg={colorvalues.bg}
+      transition="all 0.3s"
     >
       <Container variant="fullwidth">
         <Flex w="full" alignItems="center" justify="space-between">
@@ -54,7 +70,12 @@ const Navbar = () => {
             <Logo />
           </Box>
 
-          <Flex align="center" color="gray.500" display={["none", "none", "flex"]}>
+          <Flex
+            as="nav"
+            align="center"
+            color="gray.500"
+            display={["none", "none", "flex"]}
+          >
             <NextLink href="/" passHref>
               <Button mt="2px" as="a" color="current" size="sm" variant="ghost">
                 Search

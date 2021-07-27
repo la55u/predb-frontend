@@ -5,7 +5,7 @@ export default {
   },
 
   light: {
-    bg: "white",
+    bg: "rgb(237, 242, 247)",
     col: "gray.700",
   },
 };
