@@ -37,10 +37,7 @@ const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { isAuthenticated, loading } = useSelector((state) => state.auth);
 
-  const colors = useColorModeValue(
-    { borderColor: "gray.300" },
-    { borderColor: "gray.700" },
-  );
+  const colors = useColorModeValue({ panel: "gray.200" }, { panel: "whiteAlpha.50" });
 
   useEffect(() => {
     if (isAuthenticated) router.push("/");
@@ -66,8 +63,8 @@ const Register = () => {
         as="form"
         mt={20}
         p={5}
-        borderColor={colors.borderColor}
-        borderWidth="1px"
+        bg={colors.panel}
+        shadow="md"
         borderRadius="md"
         w={["100%", "100%", "500px"]}
         mx="auto"
@@ -160,13 +157,13 @@ const Register = () => {
         </Stack>
       </Box>
 
-      <Text my={6} textAlign="center" color={colors.borderColor}>
+      <Text my={6} textAlign="center">
         OR
       </Text>
 
       <HStack
-        borderWidth="1px"
-        borderColor={colors.borderColor}
+        bg={colors.panel}
+        shadow="md"
         borderRadius="md"
         w={["100%", "100%", "500px"]}
         mx="auto"
