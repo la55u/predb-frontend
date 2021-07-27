@@ -71,9 +71,10 @@ const SearchSimple = () => {
         )}
 
         <Input
+          type="search"
           ref={inputRef}
           borderRadius="lg"
-          shadow="sm"
+          shadow="md"
           variant="filled"
           placeholder="Search any release..."
           // value={query}

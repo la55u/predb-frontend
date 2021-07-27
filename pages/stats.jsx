@@ -50,11 +50,11 @@ const Stats = () => {
             </Tr>
             <Tr>
               <Td>Releases</Td>
-              <Td isNumeric>{stats.releaseCount}</Td>
+              <Td isNumeric>{stats.releaseCount.toLocaleString()}</Td>
             </Tr>
             <Tr>
               <Td>NFO files</Td>
-              <Td isNumeric>{stats.nfoCount}</Td>
+              <Td isNumeric>{stats.nfoCount.toLocaleString()}</Td>
             </Tr>
           </Tbody>
         </Table>
