@@ -1,13 +1,13 @@
-import { BellIcon, EmailIcon, InfoOutlineIcon, SearchIcon } from "@chakra-ui/icons";
+import { BellIcon, InfoOutlineIcon, SearchIcon } from "@chakra-ui/icons";
 import {
   Box,
   Button,
+  Icon,
+  Link,
   Menu,
   MenuButton,
   MenuDivider,
   MenuItem,
-  Link,
-  Icon,
   MenuList,
 } from "@chakra-ui/react";
 import NextLink from "next/link";

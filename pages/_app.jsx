@@ -6,19 +6,6 @@ import store from "../redux/store";
 import "../styles/global.css";
 import { theme } from "../styles";
 
-// if(typeof window !== 'undefined'){
-
-//   function fetchPlus( url, options) {
-//     return fetch(url, options)
-//       .then(response => {
-//           alert("THEN")
-//         return response;
-//       })
-//   }
-//   const fetch = window.fetch;
-//   window.fetch = fetchPlus;
-// }
-
 function MyApp({ Component, pageProps }) {
   return (
     <>

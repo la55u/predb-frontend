@@ -1,4 +1,3 @@
-import { CheckIcon } from "@chakra-ui/icons";
 import { Box, Flex, Grid, Link, Tag, Text, useColorModeValue } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { IoIosNuclear } from "react-icons/io";
@@ -34,7 +33,7 @@ const ReleaseRow = ({ release }) => {
       _before={{
         content: `''`,
         position: "absolute",
-        // height: "1px",
+
         left: [0, 0, "30px"],
         right: [0, 0, "30px"],
         height: "100%",
@@ -46,7 +45,6 @@ const ReleaseRow = ({ release }) => {
       _hover={{
         bg: colorvalues.hoverColor,
         borderRadius: "sm",
-        //boxShadow: "md",
       }}
     >
       <Grid
