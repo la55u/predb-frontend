@@ -33,6 +33,7 @@ function MyApp({ Component, pageProps }) {
           href="https://fonts.googleapis.com/css2?family=Lato&display=swap"
           rel="stylesheet"
         />
+        <meta name="theme-color" content="#0b0b13" />
       </Head>
 
       <Provider store={store}>
