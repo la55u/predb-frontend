@@ -1,5 +1,5 @@
 import { CheckIcon } from "@chakra-ui/icons";
-import { Box, Flex, Grid, Link, Text, useColorModeValue } from "@chakra-ui/react";
+import { Box, Flex, Grid, Link, Tag, Text, useColorModeValue } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { IoIosNuclear } from "react-icons/io";
 import TimeAgo from "timeago-react";
@@ -13,11 +13,13 @@ const ReleaseRow = ({ release }) => {
       borderColor: "gray.200",
       hoverColor: "gray.200",
       gray: "gray.500",
+      tagBg: "gray.300",
     },
     {
       borderColor: "gray.800",
       hoverColor: "gray.800",
       gray: "gray.500",
+      tagBg: "whiteAlpha.50",
     },
   );
 
@@ -99,17 +101,15 @@ const ReleaseRow = ({ release }) => {
               )}
 
               {release.proof && (
-                <Flex as="small" ml={4} color={colorvalues.gray} align="center">
-                  <span>Proof</span>
-                  <CheckIcon ml={1} fontSize="9px" color="green.500" />
-                </Flex>
+                <Tag size="sm" bg={colorvalues.tagBg}>
+                  Proof
+                </Tag>
               )}
 
               {release.nfo?.length > 0 && (
-                <Flex as="small" ml={4} color={colorvalues.gray} align="center">
-                  <span>NFO</span>
-                  <CheckIcon ml={1} color="green.500" fontSize="9px" />
-                </Flex>
+                <Tag ml={4} size="sm" bg={colorvalues.tagBg}>
+                  NFO
+                </Tag>
               )}
             </Flex>
           </Flex>

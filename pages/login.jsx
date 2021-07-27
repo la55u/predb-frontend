@@ -39,10 +39,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const { user, loading, isAuthenticated } = useSelector((state) => state.auth);
 
-  const colors = useColorModeValue(
-    { borderColor: "gray.300" },
-    { borderColor: "gray.700" },
-  );
+  const colors = useColorModeValue({ panel: "gray.200" }, { panel: "whiteAlpha.50" });
 
   useEffect(() => {
     // redirect user to homepage after successful login
@@ -81,12 +78,12 @@ const Login = () => {
         as="form"
         mt={20}
         p={5}
-        borderColor={colors.borderColor}
-        borderWidth="1px"
+        shadow="md"
         borderRadius="md"
         w={["100%", "100%", "500px"]}
         mx="auto"
         onSubmit={handleSubmit}
+        bg={colors.panel}
       >
         <Stack spacing={5}>
           <Heading>Log in</Heading>
@@ -154,8 +151,8 @@ const Login = () => {
       </Text>
 
       <HStack
-        borderWidth="1px"
-        borderColor={colors.borderColor}
+        bg={colors.panel}
+        shadow="md"
         borderRadius="md"
         w={["100%", "100%", "500px"]}
         mx="auto"
