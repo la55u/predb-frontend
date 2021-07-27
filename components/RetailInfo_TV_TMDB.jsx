@@ -4,6 +4,7 @@ import {
   Grid,
   Heading,
   Image,
+  Stack,
   Text,
   useColorMode,
 } from "@chakra-ui/react";
@@ -33,8 +34,13 @@ const RetailInfo_TV_TMDB = ({ data, borderColor }) => {
         </Heading>
       </legend>
 
-      <Flex justify="space-between" align="start">
-        <Grid p={4} gap="0 20px" templateColumns="150px auto">
+      <Stack
+        p={4}
+        justify={["space-between"]}
+        align="center"
+        direction={["column-reverse", "column-reverse", "row"]}
+      >
+        <Grid gap="0 20px" templateColumns={["90px auto", "150px auto"]}>
           <Text fontWeight="bold" justifySelf="end">
             Series name
           </Text>
@@ -52,18 +58,14 @@ const RetailInfo_TV_TMDB = ({ data, borderColor }) => {
             Country
           </Text>
           <Text>
-            {data.origin_country.length > 0
-              ? data.origin_country.join(", ")
-              : "-"}
+            {data.origin_country.length > 0 ? data.origin_country.join(", ") : "-"}
           </Text>
 
           <Text fontWeight="bold" justifySelf="end">
             Network
           </Text>
           <Text>
-            {data.networks.length > 0
-              ? data.networks.map((n) => n.name).join(", ")
-              : "-"}
+            {data.networks.length > 0 ? data.networks.map((n) => n.name).join(", ") : "-"}
           </Text>
 
           <Text fontWeight="bold" justifySelf="end">
@@ -87,15 +89,13 @@ const RetailInfo_TV_TMDB = ({ data, borderColor }) => {
             Genre
           </Text>
           <Text>
-            {data.genres.length > 0
-              ? data.genres.map((g) => g.name).join(", ")
-              : "-"}
+            {data.genres.length > 0 ? data.genres.map((g) => g.name).join(", ") : "-"}
           </Text>
 
           <Text fontWeight="bold" justifySelf="end">
             Homepage
           </Text>
-          <Text>
+          <Text wordBreak="break-all">
             <a href={data.homepage} target="_blank">
               {data.homepage || "-"}
             </a>
@@ -124,16 +124,19 @@ const RetailInfo_TV_TMDB = ({ data, borderColor }) => {
         <Image
           src={`https://image.tmdb.org/t/p/w300/${data.poster_path}`}
           fallbackSrc={fallbackSrc[colorMode]}
-          alt="poster"
-          m={4}
+          alt="poster image"
           objectFit="contain"
           htmlHeight="100%"
           htmlWidth="150px"
+          w={["full", "200px"]}
           minW="150px"
+          maxW="200px"
           borderWidth="1px"
           border={borderColor}
+          borderRadius="sm"
+          shadow="md"
         />
-      </Flex>
+      </Stack>
     </Box>
   );
 };

@@ -18,8 +18,6 @@ const DetailsTable = ({ data, borderColor }) => {
       </legend>
 
       <Grid p={4} gap="0 20px" templateColumns={["90px auto", "150px auto"]}>
-        {/* <span></span> */}
-
         <Text fontWeight="bold" justifySelf="end">
           Release
         </Text>
