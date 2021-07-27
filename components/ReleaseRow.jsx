@@ -11,15 +11,13 @@ const ReleaseRow = ({ release }) => {
   const colorvalues = useColorModeValue(
     {
       borderColor: "gray.200",
-      hoverColor: "gray.300",
+      hoverColor: "gray.100",
       gray: "gray.500",
-      shadow: "0 8px 10px 0 rgba(10, 31, 68, 0.4), 0 0 1px 0 rgba(10, 31, 68, 0.2)",
     },
     {
       borderColor: "gray.800",
       hoverColor: "gray.800",
       gray: "gray.500",
-      shadow: "0 8px 10px 0 rgba(10, 31, 68, 0.1), 0 0 1px 0 rgba(10, 31, 68, 0.08)",
     },
   );
 
@@ -45,8 +43,8 @@ const ReleaseRow = ({ release }) => {
       }}
       _hover={{
         bg: colorvalues.hoverColor,
-        borderRadius: "md",
-        boxShadow: colorvalues.shadow,
+        borderRadius: "sm",
+        boxShadow: "md",
       }}
     >
       <Grid

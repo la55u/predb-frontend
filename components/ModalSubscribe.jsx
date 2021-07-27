@@ -13,6 +13,7 @@ import {
   ModalHeader,
   ModalOverlay,
   Select,
+  Tooltip,
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
@@ -29,6 +30,7 @@ const ModalSubscribe = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const dispatch = useDispatch();
   const simpleSearch = useSelector((s) => s.search.simpleSearch);
+  const user = useSelector((s) => s.auth.user);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -43,9 +45,20 @@ const ModalSubscribe = () => {
 
   return (
     <>
-      <Button colorScheme="teal" size="sm" rightIcon={<BellIcon />} onClick={onOpen}>
-        Subscribe
-      </Button>
+      <Tooltip
+        hasArrow
+        label="You have to be logged in to use this feature"
+        isDisabled={!!user}
+      >
+        <Button
+          colorScheme="teal"
+          size="sm"
+          rightIcon={<BellIcon />}
+          onClick={user ? onOpen : undefined}
+        >
+          Subscribe
+        </Button>
+      </Tooltip>
 
       <Modal initialFocusRef={initialRef} isOpen={isOpen} onClose={onClose} size="lg">
         <ModalOverlay>
