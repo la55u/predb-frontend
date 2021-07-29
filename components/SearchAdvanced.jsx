@@ -10,9 +10,9 @@ import {
 const SearchAdvanced = () => {
   return (
     <>
-      <Alert status="warning" variant="left-accent" borderRadius="md">
+      <Alert status="warning" variant="left-accent">
         <AlertIcon />
-        Advanced search mode does not work yet. Check back later.
+        Advanced search mode does not work yet. Check back later!
       </Alert>
 
       <SimpleGrid minChildWidth="210px" spacingX="40px" spacingY="20px" pt={5}>

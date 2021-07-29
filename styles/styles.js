@@ -16,6 +16,9 @@ const styles = {
       borderColor: mode("gray.200", "whiteAlpha.300")(props),
       wordWrap: "break-word",
     },
+    /* clears the ‘X’ from Chrome */
+    "input[type='search']::-webkit-search-decoration, input[type='search']::-webkit-search-cancel-button, input[type='search']::-webkit-search-results-button, input[type='search']::-webkit-search-results-decoration":
+      { appearance: "none" },
   }),
 };
 

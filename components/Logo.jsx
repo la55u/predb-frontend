@@ -1,4 +1,4 @@
-import { Flex, Heading, Text } from "@chakra-ui/react";
+import { Flex, Heading, Tag, Text } from "@chakra-ui/react";
 import Link from "next/link";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -32,6 +32,8 @@ const Logo = () => {
           </Flex>
         </a>
       </Link>
+
+      <Tag colorScheme="teal">Beta</Tag>
 
       <Text d={["none", "none", "block"]} color="gray.500" pl={5}>
         {!count ? "..." : `Indexing ${count?.toLocaleString()} releases`}

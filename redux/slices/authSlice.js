@@ -90,6 +90,26 @@ export const getMe = createAsyncThunk("auth/getMe", async (_, thunkAPI) => {
   }
 });
 
+export const restore = createAsyncThunk("auth/restore", async (email, { dispatch }) => {
+  try {
+    const res = await fetch(API_BASE + API_ENDPOINT.RESTORE, {
+      method: "POST",
+      headers: makeHeaders(),
+      body: JSON.stringify({ email }),
+    });
+
+    if (!res.ok) {
+      const json = await res.json();
+      dispatch(addErrorToast({ title: json.message }));
+      return thunkAPI.rejectWithValue({ error: "Error getting user details!" });
+    }
+    addSuccessToast({ title: "Email sent" });
+  } catch (error) {
+    console.error(error);
+    thunkAPI.rejectWithValue({ error: error.message });
+  }
+});
+
 const authSlice = createSlice({
   name: "auth",
   initialState: {

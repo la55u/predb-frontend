@@ -1,4 +1,5 @@
 import {
+  Alert,
   Button,
   Flex,
   FormControl,
@@ -29,6 +30,10 @@ const Profile = () => {
   return (
     <Layout>
       <Heading mb={10}>Profile page</Heading>
+
+      <Alert variant="left-accent" status="warning">
+        Profile settings do not work yet. Check back later!
+      </Alert>
 
       <ActionGroup title="Preferences" position="relative">
         <Icon

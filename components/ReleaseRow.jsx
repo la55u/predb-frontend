@@ -18,7 +18,7 @@ const ReleaseRow = ({ release }) => {
       borderColor: "gray.800",
       hoverColor: "gray.800",
       gray: "gray.500",
-      tagBg: "whiteAlpha.50",
+      tagBg: "whiteAlpha.100",
     },
   );
 
@@ -82,7 +82,7 @@ const ReleaseRow = ({ release }) => {
           <Flex justifyContent="space-between">
             <Box as="small" fontStyle="italic" color={colorvalues.gray}>
               {!release.traces ? (
-                <Text>No site raced this</Text>
+                <Text>No tracers yet</Text>
               ) : (
                 release.traces.map((tr) => `#${tr.rank}\u00A0${tr.site}`).join(", ")
               )}
@@ -105,9 +105,11 @@ const ReleaseRow = ({ release }) => {
               )}
 
               {release.nfo?.length > 0 && (
-                <Tag ml={4} size="sm" bg={colorvalues.tagBg}>
-                  NFO
-                </Tag>
+                <div>
+                  <Tag d="flex" ml={4} size="sm" bg={colorvalues.tagBg}>
+                    NFO
+                  </Tag>
+                </div>
               )}
             </Flex>
           </Flex>
