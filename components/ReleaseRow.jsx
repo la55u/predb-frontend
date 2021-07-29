@@ -1,4 +1,3 @@
-import { CheckIcon } from "@chakra-ui/icons";
 import { Box, Flex, Grid, Link, Tag, Text, useColorModeValue } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { IoIosNuclear } from "react-icons/io";
@@ -19,7 +18,7 @@ const ReleaseRow = ({ release }) => {
       borderColor: "gray.800",
       hoverColor: "gray.800",
       gray: "gray.500",
-      tagBg: "whiteAlpha.50",
+      tagBg: "whiteAlpha.100",
     },
   );
 
@@ -34,7 +33,7 @@ const ReleaseRow = ({ release }) => {
       _before={{
         content: `''`,
         position: "absolute",
-        // height: "1px",
+
         left: [0, 0, "30px"],
         right: [0, 0, "30px"],
         height: "100%",
@@ -46,7 +45,6 @@ const ReleaseRow = ({ release }) => {
       _hover={{
         bg: colorvalues.hoverColor,
         borderRadius: "sm",
-        //boxShadow: "md",
       }}
     >
       <Grid
@@ -84,7 +82,7 @@ const ReleaseRow = ({ release }) => {
           <Flex justifyContent="space-between">
             <Box as="small" fontStyle="italic" color={colorvalues.gray}>
               {!release.traces ? (
-                <Text>No site raced this</Text>
+                <Text>No tracers yet</Text>
               ) : (
                 release.traces.map((tr) => `#${tr.rank}\u00A0${tr.site}`).join(", ")
               )}
@@ -107,9 +105,11 @@ const ReleaseRow = ({ release }) => {
               )}
 
               {release.nfo?.length > 0 && (
-                <Tag ml={4} size="sm" bg={colorvalues.tagBg}>
-                  NFO
-                </Tag>
+                <div>
+                  <Tag d="flex" ml={4} size="sm" bg={colorvalues.tagBg}>
+                    NFO
+                  </Tag>
+                </div>
               )}
             </Flex>
           </Flex>

@@ -21,6 +21,7 @@ export const API_ENDPOINT = {
   LOGOUT: "/api/auth/logout",
   REGISTER: "/api/auth/register",
   RESTORE: "/api/auth/restore",
+  RESTORE_PASSWORD: "/api/auth/restore/password",
   DELETE: "/api/auth/delete",
   ME: "/api/auth/me",
 

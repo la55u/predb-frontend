@@ -15,20 +15,30 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Layout from "../components/Layout";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
+import { useDispatch } from "react-redux";
+import { API_BASE, API_ENDPOINT } from "../utils/routes";
+import { addErrorToast, addSuccessToast } from "../redux/slices/toastSlice";
+import { restore } from "../redux/slices/authSlice";
 
 const Restore = () => {
-  const [email, setEmail] = useState("");
+  const dispatch = useDispatch();
   const router = useRouter();
   const { token } = router.query;
   const [showPassword, setShowPassword] = useBoolean(false);
+  const emailRef = useRef();
+  const pwRef = useRef();
+  const pwConfirmRef = useRef();
 
   const colors = useColorModeValue({ panel: "gray.200" }, { panel: "whiteAlpha.50" });
 
-  const handleInput = (e) => {
-    setEmail(e.target.value);
+  const handleEmailSubmit = async (e) => {
+    console.log(emailRef.current.value);
+    e.preventDefault();
+    dispatch(restore(emailRef.current.value));
+    e.target.reset();
   };
 
   return (
@@ -36,6 +46,7 @@ const Restore = () => {
       {!token && (
         <Box
           as="form"
+          onSubmit={handleEmailSubmit}
           mt={20}
           p={5}
           bg={colors.panel}
@@ -49,13 +60,7 @@ const Restore = () => {
             <FormControl>
               <FormLabel>Email</FormLabel>
               <InputGroup>
-                <Input
-                  type="email"
-                  isRequired
-                  placeholder="@"
-                  value={email}
-                  onChange={handleInput}
-                />
+                <Input ref={emailRef} type="email" isRequired placeholder="@" />
               </InputGroup>
               <FormHelperText>
                 Instructions to restore your account will be sent to this address
@@ -86,6 +91,7 @@ const Restore = () => {
               <FormLabel>New password</FormLabel>
               <InputGroup>
                 <Input
+                  ref={pwRef}
                   isRequired
                   variant="filled"
                   type={showPassword ? "text" : "password"}
@@ -108,6 +114,7 @@ const Restore = () => {
               <FormLabel>Confirm new password</FormLabel>
               <InputGroup>
                 <Input
+                  ref={pwConfirmRef}
                   isRequired
                   variant="filled"
                   type={showPassword ? "text" : "password"}
