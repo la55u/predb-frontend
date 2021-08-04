@@ -33,7 +33,9 @@ const Logo = () => {
         </a>
       </Link>
 
-      <Tag colorScheme="teal">Beta</Tag>
+      <Tag d={["none", "inline"]} colorScheme="teal">
+        Beta
+      </Tag>
 
       <Text d={["none", "none", "block"]} color="gray.500" pl={5}>
         {!count ? "..." : `Indexing ${count?.toLocaleString()} releases`}
