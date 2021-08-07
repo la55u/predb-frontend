@@ -15,15 +15,10 @@ import {
   Select,
   Tooltip,
   useDisclosure,
-  useToast,
 } from "@chakra-ui/react";
-import { useRef } from "react";
 import { FaSave } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { makeHeaders } from "../hooks/useFetch";
 import { createNotification } from "../redux/slices/notificationSlice";
-import { API_BASE } from "../utils/routes";
-import { addSuccessToast, addErrorToast } from "../redux/slices/toastSlice";
 
 const ModalSubscribe = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();

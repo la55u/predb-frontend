@@ -2,8 +2,7 @@ import { Box, Flex, Spinner } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSocket } from "../hooks/useSocket";
-import { addRelease, getAllRelease, updateRelease } from "../redux/slices/releasesSlice";
-import { API_BASE } from "../utils/routes";
+import { getAllRelease } from "../redux/slices/releasesSlice";
 import { NoResults } from "./NoResults";
 import ReleaseRow from "./ReleaseRow";
 
@@ -13,7 +12,7 @@ const ReleaseList = () => {
   const results = useSelector((s) => s.search.results);
   const took = useSelector((s) => s.search.took);
   const searchLoading = useSelector((s) => s.search.loading);
-  const page = useSelector((s) => s.search.page);
+  //const page = useSelector((s) => s.search.page);
 
   useSocket();
 
@@ -22,8 +21,8 @@ const ReleaseList = () => {
 
   useEffect(() => {
     // only when not searching
-    if (!took) dispatch(getAllRelease(page));
-  }, [page]);
+    if (!took) dispatch(getAllRelease());
+  }, []);
 
   if (loading || searchLoading)
     return (

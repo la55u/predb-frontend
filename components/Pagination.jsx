@@ -1,5 +1,4 @@
 import { Button, Flex } from "@chakra-ui/react";
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllRelease } from "../redux/slices/releasesSlice";
 import { searchSimple, setPage } from "../redux/slices/searchSlice";
@@ -10,20 +9,15 @@ export const Pagination = () => {
   const resultsCnt = useSelector((state) => state.search.resultsCnt);
   const page = useSelector((state) => state.search.page);
 
-  // useEffect(() => {
-  //   if (resultsCnt) {
-  //     // search is active, request next page of results
-  //     dispatch(searchSimple({ input: simpleSearch, page }));
-  //     window.scrollTo(0, 0);
-  //   } else {
-  //     // not searched yet, get next page of all releases
-  //     dispatch(getAllRelease(page));
-  //     window.scrollTo(0, 0);
-  //   }
-  // }, [page]);
-
-  const handlePageChange = (page) => {
-    dispatch(setPage(page));
+  const handlePageChange = (p) => {
+    if (resultsCnt) {
+      // search is active, request next page of results
+      dispatch(searchSimple({ input: simpleSearch, page: p }));
+    } else {
+      // not searched yet, get next page of all releases
+      dispatch(getAllRelease(p));
+    }
+    dispatch(setPage(p));
     window.scrollTo(0, 0);
   };
 
