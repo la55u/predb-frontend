@@ -73,7 +73,7 @@ const DetailsTable = ({ data, borderColor }) => {
         <Text fontWeight="bold" justifySelf="end">
           Nukes
         </Text>
-        <Text wordBreak="break-all">
+        <Box wordBreak="break-all">
           {!data.nukes || data.nukes.length === 0 ? (
             "-"
           ) : (
@@ -95,7 +95,7 @@ const DetailsTable = ({ data, borderColor }) => {
               ))}
             </Box>
           )}
-        </Text>
+        </Box>
       </Grid>
     </Flex>
   );
