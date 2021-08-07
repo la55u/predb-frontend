@@ -18,7 +18,7 @@ const ReleaseRow = ({ release }) => {
       borderColor: "gray.800",
       hoverColor: "gray.800",
       gray: "gray.500",
-      tagBg: "whiteAlpha.100",
+      tagBg: "rgba(77, 209, 196, 0.1)",
     },
   );
 

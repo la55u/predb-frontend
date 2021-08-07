@@ -78,6 +78,7 @@ const SearchSimple = () => {
           variant="filled"
           placeholder="Search any release..."
           // value={query}
+          defaultValue={simpleSearch}
           aria-label="Search by release name"
           //onChange={(e) => setQuery(e.target.value)}
           onChange={handleChange}
