@@ -34,7 +34,7 @@ const Toolbar = () => {
 
       {resultsCnt > 0 && (
         <Text color={colors.label} mt={[4, 4, 0]}>
-          {resultsCnt < 10000 ? resultsCnt : `>${resultsCnt}`} results found in ${took} ms
+          {resultsCnt < 10000 ? resultsCnt : `>${resultsCnt}`} results found in {took} ms
         </Text>
       )}
 

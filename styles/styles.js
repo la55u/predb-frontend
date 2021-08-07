@@ -3,7 +3,6 @@ import { mode } from "@chakra-ui/theme-tools";
 const styles = {
   global: (props) => ({
     body: {
-      fontFamily: "body",
       color: mode("light.col", "dark.col")(props),
       bg: mode("light.bg", "dark.bg")(props),
       transition: "background-color 0.2s",

@@ -20,7 +20,7 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      <Flex direction="column" minH="100vh" fontFamily="'Lato', sans-serif;">
+      <Flex direction="column" minH="100vh">
         <Navbar />
 
         <Box as="main" py={24} flexGrow="1">

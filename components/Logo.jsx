@@ -33,7 +33,7 @@ const Logo = () => {
         </a>
       </Link>
 
-      <Tag d={["none", "inline"]} colorScheme="teal">
+      <Tag d={["none", "inline-flex"]} colorScheme="teal">
         Beta
       </Tag>
 
