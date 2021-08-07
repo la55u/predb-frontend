@@ -10,7 +10,10 @@ import ReleaseRow from "./ReleaseRow";
 const ReleaseList = () => {
   const dispatch = useDispatch();
   const { releaselist, loading } = useSelector((state) => state.releases);
-  const { results, took, loading: searchLoading, page } = useSelector((s) => s.search);
+  const results = useSelector((s) => s.search.results);
+  const took = useSelector((s) => s.search.took);
+  const searchLoading = useSelector((s) => s.search.loading);
+  const page = useSelector((s) => s.search.page);
 
   useSocket();
 
@@ -18,8 +21,9 @@ const ReleaseList = () => {
   const list = took > 0 ? results : releaselist;
 
   useEffect(() => {
-    dispatch(getAllRelease());
-  }, []);
+    // only when not searching
+    if (!took) dispatch(getAllRelease(page));
+  }, [page]);
 
   if (loading || searchLoading)
     return (
@@ -31,15 +35,13 @@ const ReleaseList = () => {
   if (took > 0 && results.length === 0) return <NoResults />;
 
   return (
-    <>
-      <Box borderRadius="md" mt={5}>
-        {list.map((rel, i) => (
-          <div key={rel._id} className={rel.new && i === 0 ? "new-item" : ""}>
-            <ReleaseRow release={rel} />
-          </div>
-        ))}
-      </Box>
-    </>
+    <Box borderRadius="md" mt={5}>
+      {list.map((rel, i) => (
+        <div key={rel._id} className={rel.new && i === 0 ? "new-item" : ""}>
+          <ReleaseRow release={rel} />
+        </div>
+      ))}
+    </Box>
   );
 };
 

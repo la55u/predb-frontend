@@ -17,7 +17,7 @@ export const searchSimple = createAsyncThunk("search/simple", async (data, thunk
     }
     const resData = await response.json();
     console.log("searchsSimple resData:", resData.data);
-    return { input: data.input, ...resData.data };
+    return { ...resData.data };
   } catch (error) {
     return thunkAPI.rejectWithValue({ error: error.message });
   }
@@ -26,42 +26,42 @@ export const searchSimple = createAsyncThunk("search/simple", async (data, thunk
 const searchSlice = createSlice({
   name: "search",
   initialState: {
-    simpleSearch: "", // set when api call returns, only used in pagination component
-    advancedSearch: {}, // set when api call returns, only used in pagination component
+    simpleSearch: null,
     loading: false,
     results: [],
-    resultsCnt: 0, // number of all results
+    resultsCnt: null,
     took: 0, // time it took in ms to complete the request on the backend
     page: 1, // set by pagination component
   },
   reducers: {
-    // setSimpleSearch : (state, action)=> {
-    //   state.simpleSearch = action.payload;
-
-    // },
-    // standard reducer logic, with auto-generated action types per reducer
+    setSimpleSearch: (state, action) => {
+      state.simpleSearch = action.payload;
+    },
     clearSimple: (state, action) => {
       state.results = [];
-      state.took = 0;
-      state.simpleSearch = "";
+      state.took = null; // time it took to perform the search on the backend (ms)
+      state.simpleSearch = null; // input field value
+      state.page = 1; // current page
+      state.resultsCnt = null; // number of all results matching the search criteria
     },
     setPage: (state, action) => {
       state.page = action.payload;
     },
   },
   extraReducers: {
-    // Add reducers for additional action types here, and handle loading state as needed
     [searchSimple.pending]: (state) => {
+      if (!state.resultsCnt) state.page = 1; // reset page on first search
       state.results = [];
+      state.resultsCnt = null;
       state.loading = true;
+      state.took = null;
     },
     [searchSimple.fulfilled]: (state, action) => {
-      const { input, results, took, took_mongo, values } = action.payload;
+      const { results, took, took_mongo, values } = action.payload;
       state.results = values;
       state.took = took + took_mongo;
       state.resultsCnt = results;
       state.loading = false;
-      state.simpleSearch = input;
     },
     [searchSimple.rejected]: (state, action) => {
       state.error = action.payload.error;
@@ -72,5 +72,5 @@ const searchSlice = createSlice({
 export const selectResults = (state) => state.results;
 export const selectReleaselist = (state) => state.releaselist;
 
-export const { clearSimple, setPage } = searchSlice.actions;
+export const { setSimpleSearch, clearSimple, setPage } = searchSlice.actions;
 export default searchSlice.reducer;
