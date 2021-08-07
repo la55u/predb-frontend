@@ -26,7 +26,6 @@ import { API_BASE } from "../utils/routes";
 import { addSuccessToast, addErrorToast } from "../redux/slices/toastSlice";
 
 const ModalSubscribe = () => {
-  const initialRef = useRef();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const dispatch = useDispatch();
   const simpleSearch = useSelector((s) => s.search.simpleSearch);
@@ -60,7 +59,7 @@ const ModalSubscribe = () => {
         </Button>
       </Tooltip>
 
-      <Modal initialFocusRef={initialRef} isOpen={isOpen} onClose={onClose} size="lg">
+      <Modal isOpen={isOpen} onClose={onClose} size="lg">
         <ModalOverlay>
           <ModalContent as="form" onSubmit={handleSubmit}>
             <ModalHeader>Notify me about new results</ModalHeader>
@@ -68,12 +67,7 @@ const ModalSubscribe = () => {
             <ModalBody pb={6}>
               <FormControl isRequired>
                 <FormLabel>Label</FormLabel>
-                <Input
-                  name="label"
-                  ref={initialRef}
-                  placeholder="My favorite movie..."
-                  variant="filled"
-                />
+                <Input name="label" placeholder="My favorite movie..." variant="filled" />
                 <FormHelperText>
                   Enter a label that helps you identify your search
                 </FormHelperText>

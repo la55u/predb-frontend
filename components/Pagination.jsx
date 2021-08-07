@@ -6,19 +6,28 @@ import { searchSimple, setPage } from "../redux/slices/searchSlice";
 
 export const Pagination = () => {
   const dispatch = useDispatch();
-  const { resultsCnt, took, page } = useSelector((state) => state.search);
+  const simpleSearch = useSelector((state) => state.search.simpleSearch);
+  const resultsCnt = useSelector((state) => state.search.resultsCnt);
+  const page = useSelector((state) => state.search.page);
 
   // useEffect(() => {
   //   if (resultsCnt) {
   //     // search is active, request next page of results
-  //     dispatch(searchSimple());
+  //     dispatch(searchSimple({ input: simpleSearch, page }));
+  //     window.scrollTo(0, 0);
   //   } else {
   //     // not searched yet, get next page of all releases
   //     dispatch(getAllRelease(page));
+  //     window.scrollTo(0, 0);
   //   }
   // }, [page]);
 
-  const pagesCnt = took > 0 ? Math.min(Math.ceil(resultsCnt / 30), 10) : 10;
+  const handlePageChange = (page) => {
+    dispatch(setPage(page));
+    window.scrollTo(0, 0);
+  };
+
+  const pagesCnt = !resultsCnt ? 10 : Math.min(Math.ceil(resultsCnt / 30), 10);
 
   return (
     <Flex mt={10} justify="center">
@@ -27,7 +36,7 @@ export const Pagination = () => {
           aria-label={`Go to page ${i + 1}`}
           key={i}
           variant={Number(page) === i + 1 || (!page && i === 0) ? "outline" : "ghost"}
-          onClick={() => dispatch(setPage(i + 1))}
+          onClick={() => handlePageChange(i + 1)}
           size="sm"
           colorScheme="teal"
         >

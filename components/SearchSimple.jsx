@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import React, { useCallback, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { clearSimple } from "..//redux/slices/searchSlice";
+import { clearSimple, setSimpleSearch } from "..//redux/slices/searchSlice";
 import { searchSimple } from "../redux/slices/searchSlice";
 
 function debounce(callback, delay) {
@@ -21,35 +21,26 @@ function debounce(callback, delay) {
 }
 
 const SearchSimple = () => {
-  const page = useSelector((s) => s.search.page);
   const dispatch = useDispatch();
   const simpleSearch = useSelector((s) => s.search.simpleSearch);
+  const page = useSelector((s) => s.search.page);
+
   const inputRef = useRef();
 
+  const handleSearch = () => {
+    dispatch(setSimpleSearch(inputRef.current.value));
+  };
+
+  const handleChange = useCallback(debounce(handleSearch, 400), []);
+
   useEffect(() => {
-    if (page && inputRef.current.value) {
-      dispatch(searchSimple({ input: inputRef.current.value, page: page }));
-    }
-  }, [page]);
+    if (simpleSearch) dispatch(searchSimple({ input: simpleSearch, page }));
+  }, [page, simpleSearch]);
 
   const handleClear = () => {
     inputRef.current.value = "";
     dispatch(clearSimple());
   };
-
-  const handleSearch = (e) => {
-    const query = inputRef.current.value;
-    if (query.length === 0) {
-      handleClear();
-    } else if (query.length < 3) {
-      // todo warning
-      return;
-    } else {
-      dispatch(searchSimple({ input: query }));
-    }
-  };
-
-  const handleChange = useCallback(debounce(handleSearch, 500), []);
 
   return (
     <Box mt={10}>

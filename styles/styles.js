@@ -9,6 +9,10 @@ const styles = {
       transition: "background-color 0.2s",
       lineHeight: "base",
     },
+    "::selection": {
+      background: mode("black", "teal.300")(props),
+      color: mode("teal.300", "black")(props),
+    },
     "*::placeholder": {
       color: mode("gray.400", "whiteAlpha.400")(props),
     },
