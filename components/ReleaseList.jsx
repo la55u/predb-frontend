@@ -9,9 +9,10 @@ import ReleaseRow from "./ReleaseRow";
 
 const ReleaseList = () => {
   const dispatch = useDispatch();
-  const socket = useSocket(API_BASE);
   const { releaselist, loading } = useSelector((state) => state.releases);
   const { results, took, loading: searchLoading, page } = useSelector((s) => s.search);
+
+  useSocket();
 
   // if took is set, the user is searching -> show results, otherwise show the latest releases
   const list = took > 0 ? results : releaselist;
@@ -19,23 +20,6 @@ const ReleaseList = () => {
   useEffect(() => {
     dispatch(getAllRelease());
   }, []);
-
-  useEffect(() => {
-    if (socket) {
-      socket.on("data_added", handleNew);
-      socket.on("data_updated", handleUpdate);
-    }
-  }, [socket]);
-
-  const handleNew = (payload) => {
-    console.log("new:", payload);
-    dispatch(addRelease(payload));
-  };
-
-  const handleUpdate = (payload) => {
-    console.log("update:", payload);
-    dispatch(updateRelease(payload));
-  };
 
   if (loading || searchLoading)
     return (
