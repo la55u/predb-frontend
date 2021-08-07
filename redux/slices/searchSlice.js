@@ -2,7 +2,6 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { API_BASE, API_ENDPOINT } from "../../utils/routes";
 
 export const searchSimple = createAsyncThunk("search/simple", async (data, thunkAPI) => {
-  console.log("data:", data);
   try {
     const response = await fetch(API_BASE + API_ENDPOINT.SEARCH_SIMPLE, {
       method: "POST",
@@ -16,7 +15,6 @@ export const searchSimple = createAsyncThunk("search/simple", async (data, thunk
       return thunkAPI.rejectWithValue({ error: error.message });
     }
     const resData = await response.json();
-    console.log("searchsSimple resData:", resData.data);
     return { ...resData.data, page: data.page };
   } catch (error) {
     return thunkAPI.rejectWithValue({ error: error.message });
@@ -64,7 +62,7 @@ const searchSlice = createSlice({
       state.page = action.payload.page;
     },
     [searchSimple.rejected]: (state, action) => {
-      console.log("action.payload:", action);
+      //console.log("action.payload:", action);
       //state.error = action.payload.error;
     },
   },

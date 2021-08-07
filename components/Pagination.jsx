@@ -1,5 +1,4 @@
 import { Button, Flex } from "@chakra-ui/react";
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllRelease } from "../redux/slices/releasesSlice";
 import { searchSimple, setPage } from "../redux/slices/searchSlice";

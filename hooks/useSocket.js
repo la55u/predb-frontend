@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { API_BASE } from "../utils/routes";
-import { addRelease, updateRelease } from "../redux/slices/releasesSlice";
 import io from "socket.io-client";
+import { addRelease, updateRelease } from "../redux/slices/releasesSlice";
+import { API_BASE } from "../utils/routes";
 
 export function useSocket() {
   const dispatch = useDispatch();
