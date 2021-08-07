@@ -13,7 +13,7 @@ const ReleaseList = () => {
   const results = useSelector((s) => s.search.results);
   const took = useSelector((s) => s.search.took);
   const searchLoading = useSelector((s) => s.search.loading);
-  const page = useSelector((s) => s.search.page);
+  //const page = useSelector((s) => s.search.page);
 
   useSocket();
 
@@ -22,8 +22,8 @@ const ReleaseList = () => {
 
   useEffect(() => {
     // only when not searching
-    if (!took) dispatch(getAllRelease(page));
-  }, [page]);
+    if (!took) dispatch(getAllRelease());
+  }, []);
 
   if (loading || searchLoading)
     return (

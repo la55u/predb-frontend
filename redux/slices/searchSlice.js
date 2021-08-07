@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { API_BASE, API_ENDPOINT } from "../../utils/routes";
 
 export const searchSimple = createAsyncThunk("search/simple", async (data, thunkAPI) => {
+  console.log("data:", data);
   try {
     const response = await fetch(API_BASE + API_ENDPOINT.SEARCH_SIMPLE, {
       method: "POST",
@@ -10,14 +11,13 @@ export const searchSimple = createAsyncThunk("search/simple", async (data, thunk
         "Content-Type": "application/json",
       },
     });
-
     if (!response.ok) {
       const error = await response.json();
-      return thunkAPI.rejectWithValue({ error: error.errors });
+      return thunkAPI.rejectWithValue({ error: error.message });
     }
     const resData = await response.json();
     console.log("searchsSimple resData:", resData.data);
-    return { ...resData.data };
+    return { ...resData.data, page: data.page };
   } catch (error) {
     return thunkAPI.rejectWithValue({ error: error.message });
   }
@@ -50,7 +50,6 @@ const searchSlice = createSlice({
   },
   extraReducers: {
     [searchSimple.pending]: (state) => {
-      if (!state.resultsCnt) state.page = 1; // reset page on first search
       state.results = [];
       state.resultsCnt = null;
       state.loading = true;
@@ -62,9 +61,11 @@ const searchSlice = createSlice({
       state.took = took + took_mongo;
       state.resultsCnt = results;
       state.loading = false;
+      state.page = action.payload.page;
     },
     [searchSimple.rejected]: (state, action) => {
-      state.error = action.payload.error;
+      console.log("action.payload:", action);
+      //state.error = action.payload.error;
     },
   },
 });

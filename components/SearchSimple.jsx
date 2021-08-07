@@ -23,7 +23,7 @@ function debounce(callback, delay) {
 const SearchSimple = () => {
   const dispatch = useDispatch();
   const simpleSearch = useSelector((s) => s.search.simpleSearch);
-  const page = useSelector((s) => s.search.page);
+  //const page = useSelector((s) => s.search.page);
 
   const inputRef = useRef();
 
@@ -34,8 +34,8 @@ const SearchSimple = () => {
   const handleChange = useCallback(debounce(handleSearch, 400), []);
 
   useEffect(() => {
-    if (simpleSearch) dispatch(searchSimple({ input: simpleSearch, page }));
-  }, [page, simpleSearch]);
+    if (simpleSearch) dispatch(searchSimple({ input: simpleSearch, page: 1 }));
+  }, [simpleSearch]);
 
   const handleClear = () => {
     inputRef.current.value = "";
