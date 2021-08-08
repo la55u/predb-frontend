@@ -1,13 +1,4 @@
-import {
-  Box,
-  Flex,
-  Grid,
-  Heading,
-  Image,
-  Stack,
-  Text,
-  useColorMode,
-} from "@chakra-ui/react";
+import { Box, Grid, Heading, Image, Stack, Text, useColorMode } from "@chakra-ui/react";
 import TimeAgo from "timeago-react";
 
 const RetailInfo_TV_TMDB = ({ data, borderColor }) => {
@@ -40,7 +31,7 @@ const RetailInfo_TV_TMDB = ({ data, borderColor }) => {
         align="center"
         direction={["column-reverse", "column-reverse", "row"]}
       >
-        <Grid gap="0 20px" templateColumns={["90px auto", "150px auto"]}>
+        <Grid gap="0 20px" templateColumns={["80px auto", "150px auto"]}>
           <Text fontWeight="bold" justifySelf="end">
             Series name
           </Text>
@@ -72,8 +63,14 @@ const RetailInfo_TV_TMDB = ({ data, borderColor }) => {
             First aired
           </Text>
           <Text>
-            {data.first_air_date} (
-            <TimeAgo datetime={data.first_air_date} />)
+            {data.first_air_date ? (
+              <>
+                {data.first_air_date}
+                <TimeAgo datetime={data.first_air_date} />)
+              </>
+            ) : (
+              "-"
+            )}
           </Text>
 
           <Text fontWeight="bold" justifySelf="end">
