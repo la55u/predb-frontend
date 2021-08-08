@@ -31,7 +31,7 @@ const RetailInfo_TV_TMDB = ({ data, borderColor }) => {
         align="center"
         direction={["column-reverse", "column-reverse", "row"]}
       >
-        <Grid gap="0 20px" templateColumns={["90px auto", "150px auto"]}>
+        <Grid gap="0 20px" templateColumns={["80px auto", "150px auto"]}>
           <Text fontWeight="bold" justifySelf="end">
             Series name
           </Text>

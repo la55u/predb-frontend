@@ -4,6 +4,7 @@ import {
   Grid,
   Heading,
   Image,
+  Stack,
   Text,
   useColorMode,
 } from "@chakra-ui/react";
@@ -33,9 +34,14 @@ const RetailInfo_Movie_TMDB = ({ data, borderColor }) => {
         </Heading>
       </legend>
 
-      <Flex justify="space-between" align="start">
-        <Grid p={4} gap="0 20px" templateColumns="150px auto">
-          <Text fontWeight="bold" justifySelf="end">
+      <Stack
+        p={4}
+        justify={["space-between"]}
+        align="center"
+        direction={["column-reverse", "column-reverse", "row"]}
+      >
+        <Grid gap="0 20px" templateColumns={["80px auto", "150px auto"]}>
+          <Text fontWeight="bold" textAlign="right">
             Title
           </Text>
           <Text wordBreak="break-all">
@@ -43,17 +49,15 @@ const RetailInfo_Movie_TMDB = ({ data, borderColor }) => {
             {data.title !== data.original_title && ` (${data.title})`}
           </Text>
 
-          <Text fontWeight="bold" justifySelf="end">
-            Original language
+          <Text fontWeight="bold" textAlign="right">
+            Language
           </Text>
           <Text>
-            {data.original_language
-              ? data.original_language.toUpperCase()
-              : "-"}
+            {data.original_language ? data.original_language.toUpperCase() : "-"}
           </Text>
 
-          <Text fontWeight="bold" justifySelf="end">
-            Prod. companies
+          <Text fontWeight="bold" textAlign="right">
+            Produced by
           </Text>
           <Text>
             {data.production_companies.length > 0
@@ -61,8 +65,8 @@ const RetailInfo_Movie_TMDB = ({ data, borderColor }) => {
               : "-"}
           </Text>
 
-          <Text fontWeight="bold" justifySelf="end">
-            Prod. countries
+          <Text fontWeight="bold" textAlign="right">
+            Country
           </Text>
           <Text>
             {data.production_countries.length > 0
@@ -70,49 +74,42 @@ const RetailInfo_Movie_TMDB = ({ data, borderColor }) => {
               : "-"}
           </Text>
 
-          <Text fontWeight="bold" justifySelf="end">
+          <Text fontWeight="bold" textAlign="right">
             Budget
           </Text>
           <Text>
             {data.budget
-              ? "$ " +
-                data.budget.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+              ? "$ " + data.budget.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
               : "-"}
           </Text>
 
-          <Text fontWeight="bold" justifySelf="end">
+          <Text fontWeight="bold" textAlign="right">
             Revenue
           </Text>
           <Text>
             {data.revenue
-              ? "$ " +
-                data.revenue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+              ? "$ " + data.revenue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
               : "-"}
           </Text>
 
-          <Text fontWeight="bold" justifySelf="end">
+          <Text fontWeight="bold" textAlign="right">
             Runtime
           </Text>
           <Text>{data.runtime ? `${data.runtime} min` : "-"}</Text>
 
-          <Text fontWeight="bold" justifySelf="end">
+          <Text fontWeight="bold" textAlign="right">
             Genre
           </Text>
           <Text>
-            {data.genres.length > 0
-              ? data.genres.map((g) => g.name).join(", ")
-              : "-"}
+            {data.genres.length > 0 ? data.genres.map((g) => g.name).join(", ") : "-"}
           </Text>
 
-          <Text fontWeight="bold" justifySelf="end">
+          <Text fontWeight="bold" textAlign="right">
             IMDB
           </Text>
           <Text>
             {data.imdb_id ? (
-              <a
-                href={`https://imdb.com/title/${data.imdb_id}`}
-                target="_blank"
-              >
+              <a href={`https://imdb.com/title/${data.imdb_id}`} target="_blank">
                 {`https://imdb.com/title/${data.imdb_id}`}
               </a>
             ) : (
@@ -120,7 +117,7 @@ const RetailInfo_Movie_TMDB = ({ data, borderColor }) => {
             )}
           </Text>
 
-          <Text fontWeight="bold" justifySelf="end">
+          <Text fontWeight="bold" textAlign="right">
             Rating
           </Text>
           <Text>
@@ -129,20 +126,18 @@ const RetailInfo_Movie_TMDB = ({ data, borderColor }) => {
               : `${data.vote_average} / 10 (${data.vote_count} votes, TMDB)`}
           </Text>
 
-          <Text fontWeight="bold" justifySelf="end">
+          <Text fontWeight="bold" textAlign="right">
             Released
           </Text>
           <Text>
-            {data.release_date || "-"} (<TimeAgo datetime={data.release_date} />
-            )
+            {data.release_date || "-"} (<TimeAgo datetime={data.release_date} />)
           </Text>
 
-          <Text fontWeight="bold" justifySelf="end">
+          <Text fontWeight="bold" textAlign="right">
             Overview
           </Text>
           <Text>{data.overview || "-"}</Text>
         </Grid>
-
         <Image
           src={`https://image.tmdb.org/t/p/w300/${data.poster_path}`}
           fallbackSrc={fallbackSrc[colorMode]}
@@ -155,7 +150,7 @@ const RetailInfo_Movie_TMDB = ({ data, borderColor }) => {
           borderWidth="1px"
           border={borderColor}
         />
-      </Flex>
+      </Stack>
     </Box>
   );
 };
