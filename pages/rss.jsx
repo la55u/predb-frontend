@@ -1,33 +1,32 @@
 import { API_BASE, API_ENDPOINT } from "../utils/routes";
 
 const getRssXml = (releases) => {
-  const rssItemsXml = blogPostsRssXml(releases);
+  const rssItemsXml = getReleasesXML(releases);
   return `<?xml version="1.0" ?>
   <rss version="2.0" >
     <channel>
-        <title>PREdb.live feed</title>
+        <title>PREdb.live RSS feed</title>
         <link>https://predb.live</link>
-        <description>PRE and NFO database of warez scene releases with a notification system</description>
+        <description>PRE and NFO database and notification service</description>
         <language>en</language>
-        
         ${rssItemsXml}
     </channel>
   </rss>`;
 };
 
-const blogPostsRssXml = (releases) => {
+const getReleasesXML = (releases) => {
   let rssItemsXml = "";
 
   releases.forEach((release) => {
     const trace = release.traces
       ? release.traces.map((t) => t.site).join(",")
-      : "No site raced this";
+      : "No tracers yet";
 
     rssItemsXml += `
       <item>
         <title>${release.name}</title>
-        <link>https://predb.live/release/${release.name}</link>
-        <guid>https://predb.live/release/${release.name}</guid>
+        <link>https://predb.live/release/${release._id}</link>
+        <guid>https://predb.live/release/${release._id}</guid>
         <pubDate>${release.added}</pubDate>
         <description>${trace}</description>
       </item>`;
@@ -37,22 +36,18 @@ const blogPostsRssXml = (releases) => {
 };
 
 export const getServerSideProps = async (context) => {
-  console.log("context:", context);
   const { res } = context;
   if (!res) return;
 
-  const releaseResp = await fetch(API_BASE + API_ENDPOINT.RELEASES, {
-    headers: { "accept-encoding": "identity" },
-  });
+  const releaseResp = await fetch(API_BASE + API_ENDPOINT.RELEASES);
   const releases = await releaseResp.json();
 
-  res.setHeader("Content-Type", "application/xml");
+  res.setHeader("Content-Type", "application/rss+xml");
   res.write(getRssXml(releases.data.values));
   res.end();
+  return { props: {} };
 };
 
-const RSS = () => {
-  return <h1>RSS</h1>;
-};
+const RSS = () => null;
 
 export default RSS;

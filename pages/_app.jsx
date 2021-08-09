@@ -1,11 +1,10 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import "focus-visible/dist/focus-visible";
 import Head from "next/head";
-import { Provider, useDispatch } from "react-redux";
+import { Provider } from "react-redux";
 import store from "../redux/store";
-import "../styles/global.css";
 import { theme } from "../styles";
-import { useEffect } from "react";
+import "../styles/global.css";
 
 function MyApp({ Component, pageProps }) {
   return (

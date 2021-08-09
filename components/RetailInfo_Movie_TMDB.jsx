@@ -4,6 +4,7 @@ import {
   Grid,
   Heading,
   Image,
+  Link,
   Stack,
   Text,
   useColorMode,
@@ -17,7 +18,6 @@ const RetailInfo_Movie_TMDB = ({ data, borderColor }) => {
     light: "/movie-placeholder-light.png",
   };
 
-  console.log(data);
   if (!data) return null;
 
   return (
@@ -137,8 +137,17 @@ const RetailInfo_Movie_TMDB = ({ data, borderColor }) => {
             Overview
           </Text>
           <Text>{data.overview || "-"}</Text>
+
+          <Text gridColumn={2} fontSize="sm" color="gray.500" mt={2}>
+            Missing info? You can help by filling it{" "}
+            <Link isExternal href={`https://themoviedb.org/movie/${data.id}`}>
+              here!
+            </Link>
+          </Text>
         </Grid>
+
         <Image
+          alignSelf={["center", "center", "start"]}
           src={`https://image.tmdb.org/t/p/w300/${data.poster_path}`}
           fallbackSrc={fallbackSrc[colorMode]}
           alt="poster"
@@ -149,6 +158,8 @@ const RetailInfo_Movie_TMDB = ({ data, borderColor }) => {
           minW="150px"
           borderWidth="1px"
           border={borderColor}
+          borderRadius="sm"
+          shadow="md"
         />
       </Stack>
     </Box>

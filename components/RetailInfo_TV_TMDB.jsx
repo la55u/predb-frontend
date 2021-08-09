@@ -1,4 +1,14 @@
-import { Box, Grid, Heading, Image, Stack, Text, useColorMode } from "@chakra-ui/react";
+import {
+  Box,
+  Grid,
+  Heading,
+  Image,
+  Link,
+  Stack,
+  Text,
+  useColorMode,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import TimeAgo from "timeago-react";
 
 const RetailInfo_TV_TMDB = ({ data, borderColor }) => {
@@ -65,8 +75,7 @@ const RetailInfo_TV_TMDB = ({ data, borderColor }) => {
           <Text>
             {data.first_air_date ? (
               <>
-                {data.first_air_date}
-                <TimeAgo datetime={data.first_air_date} />)
+                {data.first_air_date} (<TimeAgo datetime={data.first_air_date} />)
               </>
             ) : (
               "-"
@@ -116,9 +125,17 @@ const RetailInfo_TV_TMDB = ({ data, borderColor }) => {
             Overview
           </Text>
           <Text>{data.overview || "-"}</Text>
+
+          <Text gridColumn={2} fontSize="sm" color="gray.500" mt={2}>
+            Missing info? You can help by filling it{" "}
+            <Link isExternal href={`https://themoviedb.org/tv/${data.id}`}>
+              here!
+            </Link>
+          </Text>
         </Grid>
 
         <Image
+          alignSelf={["center", "center", "start"]}
           src={`https://image.tmdb.org/t/p/w300/${data.poster_path}`}
           fallbackSrc={fallbackSrc[colorMode]}
           alt="poster image"

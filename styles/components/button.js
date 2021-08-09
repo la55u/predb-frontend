@@ -4,8 +4,10 @@ const baseStyle = {
 
 const variants = {
   solid: (props) => {
+    const { colorScheme: c } = props;
     return {
       shadow: "md",
+      // bg: `${c}.200`,
     };
   },
 };
