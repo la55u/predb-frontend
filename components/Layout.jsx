@@ -5,9 +5,12 @@ import { getMe } from "../redux/slices/authSlice";
 import { Footer } from "./Footer";
 import Navbar from "./Navbar";
 import { setAuthenticated } from "../redux/slices/authSlice";
+import { useSocket } from "../hooks/useSocket";
 
 const Layout = ({ children }) => {
   const dispatch = useDispatch();
+  useSocket();
+
   const { isAuthenticated, user } = useSelector((state) => state.auth);
 
   useEffect(() => {

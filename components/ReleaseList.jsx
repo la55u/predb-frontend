@@ -1,7 +1,6 @@
 import { Box, Flex, Spinner } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useSocket } from "../hooks/useSocket";
 import { getAllRelease } from "../redux/slices/releasesSlice";
 import { NoResults } from "./NoResults";
 import ReleaseRow from "./ReleaseRow";
@@ -14,14 +13,12 @@ const ReleaseList = () => {
   const searchLoading = useSelector((s) => s.search.loading);
   //const page = useSelector((s) => s.search.page);
 
-  useSocket();
-
   // if took is set, the user is searching -> show results, otherwise show the latest releases
   const list = took > 0 ? results : releaselist;
 
   useEffect(() => {
     // only when not searching
-    if (!took) dispatch(getAllRelease());
+    if (!took && releaselist.length === 0) dispatch(getAllRelease());
   }, []);
 
   if (loading || searchLoading)

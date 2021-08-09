@@ -1,4 +1,4 @@
-import { Box, Flex, Grid, Heading, Text } from "@chakra-ui/react";
+import { Box, Flex, Grid, Heading, Text, useColorModeValue } from "@chakra-ui/react";
 import TimeAgo from "timeago-react";
 
 const DetailsTable = ({ data, borderColor }) => {
@@ -62,7 +62,7 @@ const DetailsTable = ({ data, borderColor }) => {
         <Text>{data.url || "-"}</Text>
 
         <Text fontWeight="bold" justifySelf="end">
-          Trace
+          Tracers
         </Text>
         <Text fontStyle="italic">
           {data.traces
