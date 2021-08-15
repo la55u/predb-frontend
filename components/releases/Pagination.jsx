@@ -1,7 +1,7 @@
 import { Button, Flex } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllRelease } from "../redux/slices/releasesSlice";
-import { searchSimple, setPage } from "../redux/slices/searchSlice";
+import { getAllRelease } from "../../redux/slices/releasesSlice";
+import { searchSimple, setPage } from "../../redux/slices/searchSlice";
 
 export const Pagination = () => {
   const dispatch = useDispatch();

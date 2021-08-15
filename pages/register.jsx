@@ -19,7 +19,7 @@ import NextLink from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Layout from "../components/Layout";
+import Layout from "../components/layout/Layout";
 import { register } from "../redux/slices/authSlice";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 

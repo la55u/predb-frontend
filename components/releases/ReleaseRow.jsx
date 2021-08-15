@@ -2,7 +2,7 @@ import { Box, Flex, Grid, Link, Tag, Text, useColorModeValue } from "@chakra-ui/
 import NextLink from "next/link";
 import { IoIosNuclear } from "react-icons/io";
 import TimeAgo from "timeago-react";
-import { getSection } from "../utils/classify";
+import { getSection } from "../../utils/classify";
 import CategoryBadge from "./CategoryBadge";
 import CopyButton from "./CopyButon";
 

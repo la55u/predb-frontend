@@ -22,7 +22,7 @@ import {
 import { FaSave } from "react-icons/fa";
 import { FiDownload } from "react-icons/fi";
 import { GiSettingsKnobs } from "react-icons/gi";
-import Layout from "../components/Layout";
+import Layout from "../components/layout/Layout";
 import { ActionGroup } from "../components/profile/ActionGroup";
 import { DeleteAccountModal } from "../components/profile/DeleteAccountModal";
 

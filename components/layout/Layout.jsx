@@ -1,11 +1,11 @@
 import { Box, Container, Flex } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getMe } from "../redux/slices/authSlice";
+import { getMe } from "../../redux/slices/authSlice";
 import { Footer } from "./Footer";
 import Navbar from "./Navbar";
-import { setAuthenticated } from "../redux/slices/authSlice";
-import { useSocket } from "../hooks/useSocket";
+import { setAuthenticated } from "../../redux/slices/authSlice";
+import { useSocket } from "../../hooks/useSocket";
 
 const Layout = ({ children }) => {
   const dispatch = useDispatch();

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import Layout from "../components/Layout";
+import Layout from "../components/layout/Layout";
 import { logout } from "../redux/slices/authSlice";
 
 const Logout = () => {

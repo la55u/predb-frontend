@@ -1,22 +1,7 @@
-import { BellIcon, SearchIcon } from "@chakra-ui/icons";
-import {
-  Box,
-  Button,
-  Divider,
-  Flex,
-  Heading,
-  Spinner,
-  Stack,
-  HStack,
-  Text,
-  UnorderedList,
-  ListItem,
-} from "@chakra-ui/react";
+import { Divider, Heading, ListItem, Stack, Text, UnorderedList } from "@chakra-ui/react";
 import { useEffect } from "react";
-import { AiFillTag } from "react-icons/ai";
-import { FiTrash2 } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
-import Layout from "../components/Layout";
+import Layout from "../components/layout/Layout";
 import { NotificationCard } from "../components/notifications/NotificationCard";
 import { getNotifications } from "../redux/slices/notificationSlice";
 

@@ -16,7 +16,7 @@ import {
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useRef, useState } from "react";
-import Layout from "../components/Layout";
+import Layout from "../components/layout/Layout";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { useDispatch } from "react-redux";
 import { API_BASE, API_ENDPOINT } from "../utils/routes";

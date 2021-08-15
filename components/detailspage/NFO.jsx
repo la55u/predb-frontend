@@ -1,6 +1,6 @@
 import { Box, Button, Image, useColorMode } from "@chakra-ui/react";
 import { FiDownload } from "react-icons/fi";
-import { API_BASE, API_ENDPOINT } from "../utils/routes";
+import { API_BASE, API_ENDPOINT } from "../../utils/routes";
 
 const NFO = ({ data, borderColor }) => {
   if (!data.nfo) return null;

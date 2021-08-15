@@ -2,11 +2,11 @@ import { useColorModeValue } from "@chakra-ui/react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import DetailsTable from "../../components/DetailsTable";
-import Layout from "../../components/Layout";
-import NFO from "../../components/NFO";
-import RetailInfo_Movie_TMDB from "../../components/RetailInfo_Movie_TMDB";
-import RetailInfo_TV_TMDB from "../../components/RetailInfo_TV_TMDB";
+import DetailsTable from "../../components/detailspage/DetailsTable";
+import Layout from "../../components/layout/Layout";
+import NFO from "../../components/detailspage/NFO";
+import RetailInfo_Movie_TMDB from "../../components/detailspage/RetailInfo_Movie_TMDB";
+import RetailInfo_TV_TMDB from "../../components/detailspage/RetailInfo_TV_TMDB";
 import { getSection } from "../../utils/classify";
 import { API_BASE } from "../../utils/routes";
 
