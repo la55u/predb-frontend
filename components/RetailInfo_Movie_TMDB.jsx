@@ -139,7 +139,7 @@ const RetailInfo_Movie_TMDB = ({ data, borderColor }) => {
           <Text>{data.overview || "-"}</Text>
 
           <Text gridColumn={2} fontSize="sm" color="gray.500" mt={2}>
-            Missing info? You can help by filling it{" "}
+            Missing data? Fill it{" "}
             <Link isExternal href={`https://themoviedb.org/movie/${data.id}`}>
               here!
             </Link>
