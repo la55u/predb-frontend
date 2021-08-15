@@ -15,7 +15,7 @@ const Notifications = () => {
   }, [isAuthenticated]);
 
   return (
-    <Layout>
+    <Layout title="Notifications">
       <Stack direction="row">
         <Heading>Notifications</Heading>
         {notifications && <Divider orientation="vertical" h="40px" />}

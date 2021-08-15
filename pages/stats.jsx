@@ -24,7 +24,7 @@ const Stats = () => {
   }, []);
 
   return (
-    <Layout>
+    <Layout title="Stats">
       <Heading>Statistics</Heading>
       <Text>Some fancy graphs coming soon...</Text>
 

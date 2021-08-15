@@ -60,7 +60,7 @@ const Login = () => {
   };
 
   return (
-    <Layout>
+    <Layout title="Log in">
       {router.query.confirmed === "1" && (
         <Alert
           status="success"

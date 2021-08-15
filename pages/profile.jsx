@@ -28,7 +28,7 @@ import { DeleteAccountModal } from "../components/profile/DeleteAccountModal";
 
 const Profile = () => {
   return (
-    <Layout>
+    <Layout title="Profile">
       <Heading mb={10}>Profile page</Heading>
 
       <Alert variant="left-accent" status="warning">

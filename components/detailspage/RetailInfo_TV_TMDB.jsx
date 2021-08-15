@@ -102,9 +102,9 @@ const RetailInfo_TV_TMDB = ({ data, borderColor }) => {
             Homepage
           </Text>
           <Text wordBreak="break-all">
-            <a href={data.homepage} target="_blank">
+            <Link isExternal href={data.homepage}>
               {data.homepage || "-"}
-            </a>
+            </Link>
           </Text>
 
           <Text fontWeight="bold" textAlign="right">

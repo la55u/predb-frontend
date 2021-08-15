@@ -109,9 +109,9 @@ const RetailInfo_Movie_TMDB = ({ data, borderColor }) => {
           </Text>
           <Text>
             {data.imdb_id ? (
-              <a href={`https://imdb.com/title/${data.imdb_id}`} target="_blank">
+              <Link isExternal href={`https://imdb.com/title/${data.imdb_id}`}>
                 {`https://imdb.com/title/${data.imdb_id}`}
-              </a>
+              </Link>
             ) : (
               "-"
             )}

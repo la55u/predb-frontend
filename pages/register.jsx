@@ -58,7 +58,7 @@ const Register = () => {
   };
 
   return (
-    <Layout>
+    <Layout title="Register">
       <Box
         as="form"
         mt={20}

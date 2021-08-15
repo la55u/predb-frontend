@@ -1,4 +1,4 @@
-import { Flex, Grid, Heading, Image, Text } from "@chakra-ui/react";
+import { Flex, Link, Grid, Heading, Image, Text } from "@chakra-ui/react";
 import TimeAgo from "timeago-react";
 
 const RetailTable = ({ data, borderColor }) => {
@@ -57,9 +57,9 @@ const RetailTable = ({ data, borderColor }) => {
           Imdb
         </Heading>
         <Text>
-          <a href={`https://www.imdb.com/title/${data.imdbId}`} target="_blank">
+          <Link isExternal href={`https://www.imdb.com/title/${data.imdbId}`}>
             {`https://www.imdb.com/title/${data.imdbId}`}
-          </a>
+          </Link>
         </Text>
 
         <Heading size="sm" justifySelf="end">

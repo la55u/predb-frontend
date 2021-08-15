@@ -42,7 +42,7 @@ const Restore = () => {
   };
 
   return (
-    <Layout>
+    <Layout title="Restore account">
       {!token && (
         <Box
           as="form"
