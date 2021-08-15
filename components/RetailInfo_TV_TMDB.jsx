@@ -42,7 +42,7 @@ const RetailInfo_TV_TMDB = ({ data, borderColor }) => {
         direction={["column-reverse", "column-reverse", "row"]}
       >
         <Grid gap="0 20px" templateColumns={["80px auto", "150px auto"]}>
-          <Text fontWeight="bold" justifySelf="end">
+          <Text fontWeight="bold" textAlign="right">
             Series name
           </Text>
           <Text wordBreak="break-all">
@@ -50,26 +50,26 @@ const RetailInfo_TV_TMDB = ({ data, borderColor }) => {
             {data.name !== data.original_name && ` (${data.name})`}
           </Text>
 
-          <Text fontWeight="bold" justifySelf="end">
+          <Text fontWeight="bold" textAlign="right">
             Type
           </Text>
           <Text>{data.type || "-"}</Text>
 
-          <Text fontWeight="bold" justifySelf="end">
+          <Text fontWeight="bold" textAlign="right">
             Country
           </Text>
           <Text>
             {data.origin_country.length > 0 ? data.origin_country.join(", ") : "-"}
           </Text>
 
-          <Text fontWeight="bold" justifySelf="end">
+          <Text fontWeight="bold" textAlign="right">
             Network
           </Text>
           <Text>
             {data.networks.length > 0 ? data.networks.map((n) => n.name).join(", ") : "-"}
           </Text>
 
-          <Text fontWeight="bold" justifySelf="end">
+          <Text fontWeight="bold" textAlign="right">
             First aired
           </Text>
           <Text>
@@ -82,7 +82,7 @@ const RetailInfo_TV_TMDB = ({ data, borderColor }) => {
             )}
           </Text>
 
-          <Text fontWeight="bold" justifySelf="end">
+          <Text fontWeight="bold" textAlign="right">
             Runtime
           </Text>
           <Text>
@@ -91,14 +91,14 @@ const RetailInfo_TV_TMDB = ({ data, borderColor }) => {
               : "-"}
           </Text>
 
-          <Text fontWeight="bold" justifySelf="end">
+          <Text fontWeight="bold" textAlign="right">
             Genre
           </Text>
           <Text>
             {data.genres.length > 0 ? data.genres.map((g) => g.name).join(", ") : "-"}
           </Text>
 
-          <Text fontWeight="bold" justifySelf="end">
+          <Text fontWeight="bold" textAlign="right">
             Homepage
           </Text>
           <Text wordBreak="break-all">
@@ -107,7 +107,7 @@ const RetailInfo_TV_TMDB = ({ data, borderColor }) => {
             </a>
           </Text>
 
-          <Text fontWeight="bold" justifySelf="end">
+          <Text fontWeight="bold" textAlign="right">
             Rating
           </Text>
           <Text>
@@ -116,18 +116,18 @@ const RetailInfo_TV_TMDB = ({ data, borderColor }) => {
               : `${data.vote_average} / 10 (${data.vote_count} votes, TMDB)`}
           </Text>
 
-          <Text fontWeight="bold" justifySelf="end">
+          <Text fontWeight="bold" textAlign="right">
             Status
           </Text>
           <Text>{data.status || "-"}</Text>
 
-          <Text fontWeight="bold" justifySelf="end">
+          <Text fontWeight="bold" textAlign="right">
             Overview
           </Text>
           <Text>{data.overview || "-"}</Text>
 
           <Text gridColumn={2} fontSize="sm" color="gray.500" mt={2}>
-            Missing info? You can help by filling it{" "}
+            Missing data? Fill it{" "}
             <Link isExternal href={`https://themoviedb.org/tv/${data.id}`}>
               here!
             </Link>
