@@ -18,7 +18,7 @@ import {
 } from "@chakra-ui/react";
 import { FaSave } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { createNotification } from "../redux/slices/notificationSlice";
+import { createNotification } from "../../redux/slices/notificationSlice";
 
 const ModalSubscribe = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();

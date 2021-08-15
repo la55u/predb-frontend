@@ -1,7 +1,7 @@
 import { Box, Flex, Spinner } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllRelease } from "../redux/slices/releasesSlice";
+import { getAllRelease } from "../../redux/slices/releasesSlice";
 import { NoResults } from "./NoResults";
 import ReleaseRow from "./ReleaseRow";
 

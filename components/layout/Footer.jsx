@@ -29,9 +29,6 @@ export const Footer = () => {
           <NextLink href="/about" passHref>
             <Link mx={2}>About</Link>
           </NextLink>
-          <NextLink href="/contact" passHref>
-            <Link mx={2}>Contact</Link>
-          </NextLink>
           <NextLink href="/rss" passHref>
             <Link mx={2}>RSS</Link>
           </NextLink>

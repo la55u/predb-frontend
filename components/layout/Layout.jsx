@@ -1,13 +1,14 @@
 import { Box, Container, Flex } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getMe } from "../redux/slices/authSlice";
+import { getMe } from "../../redux/slices/authSlice";
 import { Footer } from "./Footer";
 import Navbar from "./Navbar";
-import { setAuthenticated } from "../redux/slices/authSlice";
-import { useSocket } from "../hooks/useSocket";
+import { setAuthenticated } from "../../redux/slices/authSlice";
+import { useSocket } from "../../hooks/useSocket";
+import Head from "next/head";
 
-const Layout = ({ children }) => {
+const Layout = ({ title, children }) => {
   const dispatch = useDispatch();
   useSocket();
 
@@ -23,6 +24,10 @@ const Layout = ({ children }) => {
 
   return (
     <>
+      <Head>
+        <title>{title ? `${title} | ` : ""} PREdb | Warez Scene Database</title>
+      </Head>
+
       <Flex direction="column" minH="100vh">
         <Navbar />
 

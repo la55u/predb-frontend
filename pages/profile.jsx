@@ -22,13 +22,13 @@ import {
 import { FaSave } from "react-icons/fa";
 import { FiDownload } from "react-icons/fi";
 import { GiSettingsKnobs } from "react-icons/gi";
-import Layout from "../components/Layout";
+import Layout from "../components/layout/Layout";
 import { ActionGroup } from "../components/profile/ActionGroup";
 import { DeleteAccountModal } from "../components/profile/DeleteAccountModal";
 
 const Profile = () => {
   return (
-    <Layout>
+    <Layout title="Profile">
       <Heading mb={10}>Profile page</Heading>
 
       <Alert variant="left-accent" status="warning">

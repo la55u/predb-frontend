@@ -6,19 +6,20 @@
     "dev": "NEXT_PUBLIC_GIT_SHA=`git rev-parse --short HEAD` next dev",
     "build": "NEXT_PUBLIC_GIT_SHA=`git rev-parse --short HEAD` next build",
     "start": "next start",
-    "anal": "ANALYZE=true next build"
+    "anal": "ANALYZE=true next build",
+    "lint": "next lint"
   },
   "dependencies": {
-    "@chakra-ui/icons": "^1.0.14",
-    "@chakra-ui/react": "^1.6.5",
-    "@emotion/react": "^11.4.0",
+    "@chakra-ui/icons": "^1.0.15",
+    "@chakra-ui/react": "^1.6.6",
+    "@emotion/react": "^11.4.1",
     "@emotion/styled": "^11.3.0",
     "@reduxjs/toolkit": "^1.6.1",
     "focus-visible": "^5.2.0",
     "framer-motion": "^4.1.17",
     "lodash": "^4.17.21",
     "lodash.debounce": "^4.0.8",
-    "next": "^11.0.1",
+    "next": "^11.1.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-icons": "^4.2.0",
@@ -27,7 +28,9 @@
     "timeago-react": "^3.0.3"
   },
   "devDependencies": {
-    "@next/bundle-analyzer": "^11.0.1",
+    "@next/bundle-analyzer": "^11.1.0",
+    "eslint": "7.32.0",
+    "eslint-config-next": "11.1.0",
     "prettier": "^2.3.2"
   }
 }

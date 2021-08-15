@@ -2,7 +2,7 @@ import { Flex, Heading, Tag, Text } from "@chakra-ui/react";
 import Link from "next/link";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCount } from "../redux/slices/releasesSlice";
+import { getCount } from "../../redux/slices/releasesSlice";
 
 const Logo = () => {
   const dispatch = useDispatch();

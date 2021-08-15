@@ -9,8 +9,8 @@ import {
 } from "@chakra-ui/react";
 import React, { useCallback, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { clearSimple, setSimpleSearch } from "..//redux/slices/searchSlice";
-import { searchSimple } from "../redux/slices/searchSlice";
+import { clearSimple, setSimpleSearch } from "../../redux/slices/searchSlice";
+import { searchSimple } from "../../redux/slices/searchSlice";
 
 function debounce(callback, delay) {
   let timeout;

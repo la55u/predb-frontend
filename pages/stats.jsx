@@ -12,7 +12,7 @@ import {
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import TimeAgo from "timeago-react";
-import Layout from "../components/Layout";
+import Layout from "../components/layout/Layout";
 import { getStats } from "../redux/slices/statsSlice";
 
 const Stats = () => {
@@ -24,7 +24,7 @@ const Stats = () => {
   }, []);
 
   return (
-    <Layout>
+    <Layout title="Stats">
       <Heading>Statistics</Heading>
       <Text>Some fancy graphs coming soon...</Text>
 

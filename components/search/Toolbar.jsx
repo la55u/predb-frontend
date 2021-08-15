@@ -7,7 +7,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
-import ModalSubscribe from "./ModalSubscribe";
+import ModalSubscribe from "../modals/ModalSubscribe";
 
 const Toolbar = () => {
   const took = useSelector((state) => state.search.took);

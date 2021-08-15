@@ -3,7 +3,7 @@ import { FaBook, FaFootballBall } from "react-icons/fa";
 import { FiFilm, FiMonitor, FiPackage } from "react-icons/fi";
 import { IoIosMusicalNotes, IoMdSchool } from "react-icons/io";
 import { MdGamepad, MdHelp, MdWhatshot } from "react-icons/md";
-import { SECTIONS } from "../utils/classify";
+import { SECTIONS } from "../../utils/classify";
 
 const getBadgeData = (section) => {
   switch (section) {

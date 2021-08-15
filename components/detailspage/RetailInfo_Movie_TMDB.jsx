@@ -1,5 +1,6 @@
 import {
   Box,
+  Flex,
   Grid,
   Heading,
   Image,
@@ -7,18 +8,16 @@ import {
   Stack,
   Text,
   useColorMode,
-  useColorModeValue,
 } from "@chakra-ui/react";
 import TimeAgo from "timeago-react";
 
-const RetailInfo_TV_TMDB = ({ data, borderColor }) => {
+const RetailInfo_Movie_TMDB = ({ data, borderColor }) => {
   const { colorMode } = useColorMode();
   const fallbackSrc = {
     dark: "/movie-placeholder-dark.png",
     light: "/movie-placeholder-light.png",
   };
 
-  console.log(data);
   if (!data) return null;
 
   return (
@@ -43,53 +42,60 @@ const RetailInfo_TV_TMDB = ({ data, borderColor }) => {
       >
         <Grid gap="0 20px" templateColumns={["80px auto", "150px auto"]}>
           <Text fontWeight="bold" textAlign="right">
-            Series name
+            Title
           </Text>
           <Text wordBreak="break-all">
-            {data.original_name}
-            {data.name !== data.original_name && ` (${data.name})`}
+            {data.original_title}
+            {data.title !== data.original_title && ` (${data.title})`}
           </Text>
 
           <Text fontWeight="bold" textAlign="right">
-            Type
+            Language
           </Text>
-          <Text>{data.type || "-"}</Text>
+          <Text>
+            {data.original_language ? data.original_language.toUpperCase() : "-"}
+          </Text>
+
+          <Text fontWeight="bold" textAlign="right">
+            Produced by
+          </Text>
+          <Text>
+            {data.production_companies.length > 0
+              ? data.production_companies.map((n) => n.name).join(", ")
+              : "-"}
+          </Text>
 
           <Text fontWeight="bold" textAlign="right">
             Country
           </Text>
           <Text>
-            {data.origin_country.length > 0 ? data.origin_country.join(", ") : "-"}
+            {data.production_countries.length > 0
+              ? data.production_countries.map((n) => n.name).join(", ")
+              : "-"}
           </Text>
 
           <Text fontWeight="bold" textAlign="right">
-            Network
+            Budget
           </Text>
           <Text>
-            {data.networks.length > 0 ? data.networks.map((n) => n.name).join(", ") : "-"}
+            {data.budget
+              ? "$ " + data.budget.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+              : "-"}
           </Text>
 
           <Text fontWeight="bold" textAlign="right">
-            First aired
+            Revenue
           </Text>
           <Text>
-            {data.first_air_date ? (
-              <>
-                {data.first_air_date} (<TimeAgo datetime={data.first_air_date} />)
-              </>
-            ) : (
-              "-"
-            )}
+            {data.revenue
+              ? "$ " + data.revenue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+              : "-"}
           </Text>
 
           <Text fontWeight="bold" textAlign="right">
             Runtime
           </Text>
-          <Text>
-            {data.episode_run_time.length > 0
-              ? data.episode_run_time.map((t) => t + " min").join(", ")
-              : "-"}
-          </Text>
+          <Text>{data.runtime ? `${data.runtime} min` : "-"}</Text>
 
           <Text fontWeight="bold" textAlign="right">
             Genre
@@ -99,12 +105,16 @@ const RetailInfo_TV_TMDB = ({ data, borderColor }) => {
           </Text>
 
           <Text fontWeight="bold" textAlign="right">
-            Homepage
+            IMDB
           </Text>
-          <Text wordBreak="break-all">
-            <a href={data.homepage} target="_blank">
-              {data.homepage || "-"}
-            </a>
+          <Text>
+            {data.imdb_id ? (
+              <Link isExternal href={`https://imdb.com/title/${data.imdb_id}`}>
+                {`https://imdb.com/title/${data.imdb_id}`}
+              </Link>
+            ) : (
+              "-"
+            )}
           </Text>
 
           <Text fontWeight="bold" textAlign="right">
@@ -117,9 +127,11 @@ const RetailInfo_TV_TMDB = ({ data, borderColor }) => {
           </Text>
 
           <Text fontWeight="bold" textAlign="right">
-            Status
+            Released
           </Text>
-          <Text>{data.status || "-"}</Text>
+          <Text>
+            {data.release_date || "-"} (<TimeAgo datetime={data.release_date} />)
+          </Text>
 
           <Text fontWeight="bold" textAlign="right">
             Overview
@@ -128,7 +140,7 @@ const RetailInfo_TV_TMDB = ({ data, borderColor }) => {
 
           <Text gridColumn={2} fontSize="sm" color="gray.500" mt={2}>
             Missing data? Fill it{" "}
-            <Link isExternal href={`https://themoviedb.org/tv/${data.id}`}>
+            <Link isExternal href={`https://themoviedb.org/movie/${data.id}`}>
               here!
             </Link>
           </Text>
@@ -138,13 +150,12 @@ const RetailInfo_TV_TMDB = ({ data, borderColor }) => {
           alignSelf={["center", "center", "start"]}
           src={`https://image.tmdb.org/t/p/w300/${data.poster_path}`}
           fallbackSrc={fallbackSrc[colorMode]}
-          alt="poster image"
+          alt="poster"
+          m={4}
           objectFit="contain"
           htmlHeight="100%"
           htmlWidth="150px"
-          w={["full", "200px"]}
           minW="150px"
-          maxW="200px"
           borderWidth="1px"
           border={borderColor}
           borderRadius="sm"
@@ -155,4 +166,4 @@ const RetailInfo_TV_TMDB = ({ data, borderColor }) => {
   );
 };
 
-export default RetailInfo_TV_TMDB;
+export default RetailInfo_Movie_TMDB;

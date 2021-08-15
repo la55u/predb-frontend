@@ -24,7 +24,7 @@ import NextLink from "next/link";
 import { useEffect, useState } from "react";
 import { FiLogIn } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
-import Layout from "../components/Layout";
+import Layout from "../components/layout/Layout";
 import { login } from "../redux/slices/authSlice";
 import { addToast } from "../redux/slices/toastSlice";
 
@@ -60,7 +60,7 @@ const Login = () => {
   };
 
   return (
-    <Layout>
+    <Layout title="Log in">
       {router.query.confirmed === "1" && (
         <Alert
           status="success"
