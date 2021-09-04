@@ -41,14 +41,17 @@ const ModalSubscribe = () => {
     <>
       <Tooltip
         hasArrow
-        label="You have to be logged in to use this feature"
-        isDisabled={!!user}
+        placement="top"
+        label={
+          !user ? "You have to be logged in to use this feature" : "Make a search first!"
+        }
+        isDisabled={!!user && simpleSearch}
       >
         <Button
           colorScheme="teal"
           size="sm"
           rightIcon={<BellIcon />}
-          onClick={user ? onOpen : undefined}
+          onClick={user && simpleSearch ? onOpen : undefined}
         >
           Subscribe
         </Button>
